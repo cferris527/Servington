@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.experiments.Demo1.Organization;
 
+//Class used to control requests regarding the Organization class
 @RestController
 public class OrganizationController {
     public List<Organization> organizationList = new ArrayList<Organization>();
     private boolean isInit = false;
 
+    //Must be run first, initializes the organizationList
     @GetMapping("/Organization/init")
     public List<Organization> initOrganizations() {
         organizationList.add(new Organization("Care4All", "Charity",35, 45679));
@@ -28,6 +30,7 @@ public class OrganizationController {
         return organizationList;
     }
 
+    //Retrieves a list of all the organizations currently in the system
     @GetMapping("/Organization/list")
     public List<Organization> getOrganizations() {
         if(organizationList.size() > 0 && isInit){
@@ -36,6 +39,7 @@ public class OrganizationController {
         return null;
     }
 
+    //Retrieves organization with ID of the given orgID
     @GetMapping("/Organization/{orgID}")
     public Organization getOrganization(@PathVariable("orgID") int ID) {
         for(int i = 0; i < organizationList.toArray().length; i++ ) {
@@ -46,18 +50,32 @@ public class OrganizationController {
         return null;
     }
 
+    //Adds an organization given JSON data
     @PostMapping("/Organization/add")
     public @ResponseBody Organization addOrganization(@RequestBody Organization org) {
         organizationList.add(new Organization(org.getOrganizationName(), org.getOrganizationType(), org.getOrganizationNumMembers(), org.getOrganizationID()));
         return org;
     }
 
+    //Removes organization with the given orgID
+    @DeleteMapping("/Organization/remove/{orgID}")
+    public String removeOrganization(@PathVariable("orgID") int updateID) {
+        for(int i = 0; i < organizationList.toArray().length; i++) {
+            if (organizationList.get(i).getOrganizationID() == updateID) {
+                organizationList.remove(i);
+            }
+        }
+        return "Organization with ID: " + updateID + " has been removed.";
+    }
+
+    //Updates the Organization with the given orgID using JSON from postman
     @PutMapping("/Organization/update/{orgID}")
     public Organization updateOrganization(@RequestBody Organization org, @PathVariable("orgID") int updateID) {
         updateOrganizationWithID(updateID, org);
         return org;
     }
 
+    //Copies org into organizationList at index where the ID matches
     private Organization updateOrganizationWithID(int ID, Organization org) {
         for(int i = 0; i < organizationList.toArray().length; i++) {
             if(organizationList.get(i).getOrganizationID() == ID){
