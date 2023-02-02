@@ -73,6 +73,7 @@ public class UserController {
                 userList.remove(i);
                 return "User successfully removed";
             }
+
         }
         return "User not found";
     }
