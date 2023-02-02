@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AS1">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.AS1.NoActionBar" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".CounterActivity"
             android:exported="true" />
         <activity
