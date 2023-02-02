@@ -10,6 +10,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button button;
+    Button settBtn;
+    Button logBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        settBtn = findViewById(R.id.settingsBtn);
 
+        settBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        logBtn = findViewById(R.id.logBtn);
+
+        logBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent tolog = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(tolog);
+            }
+        });
     }
 
 
