@@ -18,7 +18,8 @@ import com.experiments.Demo1.Organization;
 public class OrganizationController {
     public List<Organization> organizationList = new ArrayList<Organization>();
     private boolean isInit = false;
-    @GetMapping("/init")
+
+    @GetMapping("/Organization/init")
     public List<Organization> initOrganizations() {
         organizationList.add(new Organization("Care4All", "Charity",35, 45679));
         organizationList.add(new Organization("VETS","Veterans Service", 120, 34726));
@@ -27,16 +28,12 @@ public class OrganizationController {
         return organizationList;
     }
 
-    @GetMapping("/Organization")
+    @GetMapping("/Organization/list")
     public List<Organization> getOrganizations() {
-        if(organizationList.size() > 0){
+        if(organizationList.size() > 0 && isInit){
             return organizationList;
         }
         return null;
-    }
-    @GetMapping("/")
-    public String getWelcomeString() {
-        return "Welcome to my springboot experimentation!";
     }
 
     @GetMapping("/Organization/{orgID}")
@@ -47,5 +44,11 @@ public class OrganizationController {
             }
         }
         return null;
+    }
+
+    @PostMapping("/Organization/add")
+    public @ResponseBody Organization addOrganization(@RequestBody Organization org) {
+        organizationList.add(new Organization(org.getOrganizationName(), org.getOrganizationType(), org.getOrganizationNumMembers(), org.getOrganizationID()));
+        return org;
     }
 }
