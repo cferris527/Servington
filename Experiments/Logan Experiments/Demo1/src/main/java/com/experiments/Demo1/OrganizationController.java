@@ -51,4 +51,26 @@ public class OrganizationController {
         organizationList.add(new Organization(org.getOrganizationName(), org.getOrganizationType(), org.getOrganizationNumMembers(), org.getOrganizationID()));
         return org;
     }
+
+    @PutMapping("/Organization/update/{orgID}")
+    public Organization updateOrganization(@RequestBody Organization org, @PathVariable("orgID") int updateID) {
+        updateOrganizationWithID(updateID, org);
+        return org;
+    }
+
+    private Organization updateOrganizationWithID(int ID, Organization org) {
+        for(int i = 0; i < organizationList.toArray().length; i++) {
+            if(organizationList.get(i).getOrganizationID() == ID){
+                organizationList.get(i).setOrganizationID(org.getOrganizationID());
+                organizationList.get(i).setOrganizationAddress(org.getOrganizationAddress());
+                organizationList.get(i).setOrganizationName(org.getOrganizationName());
+                organizationList.get(i).setOrganizationStatus(org.getOrganizationStatus());
+                organizationList.get(i).setOrganizationType(org.getOrganizationType());
+                organizationList.get(i).setOrganizationNumMembers(org.getOrganizationNumMembers());
+                organizationList.get(i).setOrganizationPhoneNumber(org.getOrganizationNumMembers());
+                organizationList.get(i).setOrganizationID(org.getOrganizationID());
+            }
+        }
+        return null;
+    }
 }
