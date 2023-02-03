@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(tolog);
             }
         });
+
+        TextView receiver_msg;
+
+        receiver_msg = findViewById(R.id.recievedName);
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("message_key");
+        receiver_msg.setText("Hello " + str);
     }
 
 
