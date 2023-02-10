@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     Button counterButton;
     Button loginButton;
 
+    Button settingsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        settingsButton = findViewById(R.id.main2Btn);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                 startActivity(intent);
             }
         });

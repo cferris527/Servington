@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AS1</string>
+
+    <string-array name="spinnerArr">
+        <item>Array Item One</item>
+        <item>Array Item Two</item>
+        <item>Array Item Three</item>
+    </string-array>
+
 </resources>
