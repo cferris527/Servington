@@ -13,7 +13,7 @@ public class Experiment1Application {
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("This is my very first experiment with Springboot.");
+        System.out.println("This is my very first experiment with Springboot. ");
         System.out.println();
         System.out.println("Please enter a username:");
         String user = scan.next();
