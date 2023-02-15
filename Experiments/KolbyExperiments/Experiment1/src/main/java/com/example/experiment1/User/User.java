@@ -22,9 +22,10 @@ public class User {
 
     }
 
-    public User(String username, String password){
+    public User(String username, String password, String accountType){
         this.username = username;
         this.password = password;
+        this.accountType = accountType;
     }
 
     public int getId() {
@@ -35,7 +36,7 @@ public class User {
         return password;
     }
 
-    public String getName(){
+    public String getUsername(){
         return username;
     }
 
@@ -43,11 +44,19 @@ public class User {
         this.id = id;
     }
 
-    public void setName(String name) {
+    public void setUsername(String name) {
         this.username = name;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    public String getAccountType() {
+        return accountType;
     }
 }

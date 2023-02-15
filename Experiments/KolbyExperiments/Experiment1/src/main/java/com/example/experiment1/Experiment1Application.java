@@ -21,9 +21,9 @@ public class Experiment1Application {
     @Bean
     CommandLineRunner initUser(UserRepository userRepository) {
         return args -> {
-            User user1 = new User("John", "password");
-            User user2 = new User("Jane", "123");
-            User user3 = new User("Justin", "hello");
+            User user1 = new User("kolbykuc", "password", "volunteer" );
+            User user2 = new User("Jane", "123", "ORG");
+            User user3 = new User("Justin", "hello", "volunteer");
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);

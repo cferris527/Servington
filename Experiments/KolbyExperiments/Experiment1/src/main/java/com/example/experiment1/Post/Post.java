@@ -18,9 +18,9 @@ public class Post {
     private String message;
 
 
-    @ManyToOne
-    @JoinColumn(name = "username")
-    private User user;
+    //@ManyToOne
+    //@JoinColumn(name = "username")
+    //private User user;
 
     public Post(){
 
@@ -64,11 +64,11 @@ public class Post {
         return title;
     }
 
-    public User getUser() {
-        return user;
-    }
+    //public User getUser() {
+        //return user;
+    //}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    //public void setUser(User user) {
+        //this.user = user;
+    //}
 }
