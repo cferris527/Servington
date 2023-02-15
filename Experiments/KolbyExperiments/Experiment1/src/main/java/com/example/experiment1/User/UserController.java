@@ -1,4 +1,5 @@
-package Users;
+package com.example.experiment1.User;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

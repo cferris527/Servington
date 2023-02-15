@@ -1,4 +1,4 @@
-package Users;
+package com.example.experiment1.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +12,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    private String accountType;
+
+    private String username;
 
     private String password;
 
@@ -20,8 +22,8 @@ public class User {
 
     }
 
-    public User(String name, String password){
-        this.name = name;
+    public User(String username, String password){
+        this.username = username;
         this.password = password;
     }
 
@@ -34,7 +36,7 @@ public class User {
     }
 
     public String getName(){
-        return name;
+        return username;
     }
 
     public void setId(int id) {
@@ -42,7 +44,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public void setPassword(String password) {

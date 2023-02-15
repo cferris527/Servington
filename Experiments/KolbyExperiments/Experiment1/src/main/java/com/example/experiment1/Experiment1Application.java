@@ -1,16 +1,13 @@
 package com.example.experiment1;
 
-import Users.User;
-import Users.UserController;
-import Users.UserRepository;
-
+import com.example.experiment1.User.User;
+import com.example.experiment1.User.UserController;
+import com.example.experiment1.User.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import java.util.Scanner;
 
 @EnableJpaRepositories
 @SpringBootApplication
@@ -24,9 +21,9 @@ public class Experiment1Application {
     @Bean
     CommandLineRunner initUser(UserRepository userRepository) {
         return args -> {
-            User user1 = new User("John", "john@somemail.com");
-            User user2 = new User("Jane", "jane@somemail.com");
-            User user3 = new User("Justin", "justin@somemail.com");
+            User user1 = new User("John", "password");
+            User user2 = new User("Jane", "123");
+            User user3 = new User("Justin", "hello");
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
