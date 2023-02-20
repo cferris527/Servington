@@ -23,6 +23,9 @@ import java.util.List;
             return userRepository.findById(id);
         }
 
+        @GetMapping(path = "/users/{username}")
+        User getUserByUsername( @PathVariable String username) { return userRepository.findByUsername(username); }
+
         @PostMapping(path = "/users")
         String createUser(@RequestBody User user){
             if (user == null){
