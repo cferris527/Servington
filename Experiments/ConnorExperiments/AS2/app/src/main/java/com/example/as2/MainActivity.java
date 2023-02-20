@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
     private String method;
     private String url = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
-    // https://c3fec771-adef-43a5-94ba-64fbc660f410.mock.pstmn.io/samplepost
     // https://jsonplaceholder.typicode.com/users/1
     private String requestBody;
     private String responseBody;
@@ -138,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
             body = new JSONObject(etRequest.getText().toString());
+
+
         } catch (Exception e){
             e.printStackTrace();
         }
