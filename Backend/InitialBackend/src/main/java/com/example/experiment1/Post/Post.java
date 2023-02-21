@@ -7,6 +7,7 @@ import com.example.experiment1.User.User;
 @Entity
 public class Post {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
