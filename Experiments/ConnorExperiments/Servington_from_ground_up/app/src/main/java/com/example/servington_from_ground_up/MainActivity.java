@@ -29,7 +29,6 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     EditText Username;
-
     EditText Password;
 
     @Override
