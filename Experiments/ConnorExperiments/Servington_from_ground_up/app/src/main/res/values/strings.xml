@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Servington_from_ground_up</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="login_button">Login</string>
+</resources>
