@@ -28,9 +28,15 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText Username;
+
+    EditText Password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Username = findViewById(R.id.username);
+        Password = findViewById(R.id.password);
     }
 }
