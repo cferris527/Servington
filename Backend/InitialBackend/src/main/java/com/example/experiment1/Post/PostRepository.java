@@ -5,11 +5,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, String> {
 
-    Post findById(int id);
+    Post findByTitle(String title);
 
     @Transactional
-    void deleteById(int id);
+    void deleteByTitle(String title);
 
 }

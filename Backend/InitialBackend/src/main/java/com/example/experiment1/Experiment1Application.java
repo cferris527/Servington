@@ -18,7 +18,7 @@ public class Experiment1Application {
 
     }
 
-    @Bean
+    /*@Bean
     CommandLineRunner initUser(UserRepository userRepository) {
         return args -> {
             User user1 = new User("kolbykuc", "password", "volunteer" );
@@ -29,6 +29,6 @@ public class Experiment1Application {
             userRepository.save(user3);
 
         };
-    }
+    }*/
 
 }
