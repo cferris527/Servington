@@ -1,9 +1,11 @@
 package com.example.experiment1.User;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.experiment1.Post.Post;
+
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -20,6 +22,12 @@ public class User {
 
     private String password;
 
+
+
+
+    @OneToMany
+    private List<Post> posts;
+
     public User(){
 
     }
@@ -28,6 +36,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
+        posts = new ArrayList<>();
     }
 
     public int getId() {
@@ -60,5 +69,14 @@ public class User {
 
     public String getAccountType() {
         return accountType;
+    }
+
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void addPosts(Post post){
+        this.posts.add(post);
     }
 }
