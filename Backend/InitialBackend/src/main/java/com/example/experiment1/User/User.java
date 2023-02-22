@@ -14,8 +14,8 @@ public class User {
 
     private String accountType;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String username;
 
     private String password;

@@ -1,5 +1,6 @@
 package com.example.experiment1.Post;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import com.example.experiment1.User.User;
@@ -9,9 +10,7 @@ public class Post {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String title;
 
     private String date;
@@ -19,9 +18,10 @@ public class Post {
     private String message;
 
 
-    //@ManyToOne
-    //@JoinColumn(name = "username")
-    //private User user;
+    @ManyToOne
+    @JoinColumn(name = "username")
+    @JsonIgnore
+    private User user;
 
     public Post(){
 
@@ -31,10 +31,6 @@ public class Post {
         this.title = title;
         this.date = date;
         this.message = message;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setDate(String date) {
@@ -49,10 +45,6 @@ public class Post {
         this.title = title;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getDate() {
         return date;
     }
@@ -65,11 +57,10 @@ public class Post {
         return title;
     }
 
-    //public User getUser() {
-        //return user;
-    //}
-
-    //public void setUser(User user) {
-        //this.user = user;
-    //}
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
