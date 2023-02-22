@@ -2,6 +2,7 @@ package com.example.servington_from_ground_up;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +26,13 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     Button loginButton;
 
+    Button createButton;
+
     /**
      * URL for POST request.
      */
     private String url = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
+        createButton = findViewById(R.id.createButton);
 
         /**
          * Login button action, clicking button will call
@@ -49,8 +54,27 @@ public class MainActivity extends AppCompatActivity {
                 postRequest();
             }
         });
+
+        /**
+         * Create Account button action, clicking button will
+         * move to creating an account.
+         */
+        createButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
+
+    /**
+     * Creates POST for login credentials. Sends JSON obj:
+     * username: ___
+     * password: ___
+     */
     private void postRequest() {
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
 
@@ -86,4 +110,6 @@ public class MainActivity extends AppCompatActivity {
         );
         queue.add(request); // send request
     }
+
+
 }
