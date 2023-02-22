@@ -46,6 +46,8 @@ import java.util.List;
             return userRepository.findById(id);
         }*/
 
+        
+
         //Intended to create a post for a user but not doing what intended
         @PutMapping("/users/{userId}")
         String createPost(@PathVariable int userId, @RequestBody Post post){
