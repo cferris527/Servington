@@ -28,8 +28,8 @@ import java.util.List;
         User getUserByUsername( @PathVariable String username) { return userRepository.findByUsername(username); }
 
         @PostMapping(path = "/users")
-        String createUser(@RequestBody User user){
-            if (user == null){
+        String createUser(@RequestBody User user) {
+            if (user == null) {
                 return "User not found.";
             }
             userRepository.save(user);
@@ -45,8 +45,6 @@ import java.util.List;
             userRepository.save(request);
             return userRepository.findById(id);
         }*/
-
-        
 
         //Intended to create a post for a user but not doing what intended
         @PutMapping("/users/{userId}")
