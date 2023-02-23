@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO: action for succesful response
+                        //TODO: action for successful response
                     }
                 },
                 new Response.ErrorListener() {
