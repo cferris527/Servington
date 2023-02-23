@@ -27,13 +27,9 @@ public class CreateAccountActivity extends AppCompatActivity {
     EditText newPassword;
     Button confirmButton;
     Button cancelButton;
-
     Spinner spMethod;
-
     private String method;
-
     private String accountType;
-
     private String url = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
 
     @Override
