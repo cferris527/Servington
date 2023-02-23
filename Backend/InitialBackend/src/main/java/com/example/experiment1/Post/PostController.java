@@ -41,5 +41,7 @@ public class PostController {
         return "success";
     }
 
+    //I spent 3 hours trying to connect this backend to the remote server with no luck
+
 
 }

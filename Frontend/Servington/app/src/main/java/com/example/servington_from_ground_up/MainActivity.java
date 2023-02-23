@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * URL for POST request.
      */
-    private String url = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
+    private String url = "https://31fdc3aa-553a-48ec-ab03-f9d459afb08d.mock.pstmn.io/demo";
 
 
     @Override
