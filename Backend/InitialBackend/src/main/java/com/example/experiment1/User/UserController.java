@@ -57,6 +57,15 @@ import java.util.List;
             return "success";
         }
 
+        /*
+        @PutMapping("/users/{username}")
+        String changePassword(@PathVariable String username, @RequestBody User user){
+            User userEdit = user;
+            if(user == null)
+                return "failure";
+            userEdit.setPassword(userEdit.getPassword());
+            return "success";
+        }*/
 
         @DeleteMapping(path = "/users/{id}")
         String deleteUser(@PathVariable int id){
