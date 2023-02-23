@@ -1,7 +1,7 @@
 package com.example.sumon.androidvolley.utils;
 
 public class Const {
-	public static final String URL_JSON_OBJECT = "https://c345266a-448f-4b47-a9ae-9167630a6509.mock.pstmn.io/fruits/";
+	public static final String URL_JSON_OBJECT = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
 	//"https://jsonplaceholder.typicode.com/users/1"
 	public static final String URL_JSON_ARRAY = "https://jsonplaceholder.typicode.com/users";
 	public static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
