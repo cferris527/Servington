@@ -14,19 +14,23 @@ import java.util.List;
         @Autowired
         UserRepository userRepository;
 
+        //Returns List of USERS
         @GetMapping(path = "/users")
         List<User> getAllUsers(){
             return userRepository.findAll();
         }
 
+        //Gets USER by ID (NOT WORKING YET)
         @GetMapping(path = "/users/{id}")
         User getUserById( @PathVariable int id){
             return userRepository.findById(id);
         }
 
+        //gets user by username (NOT WORKING YET)
         @GetMapping(path = "/users/{username}")
         User getUserByUsername( @PathVariable String username) { return userRepository.findByUsername(username); }
 
+        //Creates USER (WORKING)
         @PostMapping(path = "/users")
         String createUser(@RequestBody User user) {
             if (user == null) {
@@ -36,7 +40,8 @@ import java.util.List;
             return "success";
         }
 
-        /*@PutMapping("/users/{id}")
+        //Used to update User Information by id (NOT WORKING YET) returns by ID??
+        @PutMapping("/users/{id}")
         User updateUser(@PathVariable int id, @RequestBody User request){
             User user = userRepository.findById(id);
             if(user == null) {
@@ -44,10 +49,10 @@ import java.util.List;
             }
             userRepository.save(request);
             return userRepository.findById(id);
-        }*/
+        }
 
         //Intended to create a post for a user but not doing what intended
-        @PutMapping("/users/{userId}")
+        @PutMapping("/users/{userId}/post")
         String createPost(@PathVariable int userId, @RequestBody Post post){
             User user = userRepository.findById(userId);
             if(user == null)
@@ -57,16 +62,17 @@ import java.util.List;
             return "success";
         }
 
-        /*
-        @PutMapping("/users/{username}")
+        //changes password (NOT WORKING YET)
+        @PutMapping("/users/{username}/changepassword")
         String changePassword(@PathVariable String username, @RequestBody User user){
-            User userEdit = user;
+            User userEdit = userRepository.findByUsername(username);
             if(user == null)
                 return "failure";
             userEdit.setPassword(userEdit.getPassword());
             return "success";
-        }*/
+        }
 
+        //Deletes user by ID
         @DeleteMapping(path = "/users/{id}")
         String deleteUser(@PathVariable int id){
             userRepository.deleteById(id);
