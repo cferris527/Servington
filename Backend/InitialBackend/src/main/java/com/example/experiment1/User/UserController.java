@@ -20,21 +20,21 @@ import java.util.List;
             return userRepository.findAll();
         }
 
-        //Gets USER by ID (NOT WORKING YET)
-        @GetMapping(path = "/users/{id}")
+        //Gets USER by ID
+        @GetMapping(path = "/users/id/{id}")
         User getUserById( @PathVariable int id){
             return userRepository.findById(id);
         }
 
         //gets user by username (NOT WORKING YET)
-        @GetMapping(path = "/users/{username}")
+        @GetMapping(path = "/users/username/{username}")
         User getUserByUsername( @PathVariable String username) { return userRepository.findByUsername(username); }
 
-        //Creates USER (WORKING)
+        //Creates USER
         @PostMapping(path = "/users")
         String createUser(@RequestBody User user) {
             if (user == null) {
-                return "User not found.";
+                return "Invalid User Data Input";
             }
             userRepository.save(user);
             return "success";
