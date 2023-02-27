@@ -16,9 +16,7 @@ import java.util.List;
 
         //Returns List of USERS
         @GetMapping(path = "/users")
-        List<User> getAllUsers(){
-            return userRepository.findAll();
-        }
+        List<User> getAllUsers(){ return userRepository.findAll(); }
 
         //Gets USER by ID
         @GetMapping(path = "/users/id/{id}")
@@ -38,6 +36,17 @@ import java.util.List;
             }
             userRepository.save(user);
             return "success";
+        }
+
+        //Takes a list of USERS and creates them
+        @PostMapping(path = "/users/multiple")
+        String createMultipleUsers(@RequestBody List<User> userList) {
+            if(userList == null)
+                return "Invalid Input Format";
+            for(int i = 0; i < userList.size(); i++) {
+                userRepository.save(userList.get(i));
+            }
+            return "Success";
         }
 
         //Used to update User Information by id (NOT WORKING YET) returns by ID??
