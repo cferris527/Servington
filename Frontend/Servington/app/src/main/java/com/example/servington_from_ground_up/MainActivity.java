@@ -1,30 +1,24 @@
 package com.example.servington_from_ground_up;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.servington_from_ground_up.app.AppController;
 
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,18 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
     Button createButton;
 
-    private ProgressDialog pDialog;
-    private String TAG = MainActivity.class.getSimpleName();
-
-    // These tags will be used to cancel the requests
-    private String tag_json_obj = "jobj_req", tag_json_arry = "jarray_req";s
-
     /**
      * URL for POST request.
      */
-    private String url = "https://31fdc3aa-553a-48ec-ab03-f9d459afb08d.mock.pstmn.io/demo";
+    private String url = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
 
-    private String url2 = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingget"
+    private String url2 = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingget";
 
 
     @Override
@@ -58,20 +46,19 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         createButton = findViewById(R.id.createButton);
 
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.setCancelable(false);
 
         /**
          * Login button action, clicking button will call
-         * postRequest() method.
+         * postRequest() , then getRequest().
          */
         loginButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                postRequest();
+                postRequest(); //send user data to backend
+                getRequest(); //receive from backend validity of data sent
             }
+
         });
 
         /**
@@ -86,17 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    private void showProgressDialog() {
-        if (!pDialog.isShowing())
-
-            pDialog.show();
-    }
-
-    private void hideProgressDialog() {
-        if (pDialog.isShowing())
-            pDialog.hide();
     }
 
 
@@ -128,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO: action for successful response
+                        //TODO
                     }
                 },
                 new Response.ErrorListener() {
@@ -142,55 +118,56 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void makeJsonObjReq() {
-        showProgressDialog();
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url2, null,
-                new Response.Listener<JSONObject>() {
+    private void getRequest() {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
 
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url2,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-//                        Log.d(TAG, response.toString());
-//                        msgResponse.setText(response.toString());
-//                        hideProgressDialog();
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        // String response can be converted to JSONObject via
+                        try {
+                            JSONObject object = new JSONObject(response);
+                            if(object.has("accountType")) {
+
+                                String type = object.optString("accountType");
+
+                                if(type.equals("USER")) {
+                                    Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                                    startActivity(intent);
+                                }
+                                else if(type.equals("ORGANIZATION")) {
+                                    Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
+                                    startActivity(intent);
+                                }
+                                else if(type.equals("ADMIN")) {
+                                    Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                                    startActivity(intent);
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //tvResponse.setText("Response is: "+ response);
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //tvResponse.setText("That didn't work!" + error.toString());
+                    }
+                });
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                hideProgressDialog();
-            }
-        }) {
-
-            /**
-             * Passing some request headers
-             * */
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-//                params.put("name", "Androidhive");
-//                params.put("email", "abc@androidhive.info");
-//                params.put("pass", "password123");
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-        // Cancelling request
-        // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_obj);
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+        //Toast.makeText(getApplicationContext(),method+" request sent!",Toast.LENGTH_SHORT).show();
     }
+
 
 
 }
