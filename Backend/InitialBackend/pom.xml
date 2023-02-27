@@ -14,7 +14,8 @@
     <name>Experiment1</name>
     <description>Experiment1</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
+        <start-class>com.example.experiment1.Experiment1Application</start-class>
     </properties>
     <dependencies>
         <dependency>
@@ -45,6 +46,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.example.experiment1.Experiment1Application</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
             </plugin>
         </plugins>
     </build>

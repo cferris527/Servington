@@ -30,7 +30,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     Spinner spMethod;
     private String method;
     private String accountType;
-    private String url = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
+    private String url = "http://coms-309-029.class.las.iastate.edu:8080/users";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -28,12 +28,16 @@ import java.util.List;
         User getUserByUsername( @PathVariable String username) { return userRepository.findByUsername(username); }
 
         @PostMapping(path = "/users")
-        String createUser(@RequestBody User user) {
+        Message createUser(@RequestBody User user) {
             if (user == null) {
-                return "User not found.";
+                Message m = new Message();
+                m.message = "failed";
+                return m;
             }
             userRepository.save(user);
-            return "success";
+            Message m = new Message();
+            m.message = "success";
+            return m;
         }
 
         /*@PutMapping("/users/{id}")
@@ -74,6 +78,9 @@ import java.util.List;
         }
     }
 
+    class Message {
+        String message;
+    }
 
 
 
