@@ -110,8 +110,7 @@ public class JsonRequestActivity extends Activity implements OnClickListener {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq,
-                tag_json_obj);
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
         // Cancelling request
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_obj);
