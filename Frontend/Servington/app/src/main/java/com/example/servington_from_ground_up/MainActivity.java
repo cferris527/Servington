@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,16 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
-
     Button createButton;
-
-    /**
-     * URL for POST request.
-     */
-    private String url = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
-
-    private String url2 = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingget";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_LOGIN_POST, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -123,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url2,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.URL_LOGIN_GET,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
