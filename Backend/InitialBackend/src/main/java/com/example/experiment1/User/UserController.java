@@ -66,8 +66,8 @@ import java.util.List;
             User user = userRepository.findById(userId);
             if(user == null)
                 return "failure";
-            post.setUser(user);
-            user.addPosts(post);
+            //post.setUser(user);
+            //user.addPosts(post);
             return "success";
         }
 
