@@ -21,7 +21,12 @@ import com.example.servington_from_ground_up.utils.Const;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * Main activity when app is opened. User may either log in, or
+ * create an account.
+ *
+ * @author Connor Ferris
+ */
 public class MainActivity extends AppCompatActivity {
 
     EditText username;
@@ -110,6 +115,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Gets whether or not entered login credentials are valid, along with other info.
+     * username: ___
+     * isValid: true/false
+     * accountType: ___
+     */
     private void getRequest() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
