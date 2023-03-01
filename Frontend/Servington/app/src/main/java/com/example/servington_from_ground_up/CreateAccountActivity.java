@@ -24,8 +24,8 @@ import org.json.JSONObject;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    EditText newUsername;
-    EditText newPassword;
+    private EditText newUsername;
+    private EditText newPassword;
     Button confirmButton;
     Button cancelButton;
     Spinner spMethod;
@@ -92,7 +92,7 @@ public class CreateAccountActivity extends AppCompatActivity {
          * Creates POST with new login credentials. Sends JSON obj:
          * username : ___
          * password : ___
-         * accountType : ___
+         * accountType : ADMIN
          */
         private void postRequest() {
             RequestQueue queue = Volley.newRequestQueue(CreateAccountActivity.this);
@@ -130,7 +130,5 @@ public class CreateAccountActivity extends AppCompatActivity {
             );
             queue.add(request); // send request
         }
-
-
 
 }
