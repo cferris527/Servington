@@ -18,13 +18,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.servington_from_ground_up.utils.Const;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Main activity when app is opened. User may either log in, or
  * create an account.
- *
  * @author Connor Ferris
  */
 public class MainActivity extends AppCompatActivity {
@@ -54,13 +52,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 postRequest(); //send user data to backend
                 getRequest(); //receive from backend validity of data sent
+                //sendUsername();
             }
 
         });
 
         /**
          * Create Account button action, clicking button will
-         * move to creating an account.
+         * move to account creation activity.
          */
         createButton.setOnClickListener(new View.OnClickListener()
         {
@@ -116,17 +115,36 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * Gets whether or not entered login credentials are valid, along with other info.
+     * Sends a JSON object with:
      * username: ___
-     * isValid: true/false
+     * password: ___
+     *
+     * Backend will send back JSON object with:
+     * username: ___
+     * password: ___
      * accountType: ___
      */
     private void getRequest() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
 
+        JSONObject body = new JSONObject();
+
+        // grabs Strings from Username and Password fields.
+        String user_name = username.getText().toString();
+        String pass_word = password.getText().toString();
+
+        // adds fields to JSON object
+        try {
+            body.put("username", user_name);
+            body.put("password", pass_word);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.URL_LOGIN_GET,
+        StringRequest request = new StringRequest(Request.Method.GET, Const.URL_LOGIN_GET,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -153,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
                         //tvResponse.setText("Response is: "+ response);
@@ -167,9 +185,71 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+        queue.add(request);
         //Toast.makeText(getApplicationContext(),method+" request sent!",Toast.LENGTH_SHORT).show();
     }
+
+
+    private void sendUsername() {
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JSONObject body = new JSONObject();
+
+        String user_name = username.getText().toString();
+        String pass_word = password.getText().toString();
+
+        try {
+            body.put("username", user_name);
+            body.put("password", pass_word);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Const.URL_LOGIN_GET, body,
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    JSONObject obj = response;
+                    String username = obj.optString("username");
+                    String accountType = obj.optString("accountType");
+
+                    //if Login attempt is invalid...
+                    if (username.equals(null)) {
+                        //TODO - some pop up or something saying invalid
+                        System.out.println("user is null");
+                        return;
+                    }
+                    if (accountType.equals("USER")) {
+                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                        startActivity(intent);
+                    }
+                    else if (accountType.equals("ORGANIZATION")) {
+                        Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
+                        startActivity(intent);
+                    }
+                    else if (accountType.equals("ADMIN")) {
+                        Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        System.out.println("Fail");
+                    }
+
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(MainActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        );
+
+    }
+
 
 
 
