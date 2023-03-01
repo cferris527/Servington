@@ -23,10 +23,10 @@ public class User {
     private String password;
 
 
-
-
-    //@OneToOne(mappedBy = "username")
-    //private Post post;
+    /*
+    @OneToOne(mappedBy = "username")
+    private Post post;
+    */
 
     public User(){
 
@@ -71,8 +71,8 @@ public class User {
         return accountType;
     }
 
-
-    /*public Post getPost() {
+    /*
+    public Post getPost() {
         return post;
     }
 

@@ -5,6 +5,7 @@ import com.example.experiment1.Post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ import java.util.List;
         @Autowired
         UserRepository userRepository;
 
-        //Returns List of USERS
+        //Returns List of all USERS
         @GetMapping(path = "/users")
         List<User> getAllUsers(){ return userRepository.findAll(); }
 
@@ -23,10 +24,6 @@ import java.util.List;
         User getUserById( @PathVariable int id){
             return userRepository.findById(id);
         }
-
-        //gets user by username (NOT WORKING YET)
-        @GetMapping(path = "/users/username/{username}")
-        User getUserByUsername( @PathVariable String username) { return userRepository.findByUsername(username); }
 
         //Creates USER
         @PostMapping(path = "/users")
@@ -40,46 +37,37 @@ import java.util.List;
             return m;
         }
 
-        //Takes a list of USERS and creates them
+        //Takes a list of USERS and creates them (used for postman testing mostly)
         @PostMapping(path = "/users/multiple")
         String createMultipleUsers(@RequestBody List<User> userList) {
             if(userList == null)
                 return "Invalid Input Format";
-            for(int i = 0; i < userList.size(); i++) {
-                userRepository.save(userList.get(i));
+            for (User user : userList) {
+                userRepository.save(user);
             }
             return "Success";
         }
 
-        //Used to update User Information by id (NOT WORKING YET) returns by ID??
+        //WIP working on allowing update user to happen
+        /*
         @PutMapping("/users/{id}")
         User updateUser(@PathVariable int id, @RequestBody User request){
             User user = userRepository.findById(id);
             if(user == null) {
                 return null;
             }
-            userRepository.save(request);
+            userRepository.deleteById(id);
             return userRepository.findById(id);
-        }
+        }*/
 
         //Intended to create a post for a user but not doing what intended
         @PutMapping("/users/{userId}/post")
-        String createPost(@PathVariable int userId, @RequestBody Post post){
+        String createPost(@PathVariable int userId, @RequestBody Post post) {
             User user = userRepository.findById(userId);
-            if(user == null)
+            if (user == null)
                 return "failure";
             //post.setUser(user);
             //user.addPosts(post);
-            return "success";
-        }
-
-        //changes password (NOT WORKING YET)
-        @PutMapping("/users/{username}/changepassword")
-        String changePassword(@PathVariable String username, @RequestBody User user){
-            User userEdit = userRepository.findByUsername(username);
-            if(user == null)
-                return "failure";
-            userEdit.setPassword(userEdit.getPassword());
             return "success";
         }
 
@@ -89,6 +77,19 @@ import java.util.List;
             userRepository.deleteById(id);
             return "success";
         }
+
+        //Gets all accounts of the type specified by keyword
+        @GetMapping(path = "/users/account/{keyword}")
+        public List<User> getUsersByAccountTypeContaining(@PathVariable String keyword){
+            return userRepository.findByAccountTypeContaining(keyword);
+        }
+
+        //Gets all accounts containing username specified by keyword
+        @GetMapping(path = "/users/username/{keyword}")
+        public List<User> getUsersByUsernameContaining(@PathVariable String keyword){
+            return userRepository.findByUsernameContaining(keyword);
+        }
+
     }
 
     class Message {
