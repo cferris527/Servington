@@ -103,7 +103,8 @@ import java.util.List;
                     }
                 }
             }
-            return null;
+            User nullUser = new User(null,null,null);
+            return nullUser;
         }
     }
 
