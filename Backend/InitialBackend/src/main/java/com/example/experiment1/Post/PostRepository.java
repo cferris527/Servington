@@ -12,4 +12,8 @@ public interface PostRepository extends JpaRepository<Post, String> {
     @Transactional
     void deleteByTitle(String title);
 
+
+    List<Post> findByDescriptionContaining(String keyword);
+
+    List<Post> findByTitleContaining(String keyword);
 }

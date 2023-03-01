@@ -2,6 +2,8 @@ package com.example.experiment1.User;
 
 import com.example.experiment1.Post.Post;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,8 +18,6 @@ public class User {
 
     private String accountType;
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String username;
 
     private String password;
@@ -25,8 +25,8 @@ public class User {
 
 
 
-    @OneToMany
-    private List<Post> posts;
+    //@OneToOne(mappedBy = "username")
+    //private Post post;
 
     public User(){
 
@@ -36,7 +36,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
-        posts = new ArrayList<>();
+        //post = new Post();
     }
 
     public int getId() {
@@ -72,11 +72,11 @@ public class User {
     }
 
 
-    public List<Post> getPosts() {
-        return posts;
+    /*public Post getPost() {
+        return post;
     }
 
-    public void addPosts(Post post){
-        this.posts.add(post);
-    }
+    public void setPost(Post post){
+        this.post = post;
+    }*/
 }

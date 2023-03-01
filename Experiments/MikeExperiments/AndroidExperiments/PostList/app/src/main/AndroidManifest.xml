@@ -2,31 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
-        android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/websecurityconfig"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="Servington"
+        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Servington_from_ground_up"
+        android:theme="@style/Theme.PostList"
         tools:targetApi="31">
-        <activity
-            android:name=".AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OrganizationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateAccountActivity"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

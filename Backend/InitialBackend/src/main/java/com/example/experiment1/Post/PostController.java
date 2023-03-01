@@ -13,19 +13,40 @@ public class PostController {
     @Autowired
     PostRepository postRepository;
 
-    //Lists all Posts
+
+
+    //This function returns a list of all posts in the database
     @GetMapping(path = "/post")
     List<Post> getAllPosts(){
         return postRepository.findAll();
     }
 
-    //Finds a post by title
+    //Returns the post with the given title
     @GetMapping(path = "/post/{title}")
     Post getPostByTitle( @PathVariable String title){
         return postRepository.findByTitle(title);
     }
 
-    //Adds a new post
+    //Returns a list of posts containing the given keyword in the description
+    @GetMapping(path = "/postDescriptionKeyword/{keyword}")
+    public List<Post> getPostsByKeywordInDescription(@PathVariable String keyword){
+        return postRepository.findByDescriptionContaining(keyword);
+    }
+
+    //Returns a list of posts containing the given keyword in the Title
+    @GetMapping(path = "/postTitleKeyword/{keyword}")
+    public List<Post> getPostsByKeywordinTitle(@PathVariable String keyword){
+        return postRepository.findByTitleContaining(keyword);
+    }
+
+
+
+
+
+
+
+
+    //Creates a new post and adds it to the database
     @PostMapping(path = "/post")
     String createPost(@RequestBody Post post){
         if (post == null)
@@ -34,14 +55,23 @@ public class PostController {
         return "success";
     }
 
-    //deletes post with given title
+
+
+
+
+
+
+
+
+
+
+
+    //Deletes a post with the given title
     @DeleteMapping(path = "/post/{title}")
     String deleteUser(@PathVariable String title){
         postRepository.deleteByTitle(title);
         return "success";
     }
-
-    //I spent 3 hours trying to connect this backend to the remote server with no luck
 
 
 }

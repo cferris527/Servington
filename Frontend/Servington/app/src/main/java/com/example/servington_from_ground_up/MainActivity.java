@@ -1,7 +1,5 @@
 package com.example.servington_from_ground_up;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,30 +7,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * Main activity when app is opened. User may either log in, or
+ * create an account.
+ *
+ * @author Connor Ferris
+ */
 public class MainActivity extends AppCompatActivity {
 
     EditText username;
     EditText password;
     Button loginButton;
-
     Button createButton;
-
-    /**
-     * URL for POST request.
-     */
-    private String url = "https://31fdc3aa-553a-48ec-ab03-f9d459afb08d.mock.pstmn.io/demo";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +43,19 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         createButton = findViewById(R.id.createButton);
 
+
         /**
          * Login button action, clicking button will call
-         * postRequest() method.
+         * postRequest() , then getRequest().
          */
         loginButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                postRequest();
+                postRequest(); //send user data to backend
+                getRequest(); //receive from backend validity of data sent
             }
+
         });
 
         /**
@@ -94,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_LOGIN_POST, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO: action for successful response
+                        //TODO
                     }
                 },
                 new Response.ErrorListener() {
@@ -110,6 +113,64 @@ public class MainActivity extends AppCompatActivity {
         );
         queue.add(request); // send request
     }
+
+
+    /**
+     * Gets whether or not entered login credentials are valid, along with other info.
+     * username: ___
+     * isValid: true/false
+     * accountType: ___
+     */
+    private void getRequest() {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.URL_LOGIN_GET,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        // String response can be converted to JSONObject via
+                        try {
+                            JSONObject object = new JSONObject(response);
+                            if(object.has("accountType")) {
+
+                                String type = object.optString("accountType");
+
+                                if(type.equals("USER")) {
+                                    Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                                    startActivity(intent);
+                                }
+                                else if(type.equals("ORGANIZATION")) {
+                                    Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
+                                    startActivity(intent);
+                                }
+                                else if(type.equals("ADMIN")) {
+                                    Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                                    startActivity(intent);
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //tvResponse.setText("Response is: "+ response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //tvResponse.setText("That didn't work!" + error.toString());
+                    }
+                });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+        //Toast.makeText(getApplicationContext(),method+" request sent!",Toast.LENGTH_SHORT).show();
+    }
+
 
 
 }

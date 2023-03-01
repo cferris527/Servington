@@ -1,7 +1,5 @@
 package com.example.servington_from_ground_up;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +10,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONObject;
 
@@ -30,7 +31,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     Spinner spMethod;
     private String method;
     private String accountType;
-    private String url = "http://coms-309-029.class.las.iastate.edu:8080/users";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +114,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_ACCOUNT_POST, body,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -130,6 +130,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             );
             queue.add(request); // send request
         }
+
 
 
 }

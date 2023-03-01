@@ -15,7 +15,6 @@
     <description>Experiment1</description>
     <properties>
         <java.version>17</java.version>
-        <start-class>com.example.experiment1.Experiment1Application</start-class>
     </properties>
     <dependencies>
         <dependency>
