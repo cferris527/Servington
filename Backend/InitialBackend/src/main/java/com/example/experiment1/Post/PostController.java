@@ -88,9 +88,9 @@ public class PostController {
 
 
     //Deletes a post with the given title
-    @DeleteMapping(path = "/post/{title}")
-    String deleteUser(@PathVariable String title){
-        postRepository.deleteByTitle(title);
+    @DeleteMapping(path = "/post")
+    String deleteUser(@RequestBody Post post){
+        postRepository.deleteByTitle(post.getTitle());
         return "success";
     }
 

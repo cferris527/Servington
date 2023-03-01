@@ -74,11 +74,18 @@ import java.util.List;
         }
 
         //Deletes user by ID
-        @DeleteMapping(path = "/users/{id}")
-        String deleteUser(@PathVariable int id){
+        @DeleteMapping(path = "/users")
+        Message deleteUser(@RequestBody User user){
+            int id = user.getId();
             userRepository.deleteById(id);
-            return "success";
+
+            Message m = new Message();
+            m.message = "success";
+            return m;
         }
+
+
+
 
         //Gets all accounts of the type specified by keyword
         @GetMapping(path = "/users/account/{keyword}")
