@@ -5,6 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.experiment1.User.User;
+import com.example.experiment1.User.UserRepository;
+
 import java.util.List;
 
 @RestController
@@ -12,6 +15,9 @@ public class PostController {
 
     @Autowired
     PostRepository postRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
 
 
@@ -54,6 +60,21 @@ public class PostController {
         postRepository.save(post);
         return "success";
     }
+
+
+
+
+
+    /*@PutMapping(path = "/post/{id}/{title}")
+    String addUserToPost(@RequestBody int id, @RequestBody String title){
+        Post p = postRepository.findByTitle(title);
+        User u = userRepository.findById(id);
+        if(u == null || p == null) {
+            return "failure";
+        }
+        p.setUser(u);
+        return "success";
+    }*/
 
 
 

@@ -32,7 +32,9 @@ import java.util.List;
         @PostMapping(path = "/users")
         Message createUser(@RequestBody User user) {
             if (user == null) {
-                return "Invalid User Data Input";
+                Message m = new Message();
+                m.message = "failed";
+                return m;
             }
             userRepository.save(user);
             Message m = new Message();

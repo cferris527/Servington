@@ -19,26 +19,27 @@ public class Post {
     private String description;
 
 
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "username", referencedColumnName = "username")
-    //private User username;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Post(){
 
     }
 
-    public Post(String title, String date, String message){
+    public Post(String title, String date, String description){
         this.title = title;
         this.date = date;
         this.description = description;
+        user = new User();
     }
 
     public void setDate(String date) {
         this.date = date;
     }
 
-    public void setMessage(String message) {
-        this.description = message;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setTitle(String title) {
@@ -49,7 +50,7 @@ public class Post {
         return date;
     }
 
-    public String getMessage() {
+    public String getDescription() {
         return description;
     }
 
@@ -57,10 +58,10 @@ public class Post {
         return title;
     }
 
-    /*public User getUser() {
+    public User getUser() {
         return user;
     }
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
 }

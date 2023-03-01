@@ -25,8 +25,8 @@ public class User {
 
 
 
-    //@OneToOne(mappedBy = "username")
-    //private Post post;
+    @OneToMany(mappedBy = "user")
+    private List<Post> post;
 
     public User(){
 
@@ -36,7 +36,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
-        //post = new Post();
     }
 
     public int getId() {
@@ -72,11 +71,11 @@ public class User {
     }
 
 
-    /*public Post getPost() {
+    public List<Post> getPost() {
         return post;
     }
 
-    public void setPost(Post post){
-        this.post = post;
-    }*/
+    public void setPost(Post apost){
+        post.add(apost);
+    }
 }
