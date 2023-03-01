@@ -7,7 +7,7 @@
     tools:context=".AdminActivity">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/displayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Admin: #NAME"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.309" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/authorUse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FOR AUTHORIZED USE ONLY"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.977" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/authorUse2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FOR AUTHORIZED USE ONLY"

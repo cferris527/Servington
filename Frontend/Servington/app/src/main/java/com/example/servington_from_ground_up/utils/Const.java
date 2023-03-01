@@ -32,4 +32,24 @@ public class Const {
      */
     public static final String URL_CREATE_ACCOUNT_POST
             = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
+
+
+    /**
+     * URL for creating an Admin account on the Admin page.
+     * Sends POST with:
+     * { "username", "password" , "accountType" }
+     */
+    public static final String URL_CREATE_ADMIN_POST
+            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
+
+
+    /**
+     * URL for
+     */
+    public static final String URL_DELETE_POST
+            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingdelete";
+
+
+    public static final String URL_DELETE_ACCOUNT
+            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingdelete";
 }
