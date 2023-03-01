@@ -22,13 +22,17 @@ import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONObject;
 
+/**
+ * Activity for creating a new USER or ORGANIZATION account.
+ *
+ * @author Connor Ferris
+ */
 public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText newUsername;
     private EditText newPassword;
     Button confirmButton;
     Button cancelButton;
-    Spinner spMethod;
     private String method;
     private String accountType;
 
@@ -63,10 +67,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                 method = "User";
             }
         });
-        /**
-         * Create account button, sends POST with new account info
-         * and returns to login screen.
-         */
+
+        //create account button, sends entered info
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,9 +78,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Cancel button action, returns to login screen.
-         */
+        //cancel button, returns to main login
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +92,7 @@ public class CreateAccountActivity extends AppCompatActivity {
          * Creates POST with new login credentials. Sends JSON obj:
          * username : ___
          * password : ___
-         * accountType : ADMIN
+         * accountType : USER/ORGANIZATION
          */
         private void postRequest() {
             RequestQueue queue = Volley.newRequestQueue(CreateAccountActivity.this);
