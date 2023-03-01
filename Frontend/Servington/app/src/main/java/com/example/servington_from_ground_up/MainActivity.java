@@ -29,8 +29,8 @@ import org.json.JSONObject;
  */
 public class MainActivity extends AppCompatActivity {
 
-    EditText username;
-    EditText password;
+    private EditText username;
+    private EditText password;
     Button loginButton;
     Button createButton;
 

@@ -1,5 +1,6 @@
 package com.example.servington_from_ground_up;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,8 @@ public class AdminActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                //TODO: admin account creation activity
+                Intent intent = new Intent(AdminActivity.this, ManageAdminsActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -32,7 +34,8 @@ public class AdminActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                //TODO: post/account deletion activity
+                Intent intent = new Intent(AdminActivity.this, AdminDeletionActivity.class);
+                startActivity(intent);
             }
         });
     }
