@@ -30,12 +30,14 @@ import java.util.List;
 
         //Creates USER
         @PostMapping(path = "/users")
-        String createUser(@RequestBody User user) {
+        Message createUser(@RequestBody User user) {
             if (user == null) {
                 return "Invalid User Data Input";
             }
             userRepository.save(user);
-            return "success";
+            Message m = new Message();
+            m.message = "success";
+            return m;
         }
 
         //Takes a list of USERS and creates them
@@ -89,6 +91,9 @@ import java.util.List;
         }
     }
 
+    class Message {
+        String message;
+    }
 
 
 
