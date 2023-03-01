@@ -29,7 +29,9 @@ import java.util.List;
         @PostMapping(path = "/users")
         Message createUser(@RequestBody User user) {
             if (user == null) {
-                return "Invalid User Data Input";
+                Message m = new Message();
+                m.message = "failed";
+                return m;
             }
             userRepository.save(user);
             Message m = new Message();
@@ -90,6 +92,19 @@ import java.util.List;
             return userRepository.findByUsernameContaining(keyword);
         }
 
+        //Used for login return user if username and pa
+        @GetMapping(path = "/users/{username}/{password}")
+        public User getUserByUsernameAndPassword(@PathVariable String username, @PathVariable String password){
+            List<User> listByUsername = userRepository.findByUsernameContaining(username);
+            for(User user: listByUsername){
+                if(user.getPassword().equals(password)){
+                    if(user.getUsername().equals(username)){
+                        return user;
+                    }
+                }
+            }
+            return null;
+        }
     }
 
     class Message {
