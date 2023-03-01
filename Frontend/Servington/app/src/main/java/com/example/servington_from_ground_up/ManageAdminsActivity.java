@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +20,16 @@ import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONObject;
 
+/**
+ * Activity for Admin accounts to create/manage other admins.
+ *
+ * @author Connor Ferris
+ */
 public class ManageAdminsActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText password;
+    private TextView status;
     Button createAdmin;
     Button back;
 
@@ -32,6 +39,7 @@ public class ManageAdminsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage_admins);
         username = findViewById(R.id.username2);
         password = findViewById(R.id.password2);
+        status = findViewById(R.id.statusMessageA);
         createAdmin = findViewById(R.id.createAdmin);
         back = findViewById(R.id.backButton);
 
@@ -49,6 +57,7 @@ public class ManageAdminsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 postRequest();
+                status.setText("New admin successfully created.");
             }
         });
 

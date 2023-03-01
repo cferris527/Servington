@@ -7,11 +7,15 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Admin account type main page.
+ *
+ * @author Connor Ferris
+ */
 public class AdminActivity extends AppCompatActivity {
 
     private Button manageButton;
     private Button deleteButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,7 @@ public class AdminActivity extends AppCompatActivity {
         manageButton = findViewById(R.id.manageButton);
         deleteButton = findViewById(R.id.deleteButton);
 
+        //button that leads to managing admins
         manageButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -30,6 +35,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //button that leads to deletion of accounts/posts
         deleteButton.setOnClickListener(new View.OnClickListener()
         {
             @Override

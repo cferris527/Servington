@@ -44,12 +44,17 @@ public class Const {
 
 
     /**
-     * URL for
+     * URL for deleting a post.
+     * Sends DELETE with { "postTitle" }
      */
     public static final String URL_DELETE_POST
             = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingdelete";
 
 
+    /**
+     * URL for deleting a user.
+     * Sends DELETE with { "accountID"}
+     */
     public static final String URL_DELETE_ACCOUNT
             = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingdelete";
 }
