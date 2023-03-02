@@ -80,15 +80,19 @@ public class AdminDeletionActivity extends AppCompatActivity {
         // grabs Strings from idOrName field
         String text = idText.getText().toString();
 
+        int idtext = Integer.parseInt(text);
+
+        System.out.println(idtext);
+
         // adds fields to JSON object
         try {
-            body.put("accountID", text);
+            body.put("id", idtext);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Const.URL_DELETE_ACCOUNT, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_DELETE_ACCOUNT, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -119,13 +123,13 @@ public class AdminDeletionActivity extends AppCompatActivity {
 
         // adds fields to JSON object
         try {
-            body.put("postTitle", text);
+            body.put("title", text);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, Const.URL_DELETE_POST, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_DELETE_POST, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

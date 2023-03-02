@@ -96,14 +96,22 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
 
-                    String userName;
-                    String accountType;
-                    try {
-                        userName = response.getString("username");
-                        accountType = response.getString("accountType");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+    /**
+     * Gets whether or not entered login credentials are valid, along with other info.
+     * username: ___
+     * isValid: true/false
+     * accountType: ___
+     */
+    private void getRequest() {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        //string url = http://10.0.2.2:8080/users
+
+       // url + /username + /password
+
+        //String text = postTitleText.getText().toString();
+
+
 
                     //if Login attempt is invalid...
                     if (userName.equals("null")) {
