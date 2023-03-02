@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     private void sendUsername() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        JSONObject body = new JSONObject();
 
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
