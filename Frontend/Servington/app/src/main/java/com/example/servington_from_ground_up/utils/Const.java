@@ -33,7 +33,7 @@ public class Const {
      * { "username" , "password" , "accountType" }
      */
     public static final String URL_CREATE_ACCOUNT_POST
-            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
+            = "http://coms-309-029.class.las.iastate.edu:8080/users";
 
 
     /**
@@ -50,7 +50,7 @@ public class Const {
      * Sends DELETE with { "postTitle" }
      */
     public static final String URL_DELETE_POST
-            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingdelete";
+            = "http://coms-309-029.class.las.iastate.edu:8080/postDelete";
 
 
     /**
@@ -58,12 +58,5 @@ public class Const {
      * Sends DELETE with { "accountID"}
      */
     public static final String URL_DELETE_ACCOUNT
-            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingdelete";
-
-
-    /**
-     * URL for admin list
-     */
-    public static final String URL_ADMIN_LIST
-            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/admins";
+            = "http://coms-309-029.class.las.iastate.edu:8080/usersDelete";
 }

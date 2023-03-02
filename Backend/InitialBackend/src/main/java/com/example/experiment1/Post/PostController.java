@@ -1,5 +1,6 @@
 package com.example.experiment1.Post;
 
+import com.example.experiment1.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.experiment1.User.User;
 import com.example.experiment1.User.UserRepository;
+
 
 import java.util.List;
 
@@ -88,11 +90,26 @@ public class PostController {
 
 
     //Deletes a post with the given title
-    @DeleteMapping(path = "/post/{title}")
-    String deleteUser(@PathVariable String title){
-        postRepository.deleteByTitle(title);
+    @DeleteMapping(path = "/post")
+    String delete(@RequestBody Post post){
+        postRepository.deleteByTitle(post.getTitle());
         return "success";
     }
 
 
+
+    @PostMapping(path = "/postDelete")
+    Message deleteUser(@RequestBody Post post){
+        String title = post.getTitle();
+        postRepository.deleteByTitle(title);
+
+        Message m = new Message();
+        m.message = "success";
+        return m;
+    }
+
+
 }
+
+
+

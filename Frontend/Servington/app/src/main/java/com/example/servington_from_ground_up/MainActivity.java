@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
         createButton = findViewById(R.id.createButton);
 
         //Login button, sends entered info
-        loginButton.setOnClickListener(new View.OnClickListener()
-        {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 status.setText("Loading...");
@@ -56,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Button to account creation
-        createButton.setOnClickListener(new View.OnClickListener()
-        {
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
@@ -80,52 +78,59 @@ public class MainActivity extends AppCompatActivity {
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
 
-        String stringurl = Const.URL_LOGIN_POST + user_name + "/" + pass_word;
+        try {
+            body.put("username", user_name);
+            body.put("password", pass_word);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingget", null,
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
+        String stringurl = "http://coms-309-029.class.las.iastate.edu:8080/users/" + user_name + "/" + pass_word;
 
-                    String userName;
-                    String accountType;
-                    try {
-                        userName = response.getString("username");
-                        accountType = response.getString("accountType");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
 
-                    //if Login attempt is invalid...
-                    if (userName.equals("null")) {
-                        status.setText("Invalid username/password!");
-                        username.setText("", TextView.BufferType.EDITABLE);
-                        password.setText("", TextView.BufferType.EDITABLE);
-                        return;
+                        String userName;
+                        String accountType;
+                        try {
+                            userName = response.getString("username");
+                            accountType = response.getString("accountType");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        //if Login attempt is invalid...
+                        if (userName.equals("null")) {
+                            status.setText("Invalid username/password!");
+                            username.setText("", TextView.BufferType.EDITABLE);
+                            password.setText("", TextView.BufferType.EDITABLE);
+                            return;
+                        }
+                        if (accountType.equals("USER")) {
+                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                            startActivity(intent);
+                        }
+                        else if (accountType.equals("ORGANIZATION")) {
+                            Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
+                            startActivity(intent);
+                        }
+                        else if (accountType.equals("ADMIN")) {
+                            Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            status.setText("Account has no type?");
+                        }
                     }
-                    if (accountType.equals("USER")) {
-                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                        startActivity(intent);
-                    }
-                    else if (accountType.equals("ORGANIZATION")) {
-                        Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
-                        startActivity(intent);
-                    }
-                    else if (accountType.equals("ADMIN")) {
-                        Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-                        startActivity(intent);
-                    }
-                    else {
-                        status.setText("Account has no type?");
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
                     }
                 }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(MainActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
-                }
-            }
         );
         queue.add(request); // send request
     }
