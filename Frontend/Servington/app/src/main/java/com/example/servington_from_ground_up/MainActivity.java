@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
 
+        JSONObject body = new JSONObject();
         try {
             body.put("username", user_name);
             body.put("password", pass_word);
