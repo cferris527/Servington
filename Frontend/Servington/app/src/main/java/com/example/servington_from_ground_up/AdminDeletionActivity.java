@@ -19,6 +19,11 @@ import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONObject;
 
+/**
+ * Activity for Admin to delete users and posts.
+ *
+ * @author Connor Ferris
+ */
 public class AdminDeletionActivity extends AppCompatActivity {
 
     Button backButton;
@@ -63,6 +68,9 @@ public class AdminDeletionActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sends DELETE with an account.
+     */
     private void postRequestAccount() {
         RequestQueue queue = Volley.newRequestQueue(AdminDeletionActivity.this);
 
@@ -101,6 +109,9 @@ public class AdminDeletionActivity extends AppCompatActivity {
         queue.add(request); // send request
     }
 
+    /**
+     * Sends DELETE with a post.
+     */
     private void postRequestPost() {
         RequestQueue queue = Volley.newRequestQueue(AdminDeletionActivity.this);
 

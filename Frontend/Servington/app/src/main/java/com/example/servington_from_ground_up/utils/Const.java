@@ -35,8 +35,8 @@ public class Const {
 
 
     /**
-     * URL for creating an Admin account on the Admin page.
-     * Sends POST with:
+     * URL for creating an Admin account on the Adminpage.
+     *      * Sends POST with:
      * { "username", "password" , "accountType" }
      */
     public static final String URL_CREATE_ADMIN_POST
@@ -44,12 +44,17 @@ public class Const {
 
 
     /**
-     * URL for
+     * URL for deleting a post.
+     * Sends DELETE with { "postTitle" }
      */
     public static final String URL_DELETE_POST
             = "http://10.0.2.2:8080/postDelete";
 
 
+    /**
+     * URL for deleting a user.
+     * Sends DELETE with { "accountID"}
+     */
     public static final String URL_DELETE_ACCOUNT
             = "http://10.0.2.2:8080/usersDelete";
 }
