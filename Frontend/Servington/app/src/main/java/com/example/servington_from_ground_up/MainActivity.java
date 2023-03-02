@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_LOGIN_POST, body,
+        String stringurl = "http://coms-309-029.class.las.iastate.edu:8080/users/" + user_name + "/" + pass_word;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, body,
             new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {

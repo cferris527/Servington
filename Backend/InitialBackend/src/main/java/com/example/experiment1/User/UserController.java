@@ -51,14 +51,15 @@ import java.util.List;
         }
 
         //WIP working on allowing update user to happen
-        /*
+       /*
         @PutMapping("/users/{id}")
         User updateUser(@PathVariable int id, @RequestBody User request){
             User user = userRepository.findById(id);
             if(user == null) {
                 return null;
             }
-            userRepository.deleteById(id);
+            user.setId(id);
+            user.set
             return userRepository.findById(id);
         }*/
 
@@ -92,7 +93,7 @@ import java.util.List;
             return userRepository.findByUsernameContaining(keyword);
         }
 
-        //Used for login return user if username and pa
+        //Used for login return user if username and password is valid
         @GetMapping(path = "/users/{username}/{password}")
         public User getUserByUsernameAndPassword(@PathVariable String username, @PathVariable String password){
             List<User> listByUsername = userRepository.findByUsernameContaining(username);

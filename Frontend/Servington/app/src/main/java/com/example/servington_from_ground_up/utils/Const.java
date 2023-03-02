@@ -36,8 +36,8 @@ public class Const {
 
 
     /**
-     * URL for creating an Admin account on the Admin page.
-     * Sends POST with:
+     * URL for creating an Admin account on the Adminpage.
+     *      * Sends POST with:
      * { "username", "password" , "accountType" }
      */
     public static final String URL_CREATE_ADMIN_POST
