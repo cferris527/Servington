@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
         createButton = findViewById(R.id.createButton);
 
         //Login button, sends entered info
-        loginButton.setOnClickListener(new View.OnClickListener()
-        {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 status.setText("Loading...");
@@ -56,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Button to account creation
-        createButton.setOnClickListener(new View.OnClickListener()
-        {
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
@@ -84,65 +82,56 @@ public class MainActivity extends AppCompatActivity {
         try {
             body.put("username", user_name);
             body.put("password", pass_word);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         String stringurl = "http://coms-309-029.class.las.iastate.edu:8080/users/" + user_name + "/" + pass_word;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, body,
-            new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
 
-    /**
-     * Gets whether or not entered login credentials are valid, along with other info.
-     * username: ___
-     * isValid: true/false
-     * accountType: ___
-     */
-    private void getRequest() {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        //string url = http://10.0.2.2:8080/users
+                        String userName;
+                        String accountType;
+                        try {
+                            userName = response.getString("username");
+                            accountType = response.getString("accountType");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
 
-       // url + /username + /password
-
-        //String text = postTitleText.getText().toString();
-
-
-
-                    //if Login attempt is invalid...
-                    if (userName.equals("null")) {
-                        status.setText("Invalid username/password!");
-                        username.setText("", TextView.BufferType.EDITABLE);
-                        password.setText("", TextView.BufferType.EDITABLE);
-                        return;
+                        //if Login attempt is invalid...
+                        if (userName.equals("null")) {
+                            status.setText("Invalid username/password!");
+                            username.setText("", TextView.BufferType.EDITABLE);
+                            password.setText("", TextView.BufferType.EDITABLE);
+                            return;
+                        }
+                        if (accountType.equals("USER")) {
+                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                            startActivity(intent);
+                        }
+                        else if (accountType.equals("ORGANIZATION")) {
+                            Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
+                            startActivity(intent);
+                        }
+                        else if (accountType.equals("ADMIN")) {
+                            Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            status.setText("Account has no type?");
+                        }
                     }
-                    if (accountType.equals("USER")) {
-                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                        startActivity(intent);
-                    }
-                    else if (accountType.equals("ORGANIZATION")) {
-                        Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
-                        startActivity(intent);
-                    }
-                    else if (accountType.equals("ADMIN")) {
-                        Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-                        startActivity(intent);
-                    }
-                    else {
-                        status.setText("Account has no type?");
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
                     }
                 }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(MainActivity.this, "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
-                }
-            }
         );
         queue.add(request); // send request
     }

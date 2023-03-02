@@ -48,7 +48,7 @@ public class Const {
      * Sends DELETE with { "postTitle" }
      */
     public static final String URL_DELETE_POST
-            = "http://10.0.2.2:8080/postDelete";
+            = "http://coms-309-029.class.las.iastate.edu:8080/postDelete";
 
 
     /**
@@ -56,5 +56,5 @@ public class Const {
      * Sends DELETE with { "accountID"}
      */
     public static final String URL_DELETE_ACCOUNT
-            = "http://10.0.2.2:8080/usersDelete";
+            = "http://coms-309-029.class.las.iastate.edu:8080/usersDelete";
 }
