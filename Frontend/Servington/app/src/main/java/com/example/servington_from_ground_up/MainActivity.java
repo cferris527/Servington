@@ -76,22 +76,13 @@ public class MainActivity extends AppCompatActivity {
     private void sendUsername() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        JSONObject body = new JSONObject();
 
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
 
-        try {
-            body.put("username", user_name);
-            body.put("password", pass_word);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        String stringurl = Const.URL_LOGIN_POST + user_name + "/" + pass_word;
 
-        String stringurl = "http://coms-309-029.class.las.iastate.edu:8080/users/" + user_name + "/" + pass_word;
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingget", null,
             new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {

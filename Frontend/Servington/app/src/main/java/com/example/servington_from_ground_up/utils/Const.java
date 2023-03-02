@@ -8,13 +8,14 @@ package com.example.servington_from_ground_up.utils;
  */
 public class Const {
 
+    public static final String SERVER = "http://coms-309-029.class.las.iastate.edu:8080";
+
     /**
      * URL for pushing "Login" button on MainActivity. Sends POST with:
      * { "username" , "password" }
      */
     public static final String URL_LOGIN_POST
-            = "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/doingpost";
-            // http://coms-309-029.class.las.iastate.edu:8080/users/d/d
+            = "http://coms-309-029.class.las.iastate.edu:8080/users/";
 
 
     /**
