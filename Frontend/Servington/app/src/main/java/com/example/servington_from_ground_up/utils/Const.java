@@ -31,7 +31,7 @@ public class Const {
      * { "username" , "password" , "accountType" }
      */
     public static final String URL_CREATE_ACCOUNT_POST
-            = "http://10.0.2.2:8080/users";
+            = "http://coms-309-029.class.las.iastate.edu:8080/users";
 
 
     /**
@@ -47,9 +47,9 @@ public class Const {
      * URL for
      */
     public static final String URL_DELETE_POST
-            = "http://10.0.2.2:8080/post";
+            = "http://10.0.2.2:8080/postDelete";
 
 
     public static final String URL_DELETE_ACCOUNT
-            = "http://10.0.2.2:8080/users";
+            = "http://10.0.2.2:8080/usersDelete";
 }

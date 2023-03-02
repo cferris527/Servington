@@ -124,6 +124,13 @@ public class MainActivity extends AppCompatActivity {
     private void getRequest() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
+        //string url = http://10.0.2.2:8080/users
+
+       // url + /username + /password
+
+        //String text = postTitleText.getText().toString();
+
+
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Const.URL_LOGIN_GET,

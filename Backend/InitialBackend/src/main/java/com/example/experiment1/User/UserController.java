@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.experiment1.Message;
+
 
     @RestController
     public class UserController {
@@ -73,8 +75,11 @@ import java.util.List;
             return "success";
         }
 
-        //Deletes user by ID
-        @DeleteMapping(path = "/users")
+
+
+
+        //THIS METHOD WORKS FOR DELETING USER
+        @PostMapping(path = "/usersDelete")
         Message deleteUser(@RequestBody User user){
             int id = user.getId();
             userRepository.deleteById(id);
@@ -114,9 +119,7 @@ import java.util.List;
         }
     }
 
-    class Message {
-        String message;
-    }
+
 
 
 
