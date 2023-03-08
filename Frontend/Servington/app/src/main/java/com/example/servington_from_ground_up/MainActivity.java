@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     Button loginButton;
     Button createButton;
 
+    Button userpostButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         status = findViewById(R.id.statusMessage);
         loginButton = findViewById(R.id.loginButton);
         createButton = findViewById(R.id.createButton);
+        userpostButton = findViewById(R.id.postlisttest);
 
         //Login button, sends entered info
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 status.setText("Loading...");
                 sendUsername();
+            }
+        });
+
+        userpostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UserPostListActivity.class);
+                startActivity(intent);
             }
         });
 
