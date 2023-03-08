@@ -17,17 +17,34 @@ import com.example.experiment1.Message;
         @Autowired
         UserRepository userRepository;
 
-        //Returns List of all USERS
+        //GET functions
+
+        //Returns List of all USERS. Has not been implemented on frontend.
         @GetMapping(path = "/users")
         List<User> getAllUsers(){ return userRepository.findAll(); }
 
-        //Gets USER by ID
+        //Gets USER by ID. Has not been implemented on frontend.
         @GetMapping(path = "/users/id/{id}")
         User getUserById( @PathVariable int id){
             return userRepository.findById(id);
         }
 
-        //Creates USER
+        //Gets all accounts of the type specified by keyword. This works on frontend.
+        @GetMapping(path = "/users/account/{keyword}")
+        public List<User> getUsersByAccountTypeContaining(@PathVariable String keyword){
+            return userRepository.findByAccountTypeContaining(keyword);
+        }
+
+        //Gets all accounts containing username specified by keyword. This is not implemented on frontend.
+        @GetMapping(path = "/users/username/{keyword}")
+        public List<User> getUsersByUsernameContaining(@PathVariable String keyword){
+            return userRepository.findByUsernameContaining(keyword);
+        }
+
+
+
+
+        //Creates USER. This works on frontend.
         @PostMapping(path = "/users")
         Message createUser(@RequestBody User user) {
             if (user == null) {
@@ -41,6 +58,49 @@ import com.example.experiment1.Message;
             return m;
         }
 
+
+
+
+
+
+        //THIS METHOD WORKS FOR DELETING USER. Works on frontend.
+        @PostMapping(path = "/usersDelete")
+        Message deleteUser(@RequestBody User user){
+            int id = user.getId();
+            userRepository.deleteById(id);
+
+            Message m = new Message();
+            m.message = "success";
+            return m;
+        }
+
+
+
+
+
+        //Used for login return user if username and password is valid. This is working on frontend.
+        @GetMapping(path = "/users/{username}/{password}")
+        public User getUserByUsernameAndPassword(@PathVariable String username, @PathVariable String password){
+            List<User> listByUsername = userRepository.findByUsernameContaining(username);
+            for(User user: listByUsername){
+                if(user.getPassword().equals(password)){
+                    if(user.getUsername().equals(username)){
+                        return user;
+                    }
+                }
+            }
+            User nullUser = new User(null,null,null);
+            return nullUser;
+        }
+
+
+
+
+        //Functions we are working on or do not have functions
+
+
+
+
         //Takes a list of USERS and creates them (used for postman testing mostly)
         @PostMapping(path = "/users/multiple")
         String createMultipleUsers(@RequestBody List<User> userList) {
@@ -51,6 +111,7 @@ import com.example.experiment1.Message;
             }
             return "Success";
         }
+
 
         //WIP working on allowing update user to happen
        /*
@@ -65,8 +126,9 @@ import com.example.experiment1.Message;
             return userRepository.findById(id);
         }*/
 
-        //Intended to create a post for a user but not doing what intended
-        @PutMapping("/users/{userId}/post")
+
+        //Intended to create a post for a user but not doing what intended.
+        /*@PutMapping("/users/{userId}/post")
         String createPost(@PathVariable int userId, @RequestBody Post post) {
             User user = userRepository.findById(userId);
             if (user == null)
@@ -74,52 +136,13 @@ import com.example.experiment1.Message;
             //post.setUser(user);
             //user.addPosts(post);
             return "success";
-        }
+        }*/
 
 
-
-
-        //THIS METHOD WORKS FOR DELETING USER
-        @PostMapping(path = "/usersDelete")
-        Message deleteUser(@RequestBody User user){
-            int id = user.getId();
-            userRepository.deleteById(id);
-
-            Message m = new Message();
-            m.message = "success";
-            return m;
-        }
-
-
-
-
-        //Gets all accounts of the type specified by keyword
-        @GetMapping(path = "/users/account/{keyword}")
-        public List<User> getUsersByAccountTypeContaining(@PathVariable String keyword){
-            return userRepository.findByAccountTypeContaining(keyword);
-        }
-
-        //Gets all accounts containing username specified by keyword
-        @GetMapping(path = "/users/username/{keyword}")
-        public List<User> getUsersByUsernameContaining(@PathVariable String keyword){
-            return userRepository.findByUsernameContaining(keyword);
-        }
-
-        //Used for login return user if username and password is valid
-        @GetMapping(path = "/users/{username}/{password}")
-        public User getUserByUsernameAndPassword(@PathVariable String username, @PathVariable String password){
-            List<User> listByUsername = userRepository.findByUsernameContaining(username);
-            for(User user: listByUsername){
-                if(user.getPassword().equals(password)){
-                    if(user.getUsername().equals(username)){
-                        return user;
-                    }
-                }
-            }
-            User nullUser = new User(null,null,null);
-            return nullUser;
-        }
     }
+
+
+
 
 
 
