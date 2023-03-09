@@ -55,7 +55,7 @@ public class Const {
 
     /**
      * URL for deleting a user.
-     * Sends DELETE with { "accountID"}
+     * Sends DELETE with { "accountID" }
      */
     public static final String URL_DELETE_ACCOUNT
             = "http://coms-309-029.class.las.iastate.edu:8080/usersDelete";
