@@ -16,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     Button loginButton;
     Button createButton;
-
-    Button userpostButton;
+    String initial_url = "http://coms-309-029.class.las.iastate.edu:8080/users/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         status = findViewById(R.id.statusMessage);
         loginButton = findViewById(R.id.loginButton);
         createButton = findViewById(R.id.createButton);
-        userpostButton = findViewById(R.id.postlisttest);
 
         //Login button, sends entered info
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -54,14 +51,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 status.setText("Loading...");
                 sendUsername();
-            }
-        });
-
-        userpostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, UserPostListActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -75,32 +64,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     /**
-     * Method sending POST request to server with username and password entered.
-     * Will receive response with username, password, and accountType. If username
+     * Method sending GET request to server with username and password in url.
+     * Will receive response with username and accountType. If username
      * is null, this implies the password did not match or the account name doesn't
      * exist.
      */
     private void sendUsername() {
-
         RequestQueue queue = Volley.newRequestQueue(this);
-
 
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
 
+        // empty JSON object for body
         JSONObject body = new JSONObject();
-        try {
-            body.put("username", user_name);
-            body.put("password", pass_word);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        String stringurl = "http://coms-309-029.class.las.iastate.edu:8080/users/" + user_name + "/" + pass_word;
+        String url = initial_url + user_name + "/" + pass_word;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -133,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, AdminActivity.class);
                             startActivity(intent);
                         }
+                        // special case for debugging
                         else {
                             status.setText("Account has no type?");
                         }
