@@ -102,22 +102,28 @@ public class MainActivity extends AppCompatActivity {
                             password.setText("", TextView.BufferType.EDITABLE);
                             return;
                         }
+                        Intent intent;
                         if (accountType.equals("USER")) {
-                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                            startActivity(intent);
+                            intent = new Intent(MainActivity.this, UserActivity.class);
                         }
                         else if (accountType.equals("ORGANIZATION")) {
-                            Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
-                            startActivity(intent);
+                            intent = new Intent(MainActivity.this, OrganizationActivity.class);
                         }
                         else if (accountType.equals("ADMIN")) {
-                            Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-                            startActivity(intent);
+                            intent = new Intent(MainActivity.this, AdminActivity.class);
                         }
-                        // special case for debugging
                         else {
                             status.setText("Account has no type?");
+                            return;
                         }
+
+                        Singleton data = Singleton.getInstance();
+                        try {
+                            data.setData(response);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {
