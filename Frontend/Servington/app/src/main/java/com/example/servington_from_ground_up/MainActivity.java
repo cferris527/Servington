@@ -3,6 +3,7 @@ package com.example.servington_from_ground_up;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.utils.Singleton;
+import com.example.servington_from_ground_up.utils.userType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         status = findViewById(R.id.statusMessage);
@@ -81,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         String url = initial_url + user_name + "/" + pass_word;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/sampledata", body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -103,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                         Intent intent;
-                        if (accountType.equals("USER")) {
+                        if (accountType.equals("VOLUNTEER")) {
                             intent = new Intent(MainActivity.this, UserActivity.class);
                         }
                         else if (accountType.equals("ORGANIZATION")) {
@@ -113,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
                             intent = new Intent(MainActivity.this, AdminActivity.class);
                         }
                         else {
+                            System.out.println(accountType.toString());
+                            System.out.println(userType.VOLUNTEER.toString());
                             status.setText("Account has no type?");
                             return;
                         }
