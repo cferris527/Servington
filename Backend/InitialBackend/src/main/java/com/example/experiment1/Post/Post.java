@@ -3,6 +3,7 @@ package com.example.experiment1.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import java.util.Date;
 
 import com.example.experiment1.User.User;
 
@@ -13,6 +14,7 @@ public class Post {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String title;
+
 
     private String date;
 
