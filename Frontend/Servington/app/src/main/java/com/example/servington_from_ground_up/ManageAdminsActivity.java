@@ -7,7 +7,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +38,6 @@ public class ManageAdminsActivity extends AppCompatActivity {
     Button createAdmin;
     Button back, refresh;
 
-    ScrollView scroller;
     LinearLayout layout;
 
     @Override
@@ -104,7 +102,7 @@ public class ManageAdminsActivity extends AppCompatActivity {
 
         // users/account/ADMIN
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_ADMIN_POST, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_ACCOUNT_POST, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

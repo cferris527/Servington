@@ -25,14 +25,11 @@ import org.json.JSONObject;
  * @author Connor Ferris
  */
 public class AdminDeletionActivity extends AppCompatActivity {
-
     Button backButton;
     Button deleteAccount;
     Button deletePost;
     EditText idText;
     EditText postTitleText;
-    private String method;
-    private boolean isAPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +66,7 @@ public class AdminDeletionActivity extends AppCompatActivity {
     }
 
     /**
-     * Sends DELETE with an account.
+     * Sends POST with an account to be deleted.
      */
     private void postRequestAccount() {
         RequestQueue queue = Volley.newRequestQueue(AdminDeletionActivity.this);
@@ -110,7 +107,7 @@ public class AdminDeletionActivity extends AppCompatActivity {
     }
 
     /**
-     * Sends DELETE with a post.
+     * Sends POST with a post to be deleted.
      */
     private void postRequestPost() {
         RequestQueue queue = Volley.newRequestQueue(AdminDeletionActivity.this);
