@@ -32,7 +32,7 @@ public class User {
     private String profilePictureURL;
 
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "title")
     private List<Post> post;
 
     public User(){
