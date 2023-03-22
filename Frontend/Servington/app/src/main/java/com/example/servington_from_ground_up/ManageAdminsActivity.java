@@ -102,7 +102,7 @@ public class ManageAdminsActivity extends AppCompatActivity {
 
         // users/account/ADMIN
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_ADMIN_POST, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_ACCOUNT_POST, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
