@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.servington_from_ground_up.utils.Singleton;
+
 /**
  * Admin account type main page.
  *
@@ -28,7 +30,7 @@ public class AdminActivity extends AppCompatActivity {
         manageButton = findViewById(R.id.manageButton);
         deleteButton = findViewById(R.id.deleteButton);
         adminName = findViewById(R.id.adminName);
-
+       
         Singleton data = Singleton.getInstance();
 
         adminName.setText("Admin: " + data.getDisplayName());
