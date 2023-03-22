@@ -3,6 +3,7 @@ package com.example.servington_from_ground_up;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.servington_from_ground_up.utils.Const;
+import com.example.servington_from_ground_up.utils.Singleton;
+import com.example.servington_from_ground_up.utils.userType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,11 +36,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView status;
     Button loginButton;
     Button createButton;
+    String initial_url = "http://coms-309-029.class.las.iastate.edu:8080/users/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         status = findViewById(R.id.statusMessage);
@@ -64,30 +69,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     /**
-     * Method sending POST request to server with username and password entered.
-     * Will receive response with username, password, and accountType. If username
+     * Method sending GET request to server with username and password in url.
+     * Will receive response with username and accountType. If username
      * is null, this implies the password did not match or the account name doesn't
      * exist.
      */
     private void sendUsername() {
-
         RequestQueue queue = Volley.newRequestQueue(this);
 
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
-        /*
-        try {
-            body.put("username", user_name);
-            body.put("password", pass_word);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
-        String stringurl = "http://coms-309-029.class.las.iastate.edu:8080/users/" + user_name + "/" + pass_word;
+        // empty JSON object for body
+        JSONObject body = new JSONObject();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, null,
+        String url = initial_url + user_name + "/" + pass_word;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/sampledata", body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -108,21 +107,30 @@ public class MainActivity extends AppCompatActivity {
                             password.setText("", TextView.BufferType.EDITABLE);
                             return;
                         }
-                        if (accountType.equals("USER")) {
-                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                            startActivity(intent);
+                        Intent intent;
+                        if (accountType.equals("VOLUNTEER")) {
+                            intent = new Intent(MainActivity.this, UserActivity.class);
                         }
                         else if (accountType.equals("ORGANIZATION")) {
-                            Intent intent = new Intent(MainActivity.this, OrganizationActivity.class);
-                            startActivity(intent);
+                            intent = new Intent(MainActivity.this, OrganizationActivity.class);
                         }
                         else if (accountType.equals("ADMIN")) {
-                            Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-                            startActivity(intent);
+                            intent = new Intent(MainActivity.this, AdminActivity.class);
                         }
                         else {
+                            System.out.println(accountType.toString());
+                            System.out.println(userType.VOLUNTEER.toString());
                             status.setText("Account has no type?");
+                            return;
                         }
+
+                        Singleton data = Singleton.getInstance();
+                        try {
+                            data.setData(response);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {

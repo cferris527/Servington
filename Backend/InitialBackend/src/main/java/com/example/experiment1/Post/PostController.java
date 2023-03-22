@@ -23,25 +23,25 @@ public class PostController {
 
 
 
-    //This function returns a list of all posts in the database
+    //This function returns a list of all posts in the database. This works on frontend.
     @GetMapping(path = "/post")
     List<Post> getAllPosts(){
         return postRepository.findAll();
     }
 
-    //Returns the post with the given title
+    //Returns the post with the given title. Has not been implemented on frontend.
     @GetMapping(path = "/post/{title}")
     Post getPostByTitle( @PathVariable String title){
         return postRepository.findByTitle(title);
     }
 
-    //Returns a list of posts containing the given keyword in the description
+    //Returns a list of posts containing the given keyword in the description. Has not been implemented on frontend.
     @GetMapping(path = "/postDescriptionKeyword/{keyword}")
     public List<Post> getPostsByKeywordInDescription(@PathVariable String keyword){
         return postRepository.findByDescriptionContaining(keyword);
     }
 
-    //Returns a list of posts containing the given keyword in the Title
+    //Returns a list of posts containing the given keyword in the Title. Has not been implemented on frontend.
     @GetMapping(path = "/postTitleKeyword/{keyword}")
     public List<Post> getPostsByKeywordinTitle(@PathVariable String keyword){
         return postRepository.findByTitleContaining(keyword);
@@ -52,9 +52,7 @@ public class PostController {
 
 
 
-
-
-    //Creates a new post and adds it to the database
+    //Creates a new post and adds it to the database. Not used on frontend yet.
     @PostMapping(path = "/post")
     String createPost(@RequestBody Post post){
         if (post == null)
@@ -65,39 +63,16 @@ public class PostController {
 
 
 
-
-
-    /*@PutMapping(path = "/post/{id}/{title}")
-    String addUserToPost(@RequestBody int id, @RequestBody String title){
-        Post p = postRepository.findByTitle(title);
-        User u = userRepository.findById(id);
-        if(u == null || p == null) {
-            return "failure";
-        }
-        p.setUser(u);
-        return "success";
-    }*/
-
-
-
-
-
-
-
-
-
-
-
-
-    //Deletes a post with the given title
+    //Deletes a post with the given title. Is not used right now with frontend.
     @DeleteMapping(path = "/post")
     String delete(@RequestBody Post post){
         postRepository.deleteByTitle(post.getTitle());
         return "success";
     }
 
+    
 
-
+    //This function uses the post mapping method to delete a post. Works with front end.
     @PostMapping(path = "/postDelete")
     Message deleteUser(@RequestBody Post post){
         String title = post.getTitle();
