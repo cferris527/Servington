@@ -48,7 +48,7 @@ public class PostController {
         return postRepository.findByTitleContaining(keyword);
     }
 
-    //Returns every post made by the given user id
+
     @GetMapping(path = "/test/title")
     public User test(@PathVariable String title){
         Post p = postRepository.findByTitle(title);
@@ -67,7 +67,7 @@ public class PostController {
             return "failure";
         User u = userRepository.findById(id);
         post.setUser(u);
-        u.setPost(post);
+        //u.setPost(post);
         postRepository.save(post);
         return "success";
     }
