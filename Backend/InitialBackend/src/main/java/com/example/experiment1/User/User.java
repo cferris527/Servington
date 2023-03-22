@@ -43,6 +43,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
+        post = new ArrayList<>();
     }
 
     public int getId() {
@@ -81,8 +82,8 @@ public class User {
         return post;
     }
 
-    public void setPost(Post apost){
-        post.add(apost);
+    public void setPost(Post aPost){
+        post.add(aPost);
     }
     /*
     public String getEmail() {

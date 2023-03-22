@@ -11,6 +11,7 @@ import com.example.experiment1.User.UserRepository;
 
 
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 public class PostController {
@@ -48,15 +49,25 @@ public class PostController {
     }
 
 
+    @GetMapping(path = "/test/title")
+    public User test(@PathVariable String title){
+        Post p = postRepository.findByTitle(title);
+        return p.getUser();
+    }
+
+
 
 
 
 
     //Creates a new post and adds it to the database. Not used on frontend yet.
-    @PostMapping(path = "/post")
-    String createPost(@RequestBody Post post){
+    @PostMapping(path = "/post/{id}")
+    String createPost(@RequestBody Post post, @PathVariable int id){
         if (post == null)
             return "failure";
+        User u = userRepository.findById(id);
+        post.setUser(u);
+        //u.setPost(post);
         postRepository.save(post);
         return "success";
     }
@@ -70,7 +81,7 @@ public class PostController {
         return "success";
     }
 
-    
+
 
     //This function uses the post mapping method to delete a post. Works with front end.
     @PostMapping(path = "/postDelete")
