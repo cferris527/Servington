@@ -22,10 +22,19 @@ public class User {
 
     private String password;
 
+    private String email;
+
+    private char[] phoneNumber = new char[10];
+
+    private String displayName;
+
+    //store as URL
+    private String profilePictureURL;
 
 
 
-    @OneToMany(mappedBy = "user")
+
+    @OneToMany(mappedBy = "id")
     private List<Post> post;
 
     public User(){
@@ -70,7 +79,6 @@ public class User {
         return accountType;
     }
 
-
     public List<Post> getPost() {
         return post;
     }
@@ -78,4 +86,38 @@ public class User {
     public void setPost(Post apost){
         post.add(apost);
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(){
+        this.email = email;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(){
+        this.displayName = displayName;
+    }
+
+    public char[] getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(){
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getProfilePictureURL() {
+        return profilePictureURL;
+    }
+
+    public void setProfilePictureURL(){
+        this.profilePictureURL = profilePictureURL;
+    }
+
+
 }
