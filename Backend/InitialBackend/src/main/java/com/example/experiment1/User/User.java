@@ -32,8 +32,6 @@ public class User {
     private String profilePictureURL;
 
 
-
-
     @OneToMany(mappedBy = "id")
     private List<Post> post;
 
@@ -91,7 +89,7 @@ public class User {
         return email;
     }
 
-    public void setEmail(){
+    public void setEmail(String email){
         this.email = email;
     }
 
@@ -99,7 +97,7 @@ public class User {
         return displayName;
     }
 
-    public void setDisplayName(){
+    public void setDisplayName(String displayName){
         this.displayName = displayName;
     }
 
@@ -107,17 +105,13 @@ public class User {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(){
-        this.phoneNumber = phoneNumber;
-    }
+    public void setPhoneNumber(char[] phoneNumber){this.phoneNumber = phoneNumber; }
 
     public String getProfilePictureURL() {
         return profilePictureURL;
     }
 
-    public void setProfilePictureURL(){
+    public void setProfilePictureURL(String URL){
         this.profilePictureURL = profilePictureURL;
     }
-
-
 }
