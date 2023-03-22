@@ -41,7 +41,7 @@ import com.example.experiment1.Message;
             return m;
         }
 
-        //Takes a list of USERS and creates them (used for postman testing mostly)
+        //Takes a list of USERS and creates them (used for postman testing to populate database)
         @PostMapping(path = "/users/multiple")
         String createMultipleUsers(@RequestBody List<User> userList) {
             if(userList == null)
@@ -52,8 +52,7 @@ import com.example.experiment1.Message;
             return "Success";
         }
 
-        //WIP working on allowing update user to happen
-       /*
+       /* WIP working on allowing update user to happen
         @PutMapping("/users/{id}")
         User updateUser(@PathVariable int id, @RequestBody User request){
             User user = userRepository.findById(id);
@@ -65,7 +64,7 @@ import com.example.experiment1.Message;
             return userRepository.findById(id);
         }*/
 
-        //Intended to create a post for a user but not doing what intended
+        /*WIP Intended to create a post for a user but not doing what intended
         @PutMapping("/users/{userId}/post")
         String createPost(@PathVariable int userId, @RequestBody Post post) {
             User user = userRepository.findById(userId);
@@ -74,10 +73,7 @@ import com.example.experiment1.Message;
             //post.setUser(user);
             //user.addPosts(post);
             return "success";
-        }
-
-
-
+        }*/
 
         //THIS METHOD WORKS FOR DELETING USER
         @PostMapping(path = "/usersDelete")
@@ -89,9 +85,6 @@ import com.example.experiment1.Message;
             m.message = "success";
             return m;
         }
-
-
-
 
         //Gets all accounts of the type specified by keyword
         @GetMapping(path = "/users/account/{keyword}")
@@ -120,8 +113,3 @@ import com.example.experiment1.Message;
             return nullUser;
         }
     }
-
-
-
-
-

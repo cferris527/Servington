@@ -22,14 +22,14 @@ public class User {
 
     private String password;
 
-    private String email;
+    /*private String email;
 
     private char[] phoneNumber = new char[10];
 
     private String displayName;
 
     //store as URL
-    private String profilePictureURL;
+    private String profilePictureURL;*/
 
 
     @OneToMany(mappedBy = "title")
@@ -84,7 +84,7 @@ public class User {
     public void setPost(Post apost){
         post.add(apost);
     }
-
+    /*
     public String getEmail() {
         return email;
     }
@@ -113,5 +113,5 @@ public class User {
 
     public void setProfilePictureURL(String URL){
         this.profilePictureURL = profilePictureURL;
-    }
+    }*/
 }

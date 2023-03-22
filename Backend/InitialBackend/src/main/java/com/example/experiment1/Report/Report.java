@@ -11,19 +11,20 @@ public class Report {
     private int id;
     private String reportDescription;
 
-    private User userReported;
 
-    private Post postReported;
+    private String username;
 
-    public Report(User user, Post post, String description){
-        this.userReported = user;
-        this.postReported = post;
+    private String title;
+
+    public Report(String username, String title, String description){
+        this.username = username;
+        this.title = title;
         this.reportDescription = description;
     }
 
-    public User getUser(){return userReported; }
+    public String getUser(){return username; }
 
-    public Post getPost(){return postReported; }
+    public String getPost(){return title; }
 
     public String getReportDescription(){return reportDescription; }
 

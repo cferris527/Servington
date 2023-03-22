@@ -11,7 +11,9 @@ public class Post {
 
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String title;
 
     private String date;

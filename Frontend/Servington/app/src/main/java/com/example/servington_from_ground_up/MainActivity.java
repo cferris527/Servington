@@ -77,17 +77,17 @@ public class MainActivity extends AppCompatActivity {
 
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
-
+        /*
         try {
             body.put("username", user_name);
             body.put("password", pass_word);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         String stringurl = "http://coms-309-029.class.las.iastate.edu:8080/users/" + user_name + "/" + pass_word;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringurl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
