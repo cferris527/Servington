@@ -1,13 +1,14 @@
 package com.example.experiment1.Post;
 
 import com.example.experiment1.Message;
+import com.example.experiment1.Organization.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.experiment1.User.User;
-import com.example.experiment1.User.UserRepository;
+import com.example.experiment1.Organization.Organization;
+import com.example.experiment1.Organization.OrganizationRepository;
 
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class PostController {
     PostRepository postRepository;
 
     @Autowired
-    UserRepository userRepository;
+    OrganizationRepository organizationRepository;
 
 
 
@@ -30,17 +31,20 @@ public class PostController {
         return postRepository.findAll();
     }
 
+
     //Returns the post with the given title. Has not been implemented on frontend.
     @GetMapping(path = "/post/{title}")
     Post getPostByTitle( @PathVariable String title){
         return postRepository.findByTitle(title);
     }
 
+
     //Returns a list of posts containing the given keyword in the description. Has not been implemented on frontend.
     @GetMapping(path = "/postDescriptionKeyword/{keyword}")
     public List<Post> getPostsByKeywordInDescription(@PathVariable String keyword){
         return postRepository.findByDescriptionContaining(keyword);
     }
+
 
     //Returns a list of posts containing the given keyword in the Title. Has not been implemented on frontend.
     @GetMapping(path = "/postTitleKeyword/{keyword}")
@@ -49,11 +53,6 @@ public class PostController {
     }
 
 
-    @GetMapping(path = "/test/title")
-    public User test(@PathVariable String title){
-        Post p = postRepository.findByTitle(title);
-        return p.getUser();
-    }
 
 
 
@@ -65,8 +64,8 @@ public class PostController {
     String createPost(@RequestBody Post post, @PathVariable int id){
         if (post == null)
             return "failure";
-        User u = userRepository.findById(id);
-        post.setUser(u);
+        Organization o = organizationRepository.findById(id);
+        post.setOrg(o);
         //u.setPost(post);
         postRepository.save(post);
         return "success";
@@ -85,7 +84,7 @@ public class PostController {
 
     //This function uses the post mapping method to delete a post. Works with front end.
     @PostMapping(path = "/postDelete")
-    Message deleteUser(@RequestBody Post post){
+    Message deletePost(@RequestBody Post post){
         String title = post.getTitle();
         postRepository.deleteByTitle(title);
 

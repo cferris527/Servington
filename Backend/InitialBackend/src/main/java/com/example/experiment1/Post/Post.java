@@ -1,5 +1,7 @@
 package com.example.experiment1.Post;
 
+import com.example.experiment1.Organization.Organization;
+import com.example.experiment1.Organization.OrganizationRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -12,9 +14,6 @@ public class Post {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
     private String title;
 
 
@@ -24,8 +23,8 @@ public class Post {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "org_id", referencedColumnName = "id")
+    private Organization org;
 
     public Post(){
 
@@ -35,7 +34,7 @@ public class Post {
         this.title = title;
         this.date = date;
         this.description = description;
-        user = new User();
+        org= new Organization();
     }
 
     public void setDate(String date) {
@@ -62,11 +61,11 @@ public class Post {
         return title;
     }
 
-    public User getUser() {
-        return user;
+    public Organization getOrg() {
+        return org;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOrg(Organization org) {
+        this.org = org;
     }
 }

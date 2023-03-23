@@ -32,8 +32,8 @@ public class User {
     private String profilePictureURL;*/
 
 
-    @OneToMany(mappedBy = "title")
-    private List<Post> post;
+    //@OneToMany(mappedBy = "title")
+    //private List<Post> post;
 
     public User(){
 
@@ -43,7 +43,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
-        post = new ArrayList<>();
+        //post = new ArrayList<>();
     }
 
     public int getId() {
@@ -77,7 +77,7 @@ public class User {
     public String getAccountType() {
         return accountType;
     }
-
+/*
     public List<Post> getPost() {
         return post;
     }
@@ -85,7 +85,7 @@ public class User {
     public void setPost(Post aPost){
         post.add(aPost);
     }
-    /*
+
     public String getEmail() {
         return email;
     }
