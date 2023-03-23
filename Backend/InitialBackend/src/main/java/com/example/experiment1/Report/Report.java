@@ -22,6 +22,8 @@ public class Report {
         this.reportDescription = description;
     }
 
+    public Report(){};
+
     public String getUser(){return username; }
 
     public String getPost(){return title; }
