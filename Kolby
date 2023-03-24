@@ -1,0 +1,24 @@
+stages:
+ -maventry
+ -androidtry
+
+maven-build:
+    stage:maventry
+    tags:
+     -springboot_tag
+     script:
+     -cd ./Backend/InitialBackend
+     -mvn package
+
+
+android-build:
+    image: gjandres/android-ci:latest
+    stage:androidtry
+    tags:
+     -android_tag
+    before_script:
+     -export GRADLE_USER_HOME=`pwd`/.gradle
+     -chmod +x ./Frontend/gradlew
+    script: 
+     -cd Frontend
+     -./gradlew assemble
