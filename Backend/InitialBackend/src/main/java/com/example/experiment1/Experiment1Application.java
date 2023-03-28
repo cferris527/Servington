@@ -1,8 +1,6 @@
 package com.example.experiment1;
 
-import com.example.experiment1.User.User;
-import com.example.experiment1.User.UserController;
-import com.example.experiment1.User.UserRepository;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -26,14 +26,14 @@ public class PostController {
 
 
     //This function returns a list of all posts in the database. This works on frontend.
-    @GetMapping(path = "/post")
+    @GetMapping(path = "/allPosts")
     List<Post> getAllPosts(){
         return postRepository.findAll();
     }
 
 
     //Returns the post with the given title. Has not been implemented on frontend.
-    @GetMapping(path = "/post/{title}")
+    @GetMapping(path = "/getPostByTitle/{title}")
     Post getPostByTitle( @PathVariable String title){
         return postRepository.findByTitle(title);
     }
@@ -56,19 +56,30 @@ public class PostController {
 
 
 
-
-
-
     //Creates a new post and adds it to the database. Not used on frontend yet.
-    @PostMapping(path = "/post/{id}")
+    @PostMapping(path = "/createPost/{id}")
     String createPost(@RequestBody Post post, @PathVariable int id){
         if (post == null)
             return "failure";
         Organization o = organizationRepository.findById(id);
         post.setOrg(o);
-        //u.setPost(post);
         postRepository.save(post);
         return "success";
+    }
+
+
+    //Given the organization id in the url, this method returns a list of every post that organization has made
+    @GetMapping(path = "/getPostsByOrg/{id}")
+    public List<Post> getPostsByOrganization(@PathVariable int id){
+        List<Post> all = postRepository.findAll();
+        List<Post> selected = new ArrayList<>();
+        for (Post post:all) {
+            if (post.getOrg().getId() == id){
+                selected.add(post);
+            }
+        }
+
+        return selected;
     }
 
 
@@ -83,7 +94,7 @@ public class PostController {
 
 
     //This function uses the post mapping method to delete a post. Works with front end.
-    @PostMapping(path = "/postDelete")
+    @PostMapping(path = "/deletePost")
     Message deletePost(@RequestBody Post post){
         String title = post.getTitle();
         postRepository.deleteByTitle(title);
