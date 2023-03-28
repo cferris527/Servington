@@ -2,11 +2,14 @@ package com.example.experiment1.Post;
 
 import com.example.experiment1.Organization.Organization;
 import com.example.experiment1.Organization.OrganizationRepository;
+import com.example.experiment1.Volunteer.Volunteer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -21,10 +24,17 @@ public class Post {
 
     private String description;
 
+    private int volunteerCount;
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private Organization org;
+
+    @ManyToMany
+    @Column(nullable = true)
+    @JsonIgnore
+    private List<Volunteer> volunteers;
 
     public Post(){
 
@@ -34,7 +44,9 @@ public class Post {
         this.title = title;
         this.date = date;
         this.description = description;
+        this.volunteerCount = 0;
         org= new Organization();
+        volunteers = new ArrayList<>();
     }
 
     public void setDate(String date) {
@@ -67,5 +79,23 @@ public class Post {
 
     public void setOrg(Organization org) {
         this.org = org;
+    }
+
+    public int getVolunteerCount(){
+        return volunteerCount;
+    }
+
+    public void incrementCount(){
+        this.volunteerCount ++;
+    }
+
+
+
+    public void addVolunteer(Volunteer v) {
+        this.volunteers.add(v);
+    }
+
+    public List<Volunteer> getVolunteers() {
+        return volunteers;
     }
 }

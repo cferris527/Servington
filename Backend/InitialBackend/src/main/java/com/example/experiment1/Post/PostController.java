@@ -105,6 +105,18 @@ public class PostController {
     }
 
 
+
+    @PutMapping(path = "/addVolunteer/{postTitle}")
+    Message addVolunteer(@PathVariable String postTitle){
+        Post p = postRepository.findByTitle(postTitle);
+        p.incrementCount();
+
+        Message m = new Message();
+        m.message = "success";
+        return m;
+    }
+
+
 }
 
 
