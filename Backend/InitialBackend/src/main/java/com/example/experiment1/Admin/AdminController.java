@@ -2,8 +2,6 @@ package com.example.experiment1.Admin;
 
 import com.example.experiment1.Message;
 
-import com.example.experiment1.User.User;
-import com.example.experiment1.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

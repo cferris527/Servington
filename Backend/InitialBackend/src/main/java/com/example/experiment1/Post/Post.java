@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Date;
 
-import com.example.experiment1.User.User;
+
 
 @Entity
 public class Post {

@@ -1,6 +1,6 @@
 package com.example.experiment1.Admin;
 
-import com.example.experiment1.User.User;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

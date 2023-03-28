@@ -1,7 +1,6 @@
 package com.example.experiment1.Report;
 
 import com.example.experiment1.Post.Post;
-import com.example.experiment1.User.User;
 import jakarta.persistence.*;
 
 @Entity
