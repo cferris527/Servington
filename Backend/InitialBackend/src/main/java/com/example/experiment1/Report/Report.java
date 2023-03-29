@@ -16,7 +16,8 @@ public class Report {
 
     private String title;
 
-    //@ManyToOne(mappedBy = "title")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "report_id", referencedColumnName = "title")
     private Post reportPost;
 
     public Report(String username, String title, String description){
@@ -27,9 +28,9 @@ public class Report {
 
     public Report(){};
 
-    public String getUser(){return username; }
+    public String getUsername(){return username; }
 
-    public String getPost(){return title; }
+    public String getTitle(){return title; }
 
     public String getReportDescription(){return reportDescription; }
 

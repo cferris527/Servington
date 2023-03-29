@@ -13,7 +13,6 @@ public class Experiment1Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Experiment1Application.class, args);
-
     }
 
     /*@Bean
