@@ -3,9 +3,11 @@ package com.example.servington_from_ground_up;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
 import com.example.servington_from_ground_up.utils.userType;
 
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private TextView status;
+    private String spinnerText;
+    private String accountType;
     Button loginButton;
     Button createButton;
     String initial_url = "http://coms-309-029.class.las.iastate.edu:8080/users/";
@@ -49,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         status = findViewById(R.id.statusMessage);
         loginButton = findViewById(R.id.loginButton);
         createButton = findViewById(R.id.createButton);
+
+        Spinner spMethod = findViewById(R.id.spinner2);
+        String[] methods = new String[]{"Volunteer", "Organization", "Admin"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, methods);
+        spMethod.setAdapter(adapter);
 
         //Login button, sends entered info
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +77,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Dropdown menu for account creation
+        spMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinnerText = (String) parent.getItemAtPosition(position);
+                if (spinnerText.equals("Volunteer")) {
+                    accountType = "VOLUNTEER";
+                } else if (spinnerText.equals("Organization")) {
+                    accountType = "ORGANIZATION";
+                } else if (spinnerText.equals("Admin")){
+                    accountType = "ADMIN";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {accountType = "VOLUNTEER";}
+        });
     }
 
     /**
@@ -84,9 +111,21 @@ public class MainActivity extends AppCompatActivity {
         // empty JSON object for body
         JSONObject body = new JSONObject();
 
-        String url = initial_url + user_name + "/" + pass_word;
+        String loginType = "";
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/sampledata", body,
+        if(accountType.equals("VOLUNTEER")) {
+            loginType = "volunteerLogin";
+        }
+        else if(accountType.equals("ORGANIZATION")) {
+            loginType = "orgLogin";
+        }
+        else if(accountType.equals("ADMIN")) {
+            loginType = "adminLogin";
+        }
+
+        String url = Const.SERVER + "/" + loginType + "/" + user_name + "/" + pass_word;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

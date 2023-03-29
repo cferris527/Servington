@@ -1,6 +1,7 @@
 package com.example.experiment1.Admin;
 
 
+import com.example.experiment1.Volunteer.Volunteer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,5 +13,7 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
 
     @Transactional
     void deleteById(int id);
+
+    List<Admin> findByUsernameContaining(String username);
 
 }

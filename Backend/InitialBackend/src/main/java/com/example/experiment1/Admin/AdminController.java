@@ -2,6 +2,7 @@ package com.example.experiment1.Admin;
 
 import com.example.experiment1.Message;
 
+import com.example.experiment1.Volunteer.Volunteer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,5 +48,22 @@ public class AdminController {
         m.message = "success";
         return m;
     }
+
+
+
+    @GetMapping(path = "/adminLogin/{username}/{password}")
+    public Admin login(@PathVariable String username, @PathVariable String password){
+        List<Admin> listByUsername = adminRepository.findByUsernameContaining(username);
+        for(Admin a: listByUsername){
+            if(a.getPassword().equals(password)){
+                if(a.getUsername().equals(username)){
+                    return a;
+                }
+            }
+        }
+        Admin nullUser = new Admin(null,null);
+        return nullUser;
+    }
+
 
 }
