@@ -35,6 +35,7 @@ public class Post {
     @Column(nullable = true)
     @JsonIgnore
     private List<Volunteer> volunteers;
+    
 
     public Post(){
 
