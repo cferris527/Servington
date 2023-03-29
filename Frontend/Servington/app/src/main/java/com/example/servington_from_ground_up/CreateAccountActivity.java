@@ -46,15 +46,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
 
         Spinner spMethod = findViewById(R.id.spinner);
-        String[] methods = new String[]{"User", "Organization"};
+        String[] methods = new String[]{"Volunteer", "Organization"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, methods);
         spMethod.setAdapter(adapter);
         spMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 method = (String) parent.getItemAtPosition(position);
-                if (method.equals("User")) {
-                    accountType = "USER";
+                if (method.equals("Volunteer")) {
+                    accountType = "VOLUNTEER";
                     // System.out.println("account type switched to USER");
                 } else {
                     accountType = "ORGANIZATION";
@@ -64,7 +64,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                method = "User";
+                accountType = "VOLUNTEER";
             }
         });
 
@@ -108,13 +108,22 @@ public class CreateAccountActivity extends AppCompatActivity {
             try {
                 body.put("username", user_name);
                 body.put("password", pass_word);
-                body.put("accountType", accountType);
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
+            String createType = "";
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_ACCOUNT_POST, body,
+            if(accountType.equals("VOLUNTEER")) {
+                createType = "createVolunteer";
+            }
+            else if(accountType.equals("ORGANIZATION")) {
+                createType = "createOrg";
+            }
+
+            String url = Const.SERVER + "/" + createType;
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
