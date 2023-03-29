@@ -1,6 +1,7 @@
 package com.example.experiment1.Report;
 
 import com.example.experiment1.Post.Post;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class Report {
     private String title;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "report_id", referencedColumnName = "title")
+    @JoinColumn(name = "report_id")
+    @JsonIgnore
     private Post reportPost;
 
     public Report(String username, String title, String description){
@@ -33,6 +35,8 @@ public class Report {
     public String getTitle(){return title; }
 
     public String getReportDescription(){return reportDescription; }
+
+    public void setReportPost(Post p){ reportPost = p;}
 
 
 }
