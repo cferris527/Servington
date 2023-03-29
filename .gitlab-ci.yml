@@ -26,7 +26,7 @@ stages:
 maven-build:
     stage: mavenbuild
     tags:
-     - springboot_tag
+     - tag_springboot
     script:
       - cd ./Backend/InitialBackend
       - mvn package
@@ -34,7 +34,7 @@ maven-build:
 maven-test:
   stage: maventest
   tags:
-    - springboot_tag
+    - tag_springboot
   script:
     - cd ./Backend/InitialBackend
     - mvn test
@@ -48,7 +48,7 @@ android-build:
     image: gjandres/android-ci:latest
     stage: androidbuild
     tags:
-     - android_tag
+     - tag_android
     before_script:
      - export GRADLE_USER_HOME=`pwd`/.gradle
      - chmod +x ./Frontend/Servington/gradlew
@@ -67,7 +67,7 @@ android-test:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/Servington/gradlew
   tags:
-    - android_tag
+    - tag_android
   script:
     - cd ./Frontend/Servington
     - ./gradlew assemble
@@ -77,7 +77,7 @@ android-test:
 autoDeploy:
   stage: mavenDeploy  
   tags:
-   - springboot_tag   
+   - tag_springboot   
   script:
     - cd ./Backend/InitialBackend
     - mvn package
