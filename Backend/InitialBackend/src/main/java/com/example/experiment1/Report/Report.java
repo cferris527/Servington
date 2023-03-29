@@ -38,5 +38,7 @@ public class Report {
 
     public void setReportPost(Post p){ reportPost = p;}
 
+    public Post getReportPost(){ return reportPost; };
+
 
 }

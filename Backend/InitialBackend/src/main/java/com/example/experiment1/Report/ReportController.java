@@ -3,6 +3,7 @@ package com.example.experiment1.Report;
 
 import com.example.experiment1.Organization.Organization;
 import com.example.experiment1.Post.Post;
+import com.example.experiment1.Post.PostRepository;
 import com.example.experiment1.Volunteer.Volunteer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ import com.example.experiment1.Message;
 public class ReportController {
 
     @Autowired ReportRepository reportRepository;
+
+    @Autowired PostRepository postRepository;
 
     @GetMapping(path = "/listReports")
     public List<Report> getAllReports() {
@@ -33,13 +36,14 @@ public class ReportController {
         return m;
     }
 
-    @PostMapping(path = "/createReport")
-    Message createReport(@RequestBody Report r) {
-        if (r == null) {
+    @PostMapping(path = "/createReport/{postTitle}")
+    Message createReport(@RequestBody Report r, @PathVariable String postTitle) {
+        if (r == null && !postRepository.existsById(postTitle)) {
             Message m = new Message();
             m.message = "failed";
             return m;
         }
+        r.setReportPost(postRepository.findByTitle(postTitle));
         reportRepository.save(r);
         Message m = new Message();
         m.message = "success";
@@ -53,5 +57,16 @@ public class ReportController {
             r = reportRepository.findById(reportId);
         }
         return r;
+    }
+
+    @GetMapping(path = "/getPostFromReport/{reportId}")
+    Post getPostFromReport(@PathVariable int reportId){
+        Post post;
+        Report r = new Report();
+        if(reportRepository.existsById((long)reportId)){
+            r = reportRepository.findById(reportId);
+        }
+        post = r.getReportPost();
+        return post;
     }
 }
