@@ -8,6 +8,9 @@ package com.example.servington_from_ground_up.utils;
  */
 public class Const {
 
+    /**
+     * Initial URL to be used before every "/" and string.
+     */
     public static final String SERVER = "http://coms-309-029.class.las.iastate.edu:8080";
 
     /**

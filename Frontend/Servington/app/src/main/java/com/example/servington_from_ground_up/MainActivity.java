@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
 import com.example.servington_from_ground_up.utils.userType;
 
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             loginType = "adminLogin";
         }
 
-        String url = initial_url + "/" + loginType + "/" + user_name + "/" + pass_word;
+        String url = Const.SERVER + "/" + loginType + "/" + user_name + "/" + pass_word;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, body,
                 new Response.Listener<JSONObject>() {
