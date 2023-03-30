@@ -59,4 +59,11 @@ public class Const {
      */
     public static final String URL_DELETE_ACCOUNT
             = "http://coms-309-029.class.las.iastate.edu:8080/usersDelete";
+
+    /**
+     * URL for creating a post
+     * Sends POST with { "createPost" + {"id"}}
+     */
+    public static final String URL_CREATE_POST
+            = "http://coms-309-029.class.las.iastate.edu:8080/createPost/";
 }

@@ -2,47 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/create_posts_title"
+    android:id="@+id/create_posts"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
     <TextView
         android:id="@+id/create_posts_servington"
-        android:layout_width="428dp"
-        android:layout_height="44dp"
+        android:layout_width="403dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="40dp"
         android:background="#FF9800"
         android:text="Servington"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/create_posts_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/create_posts_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginEnd="33dp"
         android:layout_marginBottom="36dp"
         android:background="#B6B6B6"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Title"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine2"
+        app:layout_constraintBottom_toTopOf="@+id/create_post_description"
+        app:layout_constraintEnd_toEndOf="@+id/create_post_description"
         app:layout_constraintTop_toBottomOf="@+id/create_posts_servington" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
+        android:id="@+id/create_post_description"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="28dp"
         android:background="#B6B6B6"
         android:ems="10"
         android:foregroundTint="#00FFFFFF"
@@ -50,20 +49,34 @@
         android:inputType="textMultiLine"
         android:singleLine="false"
         android:text="description"
-        app:layout_constraintBottom_toTopOf="@+id/button_create_post"
+        app:layout_constraintBottom_toTopOf="@+id/create_post_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/create_posts_title" />
 
     <Button
         android:id="@+id/button_create_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="271dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="235dp"
         android:text="Create Post"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintEnd_toEndOf="@+id/create_post_date"
+        app:layout_constraintTop_toBottomOf="@+id/create_post_date" />
+
+    <EditText
+        android:id="@+id/create_post_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginBottom="15dp"
+        android:background="#B6B6B6"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="date"
+        app:layout_constraintBottom_toTopOf="@+id/button_create_post"
+        app:layout_constraintStart_toStartOf="@+id/create_post_description"
+        app:layout_constraintTop_toBottomOf="@+id/create_post_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
