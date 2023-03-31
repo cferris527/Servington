@@ -31,10 +31,11 @@ public class Post {
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private Organization org;
 
+    /*
     @ManyToMany
     @Column(nullable = true)
     @JsonIgnore
-    private List<Volunteer> volunteers;
+    private List<Volunteer> volunteers;*/
     
 
     public Post(){
@@ -47,7 +48,7 @@ public class Post {
         this.description = description;
         this.volunteerCount = 0;
         org= new Organization();
-        volunteers = new ArrayList<>();
+        //volunteers = new ArrayList<>();
     }
 
     public void setDate(String date) {
@@ -91,12 +92,12 @@ public class Post {
     }
 
 
-
+/*
     public void addVolunteer(Volunteer v) {
         this.volunteers.add(v);
     }
 
     public List<Volunteer> getVolunteers() {
         return volunteers;
-    }
+    }*/
 }

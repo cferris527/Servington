@@ -28,11 +28,11 @@ public class Volunteer{
 
     //store as URL
     //private String profilePictureURL;
-
+/*
     @ManyToMany
     @Column(nullable = true)
     @JsonIgnore
-    private List<Post> events;
+    private List<Post> events;*/
 
 
     public Volunteer(){
@@ -42,7 +42,7 @@ public class Volunteer{
     public Volunteer(String username, String password){
         this.username = username;
         this.password = password;
-        events = new ArrayList<>();
+        //events = new ArrayList<>();
     }
 
     public int getId() {
@@ -69,11 +69,11 @@ public class Volunteer{
         this.password = password;
     }
 
-    public void addEvent(Post post) {
+    /*public void addEvent(Post post) {
         this.events.add(post);
     }
 
     public List<Post> getEvents() {
         return events;
-    }
+    }*/
 }
