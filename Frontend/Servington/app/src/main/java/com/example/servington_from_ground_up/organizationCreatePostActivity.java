@@ -17,6 +17,7 @@ import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.example.servington_from_ground_up.utils.Singleton;
 
 public class organizationCreatePostActivity extends AppCompatActivity {
 
@@ -67,7 +68,7 @@ public class organizationCreatePostActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_POST, post,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_POST + "/" + Singleton.getId(), post,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

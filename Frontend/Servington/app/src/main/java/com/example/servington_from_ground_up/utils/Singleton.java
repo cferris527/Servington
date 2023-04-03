@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 public class Singleton {
     private static Singleton userData = new Singleton();
-    private int id;
+    private static int id;
     private String username;
     private String password;
     private String displayName;
@@ -42,7 +42,7 @@ public class Singleton {
 
     // get methods
 
-    public int getId() {return id;}
+    public static int getId() {return id;}
     public String getUsername() {return username;}
     public String getPassword() {return password;}
     public String getDisplayName() {return displayName;}
