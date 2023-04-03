@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400sp"
+    android:layout_height="400sp"
+    android:background="#8BC34A"
+    tools:context=".CoolFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="323dp"
+        android:layout_height="341dp"
+        android:text="Cool!"
+        android:textSize="60sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="169dp"
+        android:layout_height="181dp"
+        tools:src="@tools:sample/avatars" />
+
+</FrameLayout>
