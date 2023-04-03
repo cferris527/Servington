@@ -125,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
 
         String url = Const.SERVER + "/" + loginType + "/" + user_name + "/" + pass_word;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, body,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
+                url, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -148,10 +149,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         Intent intent;
                         if (accountType.equals("VOLUNTEER")) {
-                            intent = new Intent(MainActivity.this, UserActivity.class);
+                            intent = new Intent(MainActivity.this, HomeVolunteerActivity.class);
                         }
                         else if (accountType.equals("ORGANIZATION")) {
-                            intent = new Intent(MainActivity.this, OrganizationActivity.class);
+                            intent = new Intent(MainActivity.this, HomeOrganizationActivity.class);
                         }
                         else if (accountType.equals("ADMIN")) {
                             intent = new Intent(MainActivity.this, AdminActivity.class);
