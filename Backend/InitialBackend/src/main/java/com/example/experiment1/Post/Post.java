@@ -31,15 +31,24 @@ public class Post {
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     private Organization org;
 
-    /*
-    @ManyToMany
-    @Column(nullable = true)
-    @JsonIgnore
-    private List<Volunteer> volunteers;*/
-    
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "volunteer_to_post",
+            joinColumns = { @JoinColumn(name = "post_title") },
+            inverseJoinColumns = { @JoinColumn(name = "volunteer_id") })
+//    Uncomment @JsonIgnore to fix infinite recursive calls issue
+//    @JsonIgnore
+//
+    private List<Volunteer> volunteers;
+
+
 
     public Post(){
-
+        volunteers = new ArrayList<>();
     }
 
     public Post(String title, String date, String description){
@@ -48,7 +57,7 @@ public class Post {
         this.description = description;
         this.volunteerCount = 0;
         org= new Organization();
-        //volunteers = new ArrayList<>();
+        volunteers = new ArrayList<>();
     }
 
     public void setDate(String date) {
@@ -88,16 +97,16 @@ public class Post {
     }
 
     public void incrementCount(){
-        this.volunteerCount ++;
+        this.volunteerCount += 1;
     }
 
 
-/*
+
     public void addVolunteer(Volunteer v) {
         this.volunteers.add(v);
     }
 
     public List<Volunteer> getVolunteers() {
         return volunteers;
-    }*/
+    }
 }

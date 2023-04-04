@@ -2,12 +2,14 @@ package com.example.experiment1.Post;
 
 import com.example.experiment1.Message;
 import com.example.experiment1.Organization.Organization;
+import com.example.experiment1.Volunteer.Volunteer;
+import com.example.experiment1.Volunteer.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.experiment1.Organization.Organization;
+
 import com.example.experiment1.Organization.OrganizationRepository;
 
 
@@ -22,6 +24,9 @@ public class PostController {
 
     @Autowired
     OrganizationRepository organizationRepository;
+
+    @Autowired
+    VolunteerRepository volunteerRepository;
 
 
 
@@ -64,6 +69,9 @@ public class PostController {
         Organization o = organizationRepository.findById(id);
         post.setOrg(o);
         postRepository.save(post);
+
+        o.setPost(post);
+        organizationRepository.save(o);
         return "success";
     }
 
@@ -106,10 +114,18 @@ public class PostController {
 
 
 
-    @PutMapping(path = "/addVolunteer/{postTitle}")
-    Message addVolunteer(@PathVariable String postTitle){
+    @PostMapping(path = "/addVolunteer/{postTitle}/{volunteerId}")
+    Message addVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
         Post p = postRepository.findByTitle(postTitle);
+        Volunteer v = volunteerRepository.findById(volunteerId);
+
+        p.addVolunteer(v);
+        v.addEvent(p);
+
         p.incrementCount();
+
+        postRepository.save(p);
+        volunteerRepository.save(v);
 
         Message m = new Message();
         m.message = "success";
