@@ -132,10 +132,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         String userName;
-                        String accountType;
+
                         try {
                             userName = response.getString("username");
-                            accountType = response.getString("accountType");
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }

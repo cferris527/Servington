@@ -26,7 +26,7 @@ stages:
 maven-build:
     stage: mavenbuild
     tags:
-     - tag_springboot
+     - springboot_tag
     script:
       - cd ./Backend/InitialBackend
       - mvn package
@@ -34,7 +34,7 @@ maven-build:
 maven-test:
   stage: maventest
   tags:
-    - tag_springboot
+    - springboot_tag
   script:
     - cd ./Backend/InitialBackend
     - mvn test
@@ -48,7 +48,7 @@ android-build:
     image: gjandres/android-ci:latest
     stage: androidbuild
     tags:
-     - tag_android
+     - android_tag
     before_script:
      - export GRADLE_USER_HOME=`pwd`/.gradle
      - chmod +x ./Frontend/Servington/gradlew
@@ -67,20 +67,20 @@ android-test:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Frontend/Servington/gradlew
   tags:
-    - tag_android
+    - android_tag
   script:
     - cd ./Frontend/Servington
     - ./gradlew assemble
 
 
-
 autoDeploy:
   stage: mavenDeploy  
   tags:
-   - tag_springboot   
+   - springboot_tag   
   script:
     - cd ./Backend/InitialBackend
     - mvn package
     - sudo mv target/*.jar /target/web-demo.jar 
     - sudo systemctl stop system-web-demo
     - sudo systemctl start system-web-demo
+
