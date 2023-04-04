@@ -35,9 +35,9 @@ public class Singleton {
         id = obj.getInt("id");
         username = obj.getString("username");
         password = obj.getString("password");
-        displayName = obj.getString("displayName");
-        email = obj.getString("email");
-        phone = obj.getInt("phone");
+        //displayName = obj.getString("displayName");
+        //email = obj.getString("email");
+        //phone = obj.getInt("phone");
     }
 
     // get methods
