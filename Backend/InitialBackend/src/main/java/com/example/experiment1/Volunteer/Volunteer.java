@@ -34,7 +34,7 @@ public class Volunteer{
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "volunteers")
+            mappedBy = "volunteer")
     private List<Post> events;
 
 

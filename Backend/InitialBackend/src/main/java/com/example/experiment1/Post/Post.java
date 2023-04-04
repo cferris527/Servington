@@ -43,12 +43,12 @@ public class Post {
 //    Uncomment @JsonIgnore to fix infinite recursive calls issue
 //    @JsonIgnore
 //
-    private List<Volunteer> volunteers;
+    private List<Volunteer> volunteer;
 
 
 
     public Post(){
-        volunteers = new ArrayList<>();
+        volunteer = new ArrayList<>();
     }
 
     public Post(String title, String date, String description){
@@ -57,7 +57,7 @@ public class Post {
         this.description = description;
         this.volunteerCount = 0;
         org= new Organization();
-        volunteers = new ArrayList<>();
+        volunteer = new ArrayList<>();
     }
 
     public void setDate(String date) {
@@ -103,10 +103,10 @@ public class Post {
 
 
     public void addVolunteer(Volunteer v) {
-        this.volunteers.add(v);
+        this.volunteer.add(v);
     }
 
     public List<Volunteer> getVolunteers() {
-        return volunteers;
+        return volunteer;
     }
 }
