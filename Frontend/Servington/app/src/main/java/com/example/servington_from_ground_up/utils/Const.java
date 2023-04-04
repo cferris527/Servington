@@ -69,4 +69,11 @@ public class Const {
      */
     public static final String URL_CREATE_POST
             = "http://coms-309-029.class.las.iastate.edu:8080/createPost/";
+
+    /**
+     * URL for creating a post
+     * Sends Get with {"getPostsByOrg" + {"id"}}
+     */
+    public static final String URL_VIEW_POST_BYID
+            = "http://coms-309-029.class.las.iastate.edu:8080/getPostsByOrg/";
 }
