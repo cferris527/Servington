@@ -58,13 +58,19 @@ public class PostController {
 
     //Creates a new post and adds it to the database. Not used on frontend yet.
     @PostMapping(path = "/createPost/{id}")
-    String createPost(@RequestBody Post post, @PathVariable int id){
-        if (post == null)
-            return "failure";
+    Message createPost(@RequestBody Post post, @PathVariable int id){
+        Message m = new Message();
+
+        if (post == null) {
+            m.message = "failure";
+            return m;
+        }
         Organization o = organizationRepository.findById(id);
         post.setOrg(o);
         postRepository.save(post);
-        return "success";
+        
+        m.message = "success";
+        return m;
     }
 
 
