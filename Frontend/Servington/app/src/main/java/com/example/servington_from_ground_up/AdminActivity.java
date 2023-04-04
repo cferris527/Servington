@@ -33,7 +33,7 @@ public class AdminActivity extends AppCompatActivity {
        
         Singleton data = Singleton.getInstance();
 
-        adminName.setText("Admin: " + data.getDisplayName());
+        //adminName.setText("Admin: " + data.getDisplayName());
 
         //button that leads to managing admins
         manageButton.setOnClickListener(new View.OnClickListener()
