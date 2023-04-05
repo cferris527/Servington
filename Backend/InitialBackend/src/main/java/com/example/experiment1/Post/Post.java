@@ -5,6 +5,7 @@ import com.example.experiment1.Organization.OrganizationRepository;
 import com.example.experiment1.Volunteer.Volunteer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class Post {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "org_id", referencedColumnName = "id")
+    @JsonIgnore
     private Organization org;
 
 
@@ -40,9 +42,7 @@ public class Post {
     @JoinTable(name = "volunteer_to_post",
             joinColumns = { @JoinColumn(name = "post_title") },
             inverseJoinColumns = { @JoinColumn(name = "volunteer_id") })
-//    Uncomment @JsonIgnore to fix infinite recursive calls issue
-//    @JsonIgnore
-//
+    @JsonIgnore
     private List<Volunteer> volunteer;
 
 
@@ -56,7 +56,7 @@ public class Post {
         this.date = date;
         this.description = description;
         this.volunteerCount = 0;
-        org= new Organization();
+        org = new Organization();
         volunteer = new ArrayList<>();
     }
 
