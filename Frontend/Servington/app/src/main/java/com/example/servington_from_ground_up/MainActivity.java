@@ -1,7 +1,9 @@
 package com.example.servington_from_ground_up;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,9 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.admin.HomeAdminActivity;
+import com.example.servington_from_ground_up.organization.HomeOrganizationActivity;
 import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
-import com.example.servington_from_ground_up.utils.userType;
+import com.example.servington_from_ground_up.volunteer.HomeVolunteerActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                status.setBackgroundColor(Color.parseColor("#00FF00"));
                 status.setText("Loading...");
                 sendUsername();
             }
@@ -126,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         String url = Const.SERVER + "/" + loginType + "/" + user_name + "/" + pass_word;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                url, body,
+                "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/sampledata", body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -141,9 +146,19 @@ public class MainActivity extends AppCompatActivity {
 
                         //if Login attempt is invalid...
                         if (userName.equals("null")) {
+                            status.setBackgroundColor(Color.parseColor("#00FF00"));
                             status.setText("Invalid username/password!");
                             username.setText("", TextView.BufferType.EDITABLE);
                             password.setText("", TextView.BufferType.EDITABLE);
+
+                            //5 second delay for text to go away
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    status.setText("");
+                                }
+                            }, 5000);
+
                             return;
                         }
                         Intent intent;
@@ -154,11 +169,9 @@ public class MainActivity extends AppCompatActivity {
                             intent = new Intent(MainActivity.this, HomeOrganizationActivity.class);
                         }
                         else if (accountType.equals("ADMIN")) {
-                            intent = new Intent(MainActivity.this, AdminActivity.class);
+                            intent = new Intent(MainActivity.this, HomeAdminActivity.class);
                         }
                         else {
-                            System.out.println(accountType.toString());
-                            System.out.println(userType.VOLUNTEER.toString());
                             status.setText("Account has no type?");
                             return;
                         }

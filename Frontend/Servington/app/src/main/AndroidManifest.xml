@@ -15,10 +15,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".HomeOrganizationActivity"
+            android:name=".admin.HomeAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeVolunteerActivity"
+            android:name=".organization.HomeOrganizationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".volunteer.HomeVolunteerActivity"
             android:exported="false" />
         <activity
             android:name=".AdminDeletionActivity"

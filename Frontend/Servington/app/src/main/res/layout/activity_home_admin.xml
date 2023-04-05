@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".volunteer.HomeVolunteerActivity">
+    tools:context=".admin.HomeAdminActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.servington_from_ground_up.volunteer.VolunteerHomeFragment"
-        android:layout_width="412sp"
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.servington_from_ground_up.admin.AdminHomeFragment"
+        android:layout_width="match_parent"
         android:layout_height="600sp"
-        tools:layout="@layout/fragment_volunteer_home" />
+        tools:layout="@layout/fragment_admin_home" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/homeBtn"
+            android:id="@+id/homeAdminBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -30,34 +30,35 @@
             app:strokeWidth="4dp" />
 
         <Button
-            android:id="@+id/postsBtn"
+            android:id="@+id/adminsBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Posts"
+            android:text="Admins"
             app:strokeWidth="4dp" />
 
         <Button
-            android:id="@+id/searchBtn"
+            android:id="@+id/reportsBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Search"
+            android:text="Reports"
             app:strokeWidth="4dp" />
 
         <Button
-            android:id="@+id/dmBtn"
+            android:id="@+id/banBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="DM"
+            android:text="Bans"
             app:strokeWidth="4dp" />
 
     </LinearLayout>
+
 </LinearLayout>
