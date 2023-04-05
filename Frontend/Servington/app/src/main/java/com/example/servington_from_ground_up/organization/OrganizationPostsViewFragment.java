@@ -1,17 +1,14 @@
-package com.example.servington_from_ground_up;
+package com.example.servington_from_ground_up.organization;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
 
@@ -58,7 +56,8 @@ public class OrganizationPostsViewFragment extends Fragment {
         postsview = view.findViewById(R.id.OrgPostsView);
 
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        StringRequest request = new StringRequest(Request.Method.GET, Const.URL_VIEW_POST_BYID + Singleton.getId(), new Response.Listener<String>() {
+        Singleton data = Singleton.getInstance();
+        StringRequest request = new StringRequest(Request.Method.GET, Const.URL_VIEW_POST_BYID + data.getId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 postsview.setText(response.toString());
