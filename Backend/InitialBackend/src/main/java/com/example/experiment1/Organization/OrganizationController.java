@@ -70,7 +70,7 @@ public class OrganizationController {
                 }
             }
         }
-        Organization nullUser = new Organization(null,null);
+        Organization nullUser = new Organization(null,null,null,null,null,null);
         return nullUser;
     }
 

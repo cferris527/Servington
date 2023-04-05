@@ -21,14 +21,14 @@ public class Volunteer{
 
     private String password;
 
-    //private String email;
+    private String email;
 
-    //private char[] phoneNumber = new char[10];
+    private String phone_number;
 
-    //private String displayName;
+    private String displayName;
 
     //store as URL
-    //private String profilePictureURL;
+    private String profilePictureURL;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -45,9 +45,13 @@ public class Volunteer{
         events = new ArrayList<>();
     }
 
-    public Volunteer(String username, String password){
+    public Volunteer(String username, String password,String displayName, String email, String phone_number, String profilePictureURL){
         this.username = username;
         this.password = password;
+        this.displayName = displayName;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.profilePictureURL = profilePictureURL;
         events = new ArrayList<>();
     }
 
@@ -81,5 +85,46 @@ public class Volunteer{
 
     public List<Post> getEvents() {
         return events;
+    }
+
+
+
+
+
+    //editing other fields
+
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setProfilePictureURL(String profilePictureURL) {
+        this.profilePictureURL = profilePictureURL;
+    }
+
+    public String getProfilePictureURL() {
+        return profilePictureURL;
     }
 }

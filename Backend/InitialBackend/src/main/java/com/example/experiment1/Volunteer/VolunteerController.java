@@ -70,7 +70,7 @@ public class VolunteerController {
                 }
             }
         }
-        Volunteer nullUser = new Volunteer(null,null);
+        Volunteer nullUser = new Volunteer(null,null,null,null,null,null);
         return nullUser;
     }
 
