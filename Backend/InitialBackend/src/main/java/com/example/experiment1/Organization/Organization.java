@@ -31,10 +31,11 @@ public class Organization {
 
 
     @OneToMany(mappedBy = "title")
+    @JsonIgnore
     private List<Post> posts;
 
     public Organization(){
-
+        posts = new ArrayList<>();
     }
 
     public Organization(String username, String password){
@@ -43,36 +44,47 @@ public class Organization {
         posts = new ArrayList<>();
     }
 
+
+
+
     public int getId() {
         return id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getUsername(){
-        return username;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setUsername(String name) {
-        this.username = name;
+
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+
+
+    public String getUsername(){
+        return username;
+    }
+
+
+    public void setUsername(String name) {
+        this.username = name;
+    }
+
+
+
+
     public List<Post> getPost() {
         return posts;
     }
 
-    public void setPost(Post aPost){
-        posts.add(aPost);
+    public void setPost(Post post){
+        posts.add(post);
     }
 
 
