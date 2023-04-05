@@ -68,7 +68,6 @@ public class PostController {
         Organization o = organizationRepository.findById(id);
         post.setOrg(o);
         postRepository.save(post);
-        
         m.message = "success";
         return m;
     }
