@@ -35,14 +35,19 @@ public class Singleton {
         id = obj.getInt("id");
         username = obj.getString("username");
         password = obj.getString("password");
-        //displayName = obj.getString("displayName");
-        //email = obj.getString("email");
-        //phone = obj.getInt("phone");
+    }
+
+    /**
+     * Sets all fields of user data to null, used upon logout.
+     */
+    public void logOut() {
+        id = 0;
+        username = null;
+        password = null;
     }
 
     // get methods
-
-    public static int getId() {return id;}
+    public int getId() {return id;}
     public String getUsername() {return username;}
     public String getPassword() {return password;}
     //public String getDisplayName() {return displayName;}
@@ -50,7 +55,6 @@ public class Singleton {
     //public int getPhone() {return phone;}
 
     // set methods
-
     public void setID(int id) {this.id = id;}
     public void setUsername(String username) {this.username = username;}
     public void setPassword(String password) {this.password = password;}

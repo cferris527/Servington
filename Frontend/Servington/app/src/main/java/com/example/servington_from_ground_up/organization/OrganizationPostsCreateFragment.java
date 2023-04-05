@@ -1,4 +1,4 @@
-package com.example.servington_from_ground_up;
+package com.example.servington_from_ground_up.organization;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
 
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link VolunteerPostsFragment#newInstance} factory method to
+ * Use the {@link OrganizationPostsCreateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class OrganizationPostsCreateFragment extends Fragment {
@@ -94,7 +95,9 @@ public class OrganizationPostsCreateFragment extends Fragment {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_POST + Singleton.getId(), post,
+        Singleton data = Singleton.getInstance();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_POST + data.getId(), post,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

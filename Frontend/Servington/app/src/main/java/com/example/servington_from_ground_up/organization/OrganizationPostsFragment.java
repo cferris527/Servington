@@ -1,4 +1,4 @@
-package com.example.servington_from_ground_up;
+package com.example.servington_from_ground_up.organization;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.servington_from_ground_up.R;
 
 /**
  * A simple {@link Fragment} subclass.

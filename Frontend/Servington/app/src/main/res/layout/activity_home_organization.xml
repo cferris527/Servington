@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomeVolunteerActivity">
+    tools:context=".organization.HomeOrganizationActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.servington_from_ground_up.VolunteerHomeFragment"
+        android:name="com.example.servington_from_ground_up.volunteer.VolunteerHomeFragment"
         android:layout_width="412sp"
         android:layout_height="600sp"
         tools:layout="@layout/fragment_volunteer_home" />

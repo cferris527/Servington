@@ -1,4 +1,4 @@
-package com.example.servington_from_ground_up;
+package com.example.servington_from_ground_up.volunteer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,14 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.servington_from_ground_up.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link VolunteerHomeFragment#newInstance} factory method to
+ * Use the {@link VolunteerPostsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class VolunteerHomeFragment extends Fragment {
+public class VolunteerPostsFragment extends Fragment {
     View view;
-    public VolunteerHomeFragment() {
+    public VolunteerPostsFragment() {
         // Required empty public constructor
     }
 
@@ -22,8 +24,8 @@ public class VolunteerHomeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-    public static VolunteerHomeFragment newInstance(String param1, String param2) {
-        VolunteerHomeFragment fragment = new VolunteerHomeFragment();
+    public static VolunteerPostsFragment newInstance(String param1, String param2) {
+        VolunteerPostsFragment fragment = new VolunteerPostsFragment();
         return fragment;
     }
 
@@ -35,8 +37,7 @@ public class VolunteerHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.fragment_volunteer_home, container, false);
+        view = inflater.inflate(R.layout.fragment_volunteer_posts, container, false);
 
         //TODO
 

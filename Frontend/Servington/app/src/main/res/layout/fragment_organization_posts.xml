@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412sp"
     android:layout_height="600sp"
-    tools:context=".OrganizationPostsFragment">
+    tools:context=".organization.OrganizationPostsFragment">
 
     <Button
         android:id="@+id/createposts"
