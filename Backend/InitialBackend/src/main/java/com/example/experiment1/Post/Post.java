@@ -19,7 +19,6 @@ public class Post {
     @Id
     private String title;
 
-
     private String date;
 
     private String description;
