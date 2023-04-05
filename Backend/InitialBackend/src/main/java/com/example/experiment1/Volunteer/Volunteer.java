@@ -4,6 +4,7 @@ import com.example.experiment1.Post.Post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -29,14 +30,25 @@ public class Volunteer{
     //store as URL
     //private String profilePictureURL;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "volunteer")
+    @JsonIgnore
+    private List<Post> events;
+
+
 
     public Volunteer(){
-
+        events = new ArrayList<>();
     }
 
     public Volunteer(String username, String password){
         this.username = username;
         this.password = password;
+        events = new ArrayList<>();
     }
 
     public int getId() {
@@ -63,6 +75,11 @@ public class Volunteer{
         this.password = password;
     }
 
+    public void addEvent(Post post) {
+        this.events.add(post);
+    }
 
-
+    public List<Post> getEvents() {
+        return events;
+    }
 }

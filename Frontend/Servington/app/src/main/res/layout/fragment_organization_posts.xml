@@ -4,4 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412sp"
     android:layout_height="600sp"
-    tools:context=".organization.OrganizationPostsFragment" />
+<<<<<<< Frontend/Servington/app/src/main/res/layout/fragment_organization_posts.xml
+=======
+    tools:context="organization.OrganizationPostsFragment">
+
+    <Button
+        android:id="@+id/createposts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
+        android:text="Create a post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/OrgViewPosts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="226dp"
+        android:text="View your posts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> Frontend/Servington/app/src/main/res/layout/fragment_organization_posts.xml
