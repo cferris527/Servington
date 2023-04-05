@@ -6,7 +6,7 @@
     android:layout_height="600sp"
 <<<<<<< Frontend/Servington/app/src/main/res/layout/fragment_organization_posts.xml
 =======
-    tools:context="organization.OrganizationPostsFragment">
+    tools:context=".organization.OrganizationPostsFragment">
 
     <Button
         android:id="@+id/createposts"
