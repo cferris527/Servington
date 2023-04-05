@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link VolunteerPostsFragment#newInstance} factory method to
+ * Use the {@link OrganizationPostsCreateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class OrganizationPostsCreateFragment extends Fragment {
@@ -94,7 +94,9 @@ public class OrganizationPostsCreateFragment extends Fragment {
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_POST + Singleton.getId(), post,
+        Singleton data = Singleton.getInstance();
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Const.URL_CREATE_POST + data.getId(), post,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
