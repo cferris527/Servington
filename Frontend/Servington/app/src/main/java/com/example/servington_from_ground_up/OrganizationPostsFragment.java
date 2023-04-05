@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +17,8 @@ import androidx.fragment.app.Fragment;
  */
 public class OrganizationPostsFragment extends Fragment {
     View view;
+    Button CreatePostBtn;
+    Button ViewPostsBtn;
     public OrganizationPostsFragment() {
         // Required empty public constructor
     }
@@ -38,6 +43,32 @@ public class OrganizationPostsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_organization_posts, container, false);
 
         //TODO
+        CreatePostBtn = view.findViewById(R.id.createposts);
+        ViewPostsBtn = view.findViewById(R.id.viewposts);
+
+        CreatePostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new OrganizationPostsCreateFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        ViewPostsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new OrganizationPostsViewFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
         return view;
     }
