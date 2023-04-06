@@ -20,14 +20,11 @@ public class Organization {
 
     private String password;
 
-    //private String email;
+    private String email;
 
-    //private char[] phoneNumber = new char[10];
+    private String phone_number;
 
-    //private String displayName;
-
-    //store as URL
-    //private String profilePictureURL;
+    private String displayName;
 
 
     @OneToMany(mappedBy = "title")
@@ -38,9 +35,12 @@ public class Organization {
         posts = new ArrayList<>();
     }
 
-    public Organization(String username, String password){
+    public Organization(String username, String password, String displayName, String email, String phone_number, String profilePictureURL){
         this.username = username;
         this.password = password;
+        this.displayName = displayName;
+        this.email = email;
+        this.phone_number = phone_number;
         posts = new ArrayList<>();
     }
 
@@ -87,6 +87,41 @@ public class Organization {
         posts.add(post);
     }
 
+
+
+
+
+
+
+
+    //editing other fields
+
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
 
 }
 
