@@ -26,9 +26,6 @@ public class Organization {
 
     private String displayName;
 
-    //store as URL
-    private String profilePictureURL;
-
 
     @OneToMany(mappedBy = "title")
     @JsonIgnore
@@ -44,7 +41,6 @@ public class Organization {
         this.displayName = displayName;
         this.email = email;
         this.phone_number = phone_number;
-        this.profilePictureURL = profilePictureURL;
         posts = new ArrayList<>();
     }
 
@@ -127,13 +123,6 @@ public class Organization {
         return phone_number;
     }
 
-    public void setProfilePictureURL(String profilePictureURL) {
-        this.profilePictureURL = profilePictureURL;
-    }
-
-    public String getProfilePictureURL() {
-        return profilePictureURL;
-    }
 }
 
 

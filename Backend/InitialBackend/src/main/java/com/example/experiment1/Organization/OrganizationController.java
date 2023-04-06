@@ -2,6 +2,7 @@ package com.example.experiment1.Organization;
 
 
 import com.example.experiment1.Post.Post;
+import com.example.experiment1.Volunteer.Volunteer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,6 +74,40 @@ public class OrganizationController {
         Organization nullUser = new Organization(null,null,null,null,null,null);
         return nullUser;
     }
+
+
+
+
+    @PostMapping(path = "/orgEditFields")
+    public Message editFields(@RequestBody Organization organization){
+        Message m = new Message();
+        if(organization == null){
+            m.message = "failed";
+            return m;
+        }
+        Organization o = organizationRepository.findById(organization.getId());
+
+        if(organization.getPassword() != null){
+            o.setPassword(organization.getPassword());
+        }
+        if(organization.getDisplayName() != null){
+            o.setDisplayName(organization.getDisplayName());
+        }
+        if(organization.getPhone_number() != null){
+            o.setPhone_number(organization.getPhone_number());
+        }
+        if(organization.getEmail() != null){
+            o.setEmail(organization.getEmail());
+        }
+
+        organizationRepository.save(o);
+
+        m.message = "success";
+        return m;
+
+    }
+
+
 
 
 

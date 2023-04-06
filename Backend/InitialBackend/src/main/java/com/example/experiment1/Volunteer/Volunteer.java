@@ -27,8 +27,6 @@ public class Volunteer{
 
     private String displayName;
 
-    //store as URL
-    private String profilePictureURL;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -51,7 +49,6 @@ public class Volunteer{
         this.displayName = displayName;
         this.email = email;
         this.phone_number = phone_number;
-        this.profilePictureURL = profilePictureURL;
         events = new ArrayList<>();
     }
 
@@ -120,11 +117,4 @@ public class Volunteer{
         return phone_number;
     }
 
-    public void setProfilePictureURL(String profilePictureURL) {
-        this.profilePictureURL = profilePictureURL;
-    }
-
-    public String getProfilePictureURL() {
-        return profilePictureURL;
-    }
 }
