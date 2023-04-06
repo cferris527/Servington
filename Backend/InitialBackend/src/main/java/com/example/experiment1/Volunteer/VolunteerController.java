@@ -70,8 +70,41 @@ public class VolunteerController {
                 }
             }
         }
-        Volunteer nullUser = new Volunteer(null,null);
+        Volunteer nullUser = new Volunteer(null,null,null,null,null,null);
         return nullUser;
+    }
+
+
+
+
+
+    @PostMapping(path = "/volunteerEditFields")
+    public Message editFields(@RequestBody Volunteer volunteer){
+        Message m = new Message();
+        if(volunteer == null){
+            m.message = "failed";
+            return m;
+        }
+        Volunteer v = volunteerRepository.findById(volunteer.getId());
+
+        if(volunteer.getPassword() != null){
+            v.setPassword(volunteer.getPassword());
+        }
+        if(volunteer.getDisplayName() != null){
+            v.setDisplayName(volunteer.getDisplayName());
+        }
+        if(volunteer.getPhone_number() != null){
+            v.setPhone_number(volunteer.getPhone_number());
+        }
+        if(volunteer.getEmail() != null){
+            v.setEmail(volunteer.getEmail());
+        }
+
+        volunteerRepository.save(v);
+
+        m.message = "success";
+        return m;
+
     }
 
 
