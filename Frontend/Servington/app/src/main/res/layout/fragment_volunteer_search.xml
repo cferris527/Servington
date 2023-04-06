@@ -4,4 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412sp"
     android:layout_height="600sp"
-    tools:context=".volunteer.VolunteerSearchFragment" />
+    tools:context=".volunteer.VolunteerSearchFragment" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="408dp"
+        android:layout_height="546dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <EditText
+        android:id="@+id/keywordsearch"
+        android:layout_width="212dp"
+        android:layout_height="51dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Keyword"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="2dp" />
+
+    <Button
+        android:id="@+id/SearchBtn"
+        android:layout_width="171dp"
+        android:layout_height="43dp"
+        android:text="Search"
+        tools:layout_editor_absoluteX="230dp"
+        tools:layout_editor_absoluteY="7dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
