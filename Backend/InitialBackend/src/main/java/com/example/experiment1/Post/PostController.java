@@ -1,7 +1,10 @@
 package com.example.experiment1.Post;
 
+import com.example.experiment1.Admin.AdminRepository;
 import com.example.experiment1.Message;
 import com.example.experiment1.Organization.Organization;
+import com.example.experiment1.Volunteer.Volunteer;
+import com.example.experiment1.Volunteer.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,9 @@ public class PostController {
 
     @Autowired
     OrganizationRepository organizationRepository;
+
+    @Autowired
+    VolunteerRepository volunteerRepository;
 
 
 
@@ -108,6 +114,25 @@ public class PostController {
         m.message = "success";
         return m;
     }
+
+    @PostMapping(path = "/addVolunteer/{postTitle}/{volunteerId}")
+    Message addVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
+        Post p = postRepository.findByTitle(postTitle);
+        Volunteer v = volunteerRepository.findById(volunteerId);
+
+        p.addVolunteer(v);
+        v.addEvent(p);
+
+        p.incrementCount();
+
+        postRepository.save(p);
+        volunteerRepository.save(v);
+
+        Message m = new Message();
+        m.message = "success";
+        return m;
+    }
+
 
 
 }
