@@ -27,6 +27,8 @@ public class Organization {
 
     private String displayName;
 
+    private boolean isBanned;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
     @JsonIgnore
@@ -48,6 +50,7 @@ public class Organization {
         this.phone_number = phone_number;
         posts = new ArrayList<>();
         orgTeam = new Team();
+        isBanned = false;
     }
 
 
@@ -133,6 +136,10 @@ public class Organization {
     public String getPhone_number() {
         return phone_number;
     }
+
+    public boolean getIsBanned(){ return isBanned; }
+
+    public void setIsBanned(boolean isBanned) { this.isBanned = isBanned; }
 
 
 }
