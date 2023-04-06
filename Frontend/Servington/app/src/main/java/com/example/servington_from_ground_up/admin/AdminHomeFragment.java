@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.servington_from_ground_up.R;
+import com.example.servington_from_ground_up.utils.Singleton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +19,10 @@ import com.example.servington_from_ground_up.R;
 public class AdminHomeFragment extends Fragment {
 
     View view;
+    Singleton data = Singleton.getInstance();
+    TextView welcomeText;
+    TextView idText;
+
     public AdminHomeFragment() {
         // Required empty public constructor
     }
@@ -25,7 +31,7 @@ public class AdminHomeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-    public static AdminHomeFragment newInstance(String param1, String param2) {
+    public static AdminHomeFragment newInstance() {
         AdminHomeFragment fragment = new AdminHomeFragment();
         return fragment;
     }
@@ -38,6 +44,14 @@ public class AdminHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_admin_home, container, false);
+
+        //Welcome Text
+        welcomeText = (TextView) view.findViewById(R.id.welcomeAdminText);
+        welcomeText.setText("Admin: " + data.getUsername());
+
+        //ID text
+        idText = (TextView) view.findViewById(R.id.idAdminText);
+        idText.setText("ID: " + data.getId());
 
         return view;
     }

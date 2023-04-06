@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.servington_from_ground_up.R;
+import com.example.servington_from_ground_up.utils.Const;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -117,13 +118,11 @@ public class AdminReportsFragment extends Fragment {
         buttons.get(index).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                deleteReport(titles.get(index).getText().toString());
                 layout.removeView(usernames.get(index));
                 layout.removeView(titles.get(index));
                 layout.removeView(descs.get(index));
                 layout.removeView(buttons.get(index));
-
-                //TODO removing report from actual backend report list
-
             }
         });
         layout.addView(buttons.get(index));
@@ -145,7 +144,7 @@ public class AdminReportsFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/reportlist", null,
+                Const.SERVER + "/listReports", null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -159,10 +158,31 @@ public class AdminReportsFragment extends Fragment {
                                 addTitle(report.getString("title"));
                                 addDescription(report.getString("reportDescription"));
                                 addButton(i);
+
+
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
                         }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        queue.add(request);
+    }
+
+    private void deleteReport(String reportTitle) {
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST,
+                Const.SERVER + "/deleteReport/" + reportTitle, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
                     }
                 },
                 new Response.ErrorListener() {

@@ -58,22 +58,20 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePictureVol"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.307" />
 
     <TextView
-        android:id="@+id/emailVolText"
+        android:id="@+id/DNvolText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="email: (null)"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
+        android:text="(null)"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilePictureVol"
-        app:layout_constraintVertical_bias="0.182" />
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureVol" />
 
     <TextView
         android:id="@+id/phoneVolText"
@@ -86,7 +84,20 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePictureVol"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintVertical_bias="0.565" />
+
+    <TextView
+        android:id="@+id/emailVolText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email: (null)"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureVol"
+        app:layout_constraintVertical_bias="0.441" />
 
     <ImageView
         android:id="@+id/profilePictureVol"

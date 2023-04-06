@@ -26,6 +26,9 @@ public class VolunteerHomeFragment extends Fragment {
     Singleton data = Singleton.getInstance();
     TextView welcomeText;
     TextView idText;
+    TextView emailText;
+    TextView phoneText;
+    TextView displayName;
     Button logoutBtn;
     Button settingsBtn;
     public VolunteerHomeFragment() {
@@ -60,6 +63,18 @@ public class VolunteerHomeFragment extends Fragment {
         idText = (TextView) view.findViewById(R.id.idVolText);
         idText.setText("ID: " + data.getId());
 
+        //Email text
+        emailText = (TextView) view.findViewById(R.id.emailVolText);
+        emailText.setText(data.getEmail());
+
+        //Phone text
+        phoneText = (TextView) view.findViewById(R.id.phoneVolText);
+        phoneText.setText(data.getPhone());
+
+        //Display name
+        displayName = (TextView) view.findViewById(R.id.DNvolText);
+        displayName.setText(data.getDisplayName());
+
         //Logout Button
         logoutBtn = (Button) view.findViewById(R.id.logoutVolBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +92,7 @@ public class VolunteerHomeFragment extends Fragment {
             @Override
             //Changes to Settings Fragment
             public void onClick(View view) {
-                Fragment fragment = new VolunteerDmFragment();
+                Fragment fragment = new VolunteerSettingsFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerView, fragment);

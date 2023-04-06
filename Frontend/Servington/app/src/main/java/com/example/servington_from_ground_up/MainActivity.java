@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //if Login attempt is invalid...
                         if (userName.equals("null")) {
-                            status.setBackgroundColor(Color.parseColor("#00FF00"));
+                            status.setBackgroundColor(Color.parseColor("#FF0000"));
                             status.setText("Invalid username/password!");
                             username.setText("", TextView.BufferType.EDITABLE);
                             password.setText("", TextView.BufferType.EDITABLE);
@@ -178,10 +178,16 @@ public class MainActivity extends AppCompatActivity {
 
                         Singleton data = Singleton.getInstance();
                         try {
-                            data.setData(response);
+                            data.setData(response, accountType);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
+
+                        //TODO check for ban
+                        if (data.getBanned()) {
+                            intent = new Intent(MainActivity.this, BannedActivity.class);
+                        }
+
                         startActivity(intent);
                     }
                 },

@@ -12,9 +12,10 @@ public class Singleton {
     private static int id;
     private String username;
     private String password;
-    //private String displayName;
-   // private String email;
-    //private int phone;
+    private String displayName;
+    private String email;
+    private String phone;
+    private boolean isBanned;
 
     private Singleton() {}
 
@@ -31,10 +32,20 @@ public class Singleton {
      * @param obj
      * @throws JSONException
      */
-    public void setData(JSONObject obj) throws JSONException {
+    public void setData(JSONObject obj, String accountType) throws JSONException {
+
         id = obj.getInt("id");
         username = obj.getString("username");
         password = obj.getString("password");
+
+        if (accountType.equals("ADMIN")) {
+            return;
+        }
+
+        displayName = obj.getString("displayName");
+        email = obj.getString("email");
+        phone = obj.getString("phone_number");
+        isBanned = obj.getBoolean("isBanned");
     }
 
     /**
@@ -44,22 +55,27 @@ public class Singleton {
         id = 0;
         username = null;
         password = null;
+        displayName = null;
+        email = null;
+        phone = null;
     }
 
     // get methods
     public int getId() {return id;}
     public String getUsername() {return username;}
     public String getPassword() {return password;}
-    //public String getDisplayName() {return displayName;}
-    //public String getEmail() {return email;}
-    //public int getPhone() {return phone;}
+    public String getDisplayName() {return displayName;}
+    public String getEmail() {return email;}
+    public String getPhone() {return phone;}
+    public boolean getBanned() {return isBanned;}
 
     // set methods
     public void setID(int id) {this.id = id;}
     public void setUsername(String username) {this.username = username;}
     public void setPassword(String password) {this.password = password;}
-    //public void setDisplayName(String displayName) {this.displayName = displayName;}
-    //public void setEmail(String email) {this.email = email;}
-    //public void setPhone(int phone) {this.phone = phone;}
+    public void setDisplayName(String displayName) {this.displayName = displayName;}
+    public void setEmail(String email) {this.email = email;}
+    public void setPhone(String phone) {this.phone = phone;}
+    public void setBanned(boolean b) {isBanned = b;}
 
 }
