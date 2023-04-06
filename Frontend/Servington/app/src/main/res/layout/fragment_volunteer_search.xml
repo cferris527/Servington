@@ -4,29 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412sp"
     android:layout_height="600sp"
-    tools:context=".volunteer.VolunteerSearchFragment" >
+    tools:context=".volunteer.VolunteerSearchFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="408dp"
-        android:layout_height="546dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="53dp" />
+        android:id="@+id/SearchRecy"
+        android:layout_width="393dp"
+        android:layout_height="529dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SearchBtn" />
 
     <EditText
         android:id="@+id/keywordsearch"
-        android:layout_width="212dp"
-        android:layout_height="51dp"
+        android:layout_width="160dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Keyword"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="2dp" />
+        app:layout_constraintBottom_toTopOf="@+id/SearchRecy"
+        app:layout_constraintEnd_toStartOf="@+id/SearchBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/SearchBtn"
-        android:layout_width="171dp"
-        android:layout_height="43dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="3dp"
         android:text="Search"
-        tools:layout_editor_absoluteX="230dp"
-        tools:layout_editor_absoluteY="7dp" />
+        app:layout_constraintBottom_toTopOf="@+id/SearchRecy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/keywordsearch"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
