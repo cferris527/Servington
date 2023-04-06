@@ -24,13 +24,18 @@ public class ReportController {
         return reportRepository.findAll();
     }
 
-    @PostMapping(path = "/deleteReport/{reportId}")
-    public Message deleteReport(@PathVariable int reportId){
+    @PostMapping(path = "/deleteReport/{reportTitle}")
+    public Message deleteReport(@PathVariable String reportTitle){
         Message m = new Message();
-        if(reportRepository.existsById((long)reportId)){
-            reportRepository.deleteById(reportId);
-            m.message = "success";
-            return m;
+        int id = 0;
+        List<Report> reports = reportRepository.findAll();
+        for(int i = 0; i < reports.toArray().length; i++){
+            if(reports.get(i).getTitle().equals(reportTitle)){
+                id = reports.get(i).getId();
+                reportRepository.deleteById(id);
+                m.message = "success";
+                return m;
+            }
         }
         m.message = "Deletion failed, Check if reportID exists";
         return m;

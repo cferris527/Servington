@@ -30,6 +30,8 @@ public class Report {
 
     public Report(){};
 
+    public int getId(){ return id; }
+
     public String getUsername(){return username; }
 
     public String getTitle(){return title; }
