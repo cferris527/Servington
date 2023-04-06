@@ -37,7 +37,7 @@ public class Volunteer{
     @JsonIgnore
     private List<Post> events;
 
-
+    private boolean isBanned;
 
     public Volunteer(){
         events = new ArrayList<>();
@@ -50,6 +50,7 @@ public class Volunteer{
         this.email = email;
         this.phone_number = phone_number;
         events = new ArrayList<>();
+        isBanned = false;
     }
 
     public int getId() {
@@ -84,13 +85,11 @@ public class Volunteer{
         return events;
     }
 
+    public boolean getIsBanned(){ return isBanned; }
 
-
-
+    public void setIsBanned(boolean isBanned) { this.isBanned = isBanned; }
 
     //editing other fields
-
-
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }

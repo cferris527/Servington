@@ -17,15 +17,11 @@ public class VolunteerController {
     @Autowired
     VolunteerRepository volunteerRepository;
 
-
-
     //Returns List of all Organizations
     @GetMapping(path = "/listVolunteers")
     List<Volunteer> getAllVolunteers(){
         return volunteerRepository.findAll();
     }
-
-
 
     //Creates Organization account
     @PostMapping(path = "/createVolunteer")
@@ -41,9 +37,6 @@ public class VolunteerController {
         return m;
     }
 
-
-
-
     //THIS METHOD WORKS FOR DELETING USER. Works on frontend.
     @PostMapping(path = "/deleteVolunteer")
     Message deleteUser(@RequestBody Volunteer v){
@@ -54,10 +47,6 @@ public class VolunteerController {
         m.message = "success";
         return m;
     }
-
-
-
-
 
     //Used for login return user if username and password is valid. This is working on frontend.
     @GetMapping(path = "/volunteerLogin/{username}/{password}")
@@ -73,10 +62,6 @@ public class VolunteerController {
         Volunteer nullUser = new Volunteer(null,null,null,null,null,null);
         return nullUser;
     }
-
-
-
-
 
     @PostMapping(path = "/volunteerEditFields")
     public Message editFields(@RequestBody Volunteer volunteer){
@@ -104,12 +89,36 @@ public class VolunteerController {
 
         m.message = "success";
         return m;
-
     }
 
+    @PostMapping(path = "/banVolunteer/{volUsername}")
+    public Message banVolunteer(@PathVariable String volUsername){
+        Message m = new Message();
+        List<Volunteer> v = volunteerRepository.findAll();
+        for(int i = 0; i < v.toArray().length; i++){
+            if(v.get(i).getUsername().equals(volUsername)){
+                v.get(i).setIsBanned(true);
+                m.message = "success";
+                return m;
+            }
+        }
+        m.message = "failed";
+        return m;
+    }
 
-
-
-
+    @PostMapping(path = "/unbanVolunteer/{volUsername}")
+    public Message unbanVolunteer(@PathVariable String volUsername){
+        Message m = new Message();
+        List<Volunteer> v = volunteerRepository.findAll();
+        for(int i = 0; i < v.toArray().length; i++){
+            if(v.get(i).getUsername().equals(volUsername)){
+                v.get(i).setIsBanned(false);
+                m.message = "success";
+                return m;
+            }
+        }
+        m.message = "failed";
+        return m;
+    }
 }
 

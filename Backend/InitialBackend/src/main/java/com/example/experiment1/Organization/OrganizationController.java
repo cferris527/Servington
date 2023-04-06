@@ -107,12 +107,35 @@ public class OrganizationController {
 
     }
 
+    @PostMapping(path = "/banOrganization/{orgUsername}")
+    public Message banVolunteer(@PathVariable String orgUsername){
+        Message m = new Message();
+        List<Organization> o = organizationRepository.findAll();
+        for(int i = 0; i < o.toArray().length; i++){
+            if(o.get(i).getUsername().equals(orgUsername)){
+                o.get(i).setIsBanned(true);
+                m.message = "success";
+                return m;
+            }
+        }
+        m.message = "failed";
+        return m;
+    }
 
-
-
-
-
-
+    @PostMapping(path = "/unbanVolunteer/{orgUsername}")
+    public Message unbanVolunteer(@PathVariable String orgUsername){
+        Message m = new Message();
+        List<Organization> o = organizationRepository.findAll();
+        for(int i = 0; i < o.toArray().length; i++){
+            if(o.get(i).getUsername().equals(orgUsername)){
+                o.get(i).setIsBanned(false);
+                m.message = "success";
+                return m;
+            }
+        }
+        m.message = "failed";
+        return m;
+    }
 }
 
 
