@@ -2,6 +2,7 @@ package com.example.experiment1.Organization;
 
 import com.example.experiment1.Post.Post;
 
+import com.example.experiment1.Team.Team;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -26,6 +27,10 @@ public class Organization {
 
     private String displayName;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_id")
+    @JsonIgnore
+    private Team orgTeam;
 
     @OneToMany(mappedBy = "title")
     @JsonIgnore
@@ -42,9 +47,8 @@ public class Organization {
         this.email = email;
         this.phone_number = phone_number;
         posts = new ArrayList<>();
+        orgTeam = new Team();
     }
-
-
 
 
     public int getId() {
@@ -89,6 +93,13 @@ public class Organization {
 
 
 
+    public void setOrgTeam(Team t) {
+        orgTeam = t;
+    }
+
+    public Team getOrgTeam(){ return orgTeam; }
+
+
 
 
 
@@ -122,6 +133,7 @@ public class Organization {
     public String getPhone_number() {
         return phone_number;
     }
+
 
 }
 
