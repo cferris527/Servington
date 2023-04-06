@@ -46,7 +46,7 @@ public class OrganizationPostsFragment extends Fragment {
 
         //TODO
         CreatePostBtn = view.findViewById(R.id.createposts);
-        ViewPostsBtn = view.findViewById(R.id.viewposts);
+        ViewPostsBtn = view.findViewById(R.id.OrgViewPosts);
 
         CreatePostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
