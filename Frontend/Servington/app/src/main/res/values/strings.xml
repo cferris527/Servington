@@ -2,6 +2,10 @@
     <string name="app_name">Servington_from_ground_up</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_old_password">Old Password</string>
+    <string name="prompt_new_password">New Password</string>
+    <string name="prompt_user_to_ban">Username to ban</string>
+    <string name="prompt_user_to_unban">Username to unban</string>
     <string name="prompt_id">Account ID</string>
     <string name="prompt_postTitle">Post Title</string>
     <string name="login_button">Login</string>

@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".BannedActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.HomeAdminActivity"
             android:exported="false" />
         <activity
@@ -53,8 +56,6 @@
         <activity
             android:name=".UserPostListActivity"
             android:exported="false" />
-
     </application>
-
 
 </manifest>

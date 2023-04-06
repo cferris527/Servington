@@ -42,9 +42,7 @@ public class HomeAdminActivity extends AppCompatActivity {
         });
         banBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //TODO
-            }
+            public void onClick(View view) {changeTo(AdminBansFragment.class);}
         });
 
     }
