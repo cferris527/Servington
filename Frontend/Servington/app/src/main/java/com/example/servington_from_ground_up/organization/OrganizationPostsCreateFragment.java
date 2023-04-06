@@ -108,6 +108,7 @@ public class OrganizationPostsCreateFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getActivity().getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
                     }
                 }
         );

@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         String url = Const.SERVER + "/" + loginType + "/" + user_name + "/" + pass_word;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/sampledata", body,
+                url, body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
