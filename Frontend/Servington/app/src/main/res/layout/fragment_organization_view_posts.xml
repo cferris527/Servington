@@ -6,16 +6,16 @@
     android:layout_height="600sp"
     tools:context=".organization.OrganizationPostsViewFragment">
 
-    <TextView
-        android:id="@+id/OrgPostsView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orgRecycler"
         android:layout_width="0dp"
-        android:layout_height="530dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="24dp"
-        android:text="TextView"
-        android:scrollbars="vertical"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

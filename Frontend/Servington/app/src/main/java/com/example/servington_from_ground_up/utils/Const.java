@@ -76,4 +76,10 @@ public class Const {
      */
     public static final String URL_VIEW_POST_BYID
             = "http://coms-309-029.class.las.iastate.edu:8080/getPostsByOrg/";
+
+    public static final String URL_View_All_Posts
+            = "http://coms-309-029.class.las.iastate.edu:8080/allPosts";
+
+    public static final String URL_SEARCH_POST_TITLE
+            = "http://coms-309-029.class.las.iastate.edu:8080/postTitleKeyword/";
 }
