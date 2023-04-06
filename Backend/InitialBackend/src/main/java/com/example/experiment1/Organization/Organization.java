@@ -2,6 +2,7 @@ package com.example.experiment1.Organization;
 
 import com.example.experiment1.Post.Post;
 
+import com.example.experiment1.Team.Team;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -29,6 +30,10 @@ public class Organization {
     //store as URL
     //private String profilePictureURL;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_id")
+    @JsonIgnore
+    private Team orgTeam;
 
     @OneToMany(mappedBy = "title")
     @JsonIgnore
@@ -42,9 +47,8 @@ public class Organization {
         this.username = username;
         this.password = password;
         posts = new ArrayList<>();
+        orgTeam = new Team();
     }
-
-
 
 
     public int getId() {
@@ -88,6 +92,11 @@ public class Organization {
     }
 
 
+    public void setOrgTeam(Team t) {
+        orgTeam = t;
+    }
+
+    public Team getOrgTeam(){ return orgTeam; }
 }
 
 
