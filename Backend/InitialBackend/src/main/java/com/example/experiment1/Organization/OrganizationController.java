@@ -114,6 +114,7 @@ public class OrganizationController {
         for(int i = 0; i < o.toArray().length; i++){
             if(o.get(i).getUsername().equals(orgUsername)){
                 o.get(i).setIsBanned(true);
+                organizationRepository.save(o.get(i));
                 m.message = "success";
                 return m;
             }
@@ -129,6 +130,7 @@ public class OrganizationController {
         for(int i = 0; i < o.toArray().length; i++){
             if(o.get(i).getUsername().equals(orgUsername)){
                 o.get(i).setIsBanned(false);
+                organizationRepository.save(o.get(i));
                 m.message = "success";
                 return m;
             }

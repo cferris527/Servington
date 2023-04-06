@@ -94,10 +94,12 @@ public class VolunteerController {
     @PostMapping(path = "/banVolunteer/{volUsername}")
     public Message banVolunteer(@PathVariable String volUsername){
         Message m = new Message();
+        boolean b = true;
         List<Volunteer> v = volunteerRepository.findAll();
         for(int i = 0; i < v.toArray().length; i++){
             if(v.get(i).getUsername().equals(volUsername)){
-                v.get(i).setIsBanned(true);
+                v.get(i).setIsBanned(b);
+                volunteerRepository.save(v.get(i));
                 m.message = "success";
                 return m;
             }
@@ -113,6 +115,7 @@ public class VolunteerController {
         for(int i = 0; i < v.toArray().length; i++){
             if(v.get(i).getUsername().equals(volUsername)){
                 v.get(i).setIsBanned(false);
+                volunteerRepository.save(v.get(i));
                 m.message = "success";
                 return m;
             }
