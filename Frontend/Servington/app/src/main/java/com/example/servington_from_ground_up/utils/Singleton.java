@@ -58,6 +58,7 @@ public class Singleton {
         displayName = null;
         email = null;
         phone = null;
+        isBanned = false;
     }
 
     // get methods
