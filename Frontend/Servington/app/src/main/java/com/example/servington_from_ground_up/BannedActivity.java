@@ -7,9 +7,12 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.servington_from_ground_up.utils.Singleton;
+
 public class BannedActivity extends AppCompatActivity {
 
     Button okButton;
+    Singleton data = Singleton.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class BannedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(BannedActivity.this, MainActivity.class);
                 startActivity(intent);
+                data.logOut();
+
             }
         });
 
