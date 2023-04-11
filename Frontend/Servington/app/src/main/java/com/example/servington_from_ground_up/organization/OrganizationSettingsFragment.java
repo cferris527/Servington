@@ -1,4 +1,4 @@
-package com.example.servington_from_ground_up.volunteer;
+package com.example.servington_from_ground_up.organization;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,16 +26,17 @@ import com.android.volley.toolbox.Volley;
 import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
+import com.example.servington_from_ground_up.volunteer.VolunteerHomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Fragment allowing Volunteer to change their account details.
+ * Fragment allowing Organization to change their account details.
  *
  * @author Connor Ferris
  */
-public class VolunteerSettingsFragment extends Fragment {
+public class OrganizationSettingsFragment extends Fragment {
 
     View view;
     String field;
@@ -45,19 +46,13 @@ public class VolunteerSettingsFragment extends Fragment {
     Button changeBtn;
     Button backBtn;
     Singleton data = Singleton.getInstance();
-
-    public VolunteerSettingsFragment() {
-        // Required empty public constructor
-    }
+    public OrganizationSettingsFragment() {}
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment.
      */
-    public static VolunteerSettingsFragment newInstance() {
-        VolunteerSettingsFragment fragment = new VolunteerSettingsFragment();
-        return fragment;
-    }
+    public static OrganizationSettingsFragment newInstance() {return new OrganizationSettingsFragment();}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,17 +63,17 @@ public class VolunteerSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_volunteer_settings, container, false);
+        view = inflater.inflate(R.layout.fragment_organization_settings, container, false);
 
         //Old + New Field
-        oldField = (EditText) view.findViewById(R.id.oldField);
-        newField = (EditText) view.findViewById(R.id.newField);
+        oldField = (EditText) view.findViewById(R.id.oldField2);
+        newField = (EditText) view.findViewById(R.id.newField2);
 
         //Status message
-        statusMessage = (TextView) view.findViewById(R.id.statusMessage2);
+        statusMessage = (TextView) view.findViewById(R.id.statusMessage4);
 
         //Change button
-        changeBtn = (Button) view.findViewById(R.id.changeBtn);
+        changeBtn = (Button) view.findViewById(R.id.changeBtn2);
         changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +86,7 @@ public class VolunteerSettingsFragment extends Fragment {
         });
 
         //Back button
-        backBtn = (Button) view.findViewById(R.id.backBtn);
+        backBtn = (Button) view.findViewById(R.id.backBtn3);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,9 +99,8 @@ public class VolunteerSettingsFragment extends Fragment {
             }
         });
 
-
         //Spinner
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinna);
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinna2);
         String[] methods = new String[]{"Password", "Display Name", "Email", "Phone"};
         //TO BE changed: password, displayName, email, phone_number
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, methods);
@@ -153,9 +147,7 @@ public class VolunteerSettingsFragment extends Fragment {
      * @param edit EditText to be changed
      * @param hint text to be put for EditText's hint
      */
-    private void setHint(EditText edit, String hint){
-        edit.setHint(hint);
-    }
+    private void setHint(EditText edit, String hint){edit.setHint(hint);}
 
     /**
      * Clears both EditTexts.

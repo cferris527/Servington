@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private String accountType;
     Button loginButton;
     Button createButton;
-    String initial_url = "http://coms-309-029.class.las.iastate.edu:8080/users/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,13 +130,12 @@ public class MainActivity extends AppCompatActivity {
         String url = Const.SERVER + "/" + loginType + "/" + user_name + "/" + pass_word;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
-                url, body,
+                "https://a601cc78-61cd-46e0-aca3-100920b95d12.mock.pstmn.io/sampledata", body,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
 
                         String userName;
-
                         try {
                             userName = response.getString("username");
                         } catch (JSONException e) {
@@ -161,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
 
                             return;
                         }
+
+                        //determine account type
                         Intent intent;
                         if (accountType.equals("VOLUNTEER")) {
                             intent = new Intent(MainActivity.this, HomeVolunteerActivity.class);
@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
 
+                        //fill singleton
                         Singleton data = Singleton.getInstance();
                         try {
                             data.setData(response, accountType);
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                             throw new RuntimeException(e);
                         }
 
-                        //TODO check for ban
+                        //check if account is banned
                         if (data.getBanned()) {
                             intent = new Intent(MainActivity.this, BannedActivity.class);
                         }

@@ -26,9 +26,9 @@ import com.example.servington_from_ground_up.utils.Const;
 import org.json.JSONObject;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminUserBanFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment allowing Admin to ban or unban accounts.
+ *
+ * @author Connor Ferris
  */
 public class AdminUserBanFragment extends Fragment {
 
@@ -46,11 +46,10 @@ public class AdminUserBanFragment extends Fragment {
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment.
      */
     public static AdminUserBanFragment newInstance() {
-        AdminUserBanFragment fragment = new AdminUserBanFragment();
-        return fragment;
+        return new AdminUserBanFragment();
     }
 
     @Override
@@ -105,6 +104,10 @@ public class AdminUserBanFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Bans a user, sets their "isBanned" field to true.
+     * @param username user to be banned
+     */
     private void banUser(String username) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JSONObject obj = new JSONObject();
@@ -129,13 +132,16 @@ public class AdminUserBanFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 });
         queue.add(request);
 
     }
 
+    /**
+     * Unbans a user, sets their "isBanned" field to false.
+     * @param username user to be unbanned
+     */
     private void unbanUser(String username) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JSONObject obj = new JSONObject();
@@ -161,7 +167,6 @@ public class AdminUserBanFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 });
         queue.add(request);

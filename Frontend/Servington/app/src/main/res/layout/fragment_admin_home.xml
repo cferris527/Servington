@@ -15,10 +15,9 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeAdminText"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintVertical_bias="0.052" />
 
     <TextView
         android:id="@+id/welcomeAdminText"
@@ -32,4 +31,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.063" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="181dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="148dp"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

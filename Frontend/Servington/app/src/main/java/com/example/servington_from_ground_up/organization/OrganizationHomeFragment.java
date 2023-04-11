@@ -17,9 +17,10 @@ import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.utils.Singleton;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrganizationHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment that acts as a home page for Organization. This fragment is the first one
+ * loaded upon login. Displays Organization details and option to log out/change settings.
+ *
+ * @author Connor Ferris
  */
 public class OrganizationHomeFragment extends Fragment {
     View view;
@@ -28,18 +29,13 @@ public class OrganizationHomeFragment extends Fragment {
     TextView idText;
     Button logoutBtn;
     Button settingsBtn;
-    public OrganizationHomeFragment() {
-        // Required empty public constructor
-    }
+    public OrganizationHomeFragment() {}
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment.
      */
-    public static OrganizationHomeFragment newInstance(String param1, String param2) {
-        OrganizationHomeFragment fragment = new OrganizationHomeFragment();
-        return fragment;
-    }
+    public static OrganizationHomeFragment newInstance() {return new OrganizationHomeFragment();}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
