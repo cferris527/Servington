@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinna"
+        app:layout_constraintTop_toBottomOf="@+id/spinna2"
         app:layout_constraintVertical_bias="0.078" />
 
     <EditText
@@ -80,6 +80,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeBtn"
+        app:layout_constraintTop_toBottomOf="@+id/changeBtn2"
         app:layout_constraintVertical_bias="0.664" />
 </androidx.constraintlayout.widget.ConstraintLayout>
