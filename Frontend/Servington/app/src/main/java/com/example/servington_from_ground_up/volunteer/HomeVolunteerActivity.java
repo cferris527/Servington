@@ -9,6 +9,12 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.servington_from_ground_up.R;
 
+/**
+ * Activity that holds and displays the necessary fragments for Volunteer by
+ * a bottom navigation bar.
+ *
+ * @author Connor Ferris
+ */
 public class HomeVolunteerActivity extends AppCompatActivity {
 
     Button homeBtn;

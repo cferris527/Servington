@@ -17,9 +17,10 @@ import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.utils.Singleton;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link VolunteerHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment that acts as a home page for Volunteer. This fragment is the first one
+ * loaded upon login. Displays Volunteer details and option to log out/change settings.
+ *
+ * @author Connor Ferris
  */
 public class VolunteerHomeFragment extends Fragment {
     View view;
@@ -31,18 +32,13 @@ public class VolunteerHomeFragment extends Fragment {
     TextView displayName;
     Button logoutBtn;
     Button settingsBtn;
-    public VolunteerHomeFragment() {
-        // Required empty public constructor
-    }
+    public VolunteerHomeFragment() {}
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment.
      */
-    public static VolunteerHomeFragment newInstance(String param1, String param2) {
-        VolunteerHomeFragment fragment = new VolunteerHomeFragment();
-        return fragment;
-    }
+    public static VolunteerHomeFragment newInstance() {return new VolunteerHomeFragment();}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,20 +1,24 @@
 package com.example.servington_from_ground_up.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.servington_from_ground_up.MainActivity;
 import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.utils.Singleton;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment that acts as a home page for admin. This fragment is the first one
+ * loaded upon login. Displays Admin details and option to log out.
+ *
+ * @author Connor Ferris
  */
 public class AdminHomeFragment extends Fragment {
 
@@ -22,6 +26,7 @@ public class AdminHomeFragment extends Fragment {
     Singleton data = Singleton.getInstance();
     TextView welcomeText;
     TextView idText;
+    Button logoutBtn;
 
     public AdminHomeFragment() {
         // Required empty public constructor
@@ -32,8 +37,7 @@ public class AdminHomeFragment extends Fragment {
      * this fragment using the provided parameters.
      */
     public static AdminHomeFragment newInstance() {
-        AdminHomeFragment fragment = new AdminHomeFragment();
-        return fragment;
+        return new AdminHomeFragment();
     }
 
     @Override
@@ -53,6 +57,16 @@ public class AdminHomeFragment extends Fragment {
         idText = (TextView) view.findViewById(R.id.idAdminText);
         idText.setText("ID: " + data.getId());
 
+        //Logout Button
+        logoutBtn = (Button) view.findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                Intent intent = new Intent(view.getContext(), MainActivity.class);
+                startActivity(intent);
+                data.logOut();
+            }
+        });
         return view;
     }
 }

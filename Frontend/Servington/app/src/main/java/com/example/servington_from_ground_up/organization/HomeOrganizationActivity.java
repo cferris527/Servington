@@ -9,6 +9,12 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.servington_from_ground_up.R;
 
+/**
+ * Activity that holds and displays the necessary fragments for Organization by
+ * a bottom navigation bar.
+ *
+ * @author Connor Ferris
+ */
 public class HomeOrganizationActivity extends AppCompatActivity {
 
     Button homeBtn;

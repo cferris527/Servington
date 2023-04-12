@@ -24,9 +24,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminDeletionFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment to delete an account or user.
+ *
+ * @author Connor Ferris
  */
 public class AdminDeletionFragment extends Fragment {
 
@@ -46,8 +46,7 @@ public class AdminDeletionFragment extends Fragment {
      * this fragment using the provided parameters.
      */
     public static AdminDeletionFragment newInstance() {
-        AdminDeletionFragment fragment = new AdminDeletionFragment();
-        return fragment;
+        return new AdminDeletionFragment();
     }
 
     @Override
@@ -110,6 +109,11 @@ public class AdminDeletionFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Delete post from server.
+     * @param postTitle title of post to be deleted
+     * @throws JSONException for handling JSON object
+     */
     private void deletePost(String postTitle) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JSONObject obj = new JSONObject();
@@ -119,7 +123,6 @@ public class AdminDeletionFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO: action for successful response
                     }
                 },
                 new Response.ErrorListener() {
@@ -131,6 +134,11 @@ public class AdminDeletionFragment extends Fragment {
         queue.add(request);
     }
 
+    /**
+     * Delete user from server.
+     * @param userId id of user to be deleted
+     * @throws JSONException for handling JSON object
+     */
     private void deleteUser(String userId) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JSONObject obj = new JSONObject();
@@ -140,7 +148,6 @@ public class AdminDeletionFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO: action for successful response
                     }
                 },
                 new Response.ErrorListener() {

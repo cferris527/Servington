@@ -9,6 +9,12 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.servington_from_ground_up.R;
 
+/**
+ * Activity that holds and displays the necessary fragments for Admin by
+ * a bottom navigation bar.
+ *
+ * @author Connor Ferris
+ */
 public class HomeAdminActivity extends AppCompatActivity {
 
     Button homeBtn;
@@ -34,7 +40,7 @@ public class HomeAdminActivity extends AppCompatActivity {
         });
         adminsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {}
+            public void onClick(View view) {changeTo(AdminAdminsFragment.class);}
         });
         reportsBtn.setOnClickListener(new View.OnClickListener() {
             @Override

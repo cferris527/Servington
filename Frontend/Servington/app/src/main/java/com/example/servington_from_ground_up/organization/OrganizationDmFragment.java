@@ -10,24 +10,17 @@ import androidx.fragment.app.Fragment;
 import com.example.servington_from_ground_up.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrganizationDmFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment allowing Organization to message Volunteers.
  */
 public class OrganizationDmFragment extends Fragment {
     View view;
-    public OrganizationDmFragment() {
-        // Required empty public constructor
-    }
+    public OrganizationDmFragment() {}
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment.
      */
-    public static OrganizationDmFragment newInstance(String param1, String param2) {
-        OrganizationDmFragment fragment = new OrganizationDmFragment();
-        return fragment;
-    }
+    public static OrganizationDmFragment newInstance() {return new OrganizationDmFragment();}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

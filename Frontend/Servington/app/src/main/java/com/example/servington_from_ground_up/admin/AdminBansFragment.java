@@ -13,9 +13,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.servington_from_ground_up.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminBansFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment to navigate to different Admin ban features.
+ *
+ * @author Connor Ferris
  */
 public class AdminBansFragment extends Fragment {
 
@@ -31,8 +31,7 @@ public class AdminBansFragment extends Fragment {
      * this fragment using the provided parameters.
      */
     public static AdminBansFragment newInstance() {
-        AdminBansFragment fragment = new AdminBansFragment();
-        return fragment;
+        return new AdminBansFragment();
     }
 
     @Override
@@ -43,7 +42,6 @@ public class AdminBansFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_admin_bans, container, false);
 
         //Delete Button

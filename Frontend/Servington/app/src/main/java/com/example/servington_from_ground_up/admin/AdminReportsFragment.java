@@ -27,9 +27,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminReportsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment that displays all reports on server. Admin can clear
+ * reports as necessary.
+ *
+ * @author Connor Ferris
  */
 public class AdminReportsFragment extends Fragment {
 
@@ -46,11 +47,10 @@ public class AdminReportsFragment extends Fragment {
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment.
      */
-    public static AdminReportsFragment newInstance(String param1, String param2) {
-        AdminReportsFragment fragment = new AdminReportsFragment();
-        return fragment;
+    public static AdminReportsFragment newInstance() {
+        return new AdminReportsFragment();
     }
 
     @Override
@@ -62,14 +62,15 @@ public class AdminReportsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_admin_reports, container, false);
-
-        layout = (LinearLayout) view.findViewById(R.id.reportsLayout);
-
+        layout = view.findViewById(R.id.reportsLayout);
         loadAllReports();
-
         return view;
     }
 
+    /**
+     * Adds username TextView to Scrollable list.
+     * @param name who report was created by
+     */
     private void addUsername(String name) {
         TextView username = new TextView(getActivity());
         username = new TextView(getContext());
@@ -79,11 +80,14 @@ public class AdminReportsFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         username.setTextSize(20);
         username.setBackgroundColor(Color.parseColor("#fcfcfc"));
-
         usernames.add(username);
         layout.addView(username);
     }
 
+    /**
+     * Adds title TextView to Scrollable list.
+     * @param titleText title of the report
+     */
     private void addTitle(String titleText) {
         TextView title = new TextView(getActivity());
         title = new TextView(getContext());
@@ -93,11 +97,14 @@ public class AdminReportsFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         title.setTextSize(30);
         title.setBackgroundColor(Color.parseColor("#fcfcfc"));
-
         titles.add(title);
         layout.addView(title);
     }
 
+    /**
+     * Adds description TextView to Scrollable list.
+     * @param description what the report is about
+     */
     private void addDescription(String description) {
         TextView desc = new TextView(getActivity());
         desc = new TextView(getContext());
@@ -107,11 +114,14 @@ public class AdminReportsFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         desc.setTextSize(20);
         desc.setBackgroundColor(Color.parseColor("#fcfcfc"));
-
         descs.add(desc);
         layout.addView(desc);
     }
 
+    /**
+     * Adds a Button to Scrollable list that removes the above report.
+     * @param index index of TextView ArrayLists to be removed
+     */
     private void addButton(int index) {
         buttons.add(new Button(getContext()));
         buttons.get(index).setText("Remove");
@@ -128,17 +138,9 @@ public class AdminReportsFragment extends Fragment {
         layout.addView(buttons.get(index));
     }
 
-    private void addSeperator() {
-        TextView sep = new TextView(getActivity());
-        sep = new TextView(getContext());
-        sep.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.FILL_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        sep.setTextSize(2);
-        sep.setBackgroundColor(Color.parseColor("#000000"));
-        layout.addView(sep);
-    }
-
+    /**
+     * Loads all reports from server.
+     */
     private void loadAllReports() {
         layout.removeAllViews();
 
@@ -175,6 +177,10 @@ public class AdminReportsFragment extends Fragment {
         queue.add(request);
     }
 
+    /**
+     * Deletes removed report from Server.
+     * @param reportTitle title of report to be deleted.
+     */
     private void deleteReport(String reportTitle) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST,
