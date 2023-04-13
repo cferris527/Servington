@@ -27,6 +27,8 @@ public class Volunteer{
 
     private String displayName;
 
+    private String profilePictureUrl;
+
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -43,12 +45,13 @@ public class Volunteer{
         events = new ArrayList<>();
     }
 
-    public Volunteer(String username, String password,String displayName, String email, String phone_number, String profilePictureURL){
+    public Volunteer(String username, String password, String displayName, String email, String phone_number, String profilePictureURL){
         this.username = username;
         this.password = password;
         this.displayName = displayName;
         this.email = email;
         this.phone_number = phone_number;
+        this.profilePictureUrl = profilePictureURL;
         events = new ArrayList<>();
         isBanned = false;
     }
@@ -89,6 +92,10 @@ public class Volunteer{
 
     public void setIsBanned(boolean isBanned) { this.isBanned = isBanned; }
 
+
+
+
+
     //editing other fields
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
@@ -116,4 +123,9 @@ public class Volunteer{
         return phone_number;
     }
 
+    public void setProfilePictureUrl(String profilePictureUrl) {this.profilePictureUrl = profilePictureUrl; }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
 }

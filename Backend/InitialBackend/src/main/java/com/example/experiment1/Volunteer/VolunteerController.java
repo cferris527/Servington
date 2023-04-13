@@ -84,6 +84,9 @@ public class VolunteerController {
         if(volunteer.getEmail() != null){
             v.setEmail(volunteer.getEmail());
         }
+        if(volunteer.getProfilePictureUrl() != null){
+            v.setProfilePictureUrl(volunteer.getProfilePictureUrl());
+        }
 
         volunteerRepository.save(v);
 
