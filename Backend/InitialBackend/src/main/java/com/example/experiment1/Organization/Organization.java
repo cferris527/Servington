@@ -27,6 +27,8 @@ public class Organization {
 
     private String displayName;
 
+    private String profilePictureUrl;
+
     private boolean isBanned;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -48,6 +50,7 @@ public class Organization {
         this.displayName = displayName;
         this.email = email;
         this.phone_number = phone_number;
+        this.profilePictureUrl = profilePictureURL;
         posts = new ArrayList<>();
         orgTeam = new Team();
         isBanned = false;
@@ -142,6 +145,14 @@ public class Organization {
     public void setIsBanned(boolean isBanned) { this.isBanned = isBanned; }
 
 
+    public void setProfilePictureUrl(String profilePictureUrl) {this.profilePictureUrl = profilePictureUrl; }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
 }
+
+
+
 
 

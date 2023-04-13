@@ -99,6 +99,9 @@ public class OrganizationController {
         if(organization.getEmail() != null){
             o.setEmail(organization.getEmail());
         }
+        if(organization.getProfilePictureUrl() != null){
+            o.setProfilePictureUrl(organization.getProfilePictureUrl());
+        }
 
         organizationRepository.save(o);
 
