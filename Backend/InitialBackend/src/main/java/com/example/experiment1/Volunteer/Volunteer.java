@@ -88,7 +88,7 @@ public class Volunteer{
         return events;
     }
 
-    public void removeEvent(Post p){
+    public int removeEvent(Post p){
         int found = 0;
         Post delete = null;
         for (Post post : events){
@@ -101,6 +101,8 @@ public class Volunteer{
         if (found == 1){
             events.remove(delete);
         }
+
+        return found;  //returns 1 if you found a post to remove, 0 otherwise
 
     }
 

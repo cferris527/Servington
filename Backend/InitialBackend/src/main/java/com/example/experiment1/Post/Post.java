@@ -120,7 +120,7 @@ public class Post {
         return volunteer;
     }
 
-    public void removeVolunteer(Volunteer v){
+    public int removeVolunteer(Volunteer v){
         int found = 0;
         Volunteer delete = null;
         for (Volunteer vol : volunteer){
@@ -133,6 +133,8 @@ public class Post {
         if (found == 1){
             volunteer.remove(delete);
         }
+
+        return found; //returns 1 if you found a volunteer to remove, 0 otherwise
 
     }
 }

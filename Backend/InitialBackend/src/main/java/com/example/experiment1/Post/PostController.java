@@ -117,8 +117,18 @@ public class PostController {
 
     @PostMapping(path = "/addVolunteer/{postTitle}/{volunteerId}")
     Message addVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
+        Message m = new Message();
         Post p = postRepository.findByTitle(postTitle);
         Volunteer v = volunteerRepository.findById(volunteerId);
+
+        List<Volunteer> volunteers = p.getVolunteers();
+
+        for(Volunteer vol : volunteers){
+            if(vol.getId() == volunteerId){
+                m.message = "You have already signed up for this post";
+                return m;
+            }
+        }
 
         p.addVolunteer(v);
         v.addEvent(p);
@@ -128,7 +138,7 @@ public class PostController {
         postRepository.save(p);
         volunteerRepository.save(v);
 
-        Message m = new Message();
+
         m.message = "success";
         return m;
     }
@@ -136,17 +146,18 @@ public class PostController {
 
     @PostMapping(path = "/removeVolunteer/{postTitle}/{volunteerId}")
     Message removeVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
+        Message m = new Message();
         Post p = postRepository.findByTitle(postTitle);
         Volunteer v = volunteerRepository.findById(volunteerId);
 
-        if(p.getVolunteerCount() == 0){
-            Message m = new Message();
-            m.message = "failed, this post has no volunteers";
+
+        int found = p.removeVolunteer(v);
+
+        if(found == 0){
+            m.message = "You have not signed up for this post";
             return m;
         }
 
-
-        p.removeVolunteer(v);
         v.removeEvent(p);
 
         p.decrementCount();
@@ -154,7 +165,6 @@ public class PostController {
         postRepository.save(p);
         volunteerRepository.save(v);
 
-        Message m = new Message();
         m.message = "success";
         return m;
     }
