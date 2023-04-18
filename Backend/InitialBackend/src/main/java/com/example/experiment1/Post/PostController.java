@@ -134,6 +134,32 @@ public class PostController {
     }
 
 
+    @PostMapping(path = "/removeVolunteer/{postTitle}/{volunteerId}")
+    Message removeVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
+        Post p = postRepository.findByTitle(postTitle);
+        Volunteer v = volunteerRepository.findById(volunteerId);
+
+        if(p.getVolunteerCount() == 0){
+            Message m = new Message();
+            m.message = "failed, this post has no volunteers";
+            return m;
+        }
+
+
+        p.removeVolunteer(v);
+        //v.addEvent(p);
+
+        p.decrementCount();
+
+        postRepository.save(p);
+        //volunteerRepository.save(v);
+
+        Message m = new Message();
+        m.message = "success";
+        return m;
+    }
+
+
 
 }
 
