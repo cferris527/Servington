@@ -147,12 +147,12 @@ public class PostController {
 
 
         p.removeVolunteer(v);
-        //v.addEvent(p);
+        v.removeEvent(p);
 
         p.decrementCount();
 
         postRepository.save(p);
-        //volunteerRepository.save(v);
+        volunteerRepository.save(v);
 
         Message m = new Message();
         m.message = "success";
