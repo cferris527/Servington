@@ -158,4 +158,6 @@ public class Volunteer{
     public String getProfilePictureUrl() {
         return profilePictureUrl;
     }
+
+    public void addTeam(Team t){ this.teams.add(t); }
 }

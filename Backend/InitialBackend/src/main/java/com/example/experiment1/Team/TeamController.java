@@ -1,5 +1,7 @@
 package com.example.experiment1.Team;
 
+import com.example.experiment1.Volunteer.VolunteerRepository;
+import com.example.experiment1.Volunteer.Volunteer;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.experiment1.Organization.Organization;
 import com.example.experiment1.Organization.OrganizationRepository;
@@ -17,6 +19,9 @@ public class TeamController {
     @Autowired TeamRepository teamRepository;
 
     @Autowired OrganizationRepository organizationRepository;
+
+    @Autowired
+    VolunteerRepository volunteerRepository;
 
     @PostMapping(path = "/createTeam/{orgID}/{teamName}")
     Message createTeam(@PathVariable int orgID, @PathVariable String teamName){
@@ -54,6 +59,23 @@ public class TeamController {
             return m;
         }
         m.message = "Deletion failed, Check if teamID exists";
+        return m;
+    }
+
+    @PostMapping(path = "/addVolunteerTeam/{teamId}/{volunteerId}")
+    Message addVolunteer(@PathVariable int teamId, @PathVariable int volunteerId) {
+        Message m = new Message();
+        if(teamRepository.existsById((long) teamId) && volunteerRepository.existsById((long) volunteerId)) {
+            Volunteer v = volunteerRepository.findById(volunteerId);
+            Team t = teamRepository.findById(teamId);
+            t.addVolunteer(v);
+            v.addTeam(t);
+            teamRepository.save(t);
+            volunteerRepository.save(v);
+            m.message = "success";
+        } else {
+            m.message = "failed";
+        }
         return m;
     }
 }
