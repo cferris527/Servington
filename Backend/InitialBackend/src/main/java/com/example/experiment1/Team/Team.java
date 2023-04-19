@@ -1,8 +1,11 @@
 package com.example.experiment1.Team;
 
 import com.example.experiment1.Organization.Organization;
+import com.example.experiment1.Volunteer.Volunteer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Team {
@@ -16,6 +19,17 @@ public class Team {
     @OneToOne
     @JsonIgnore
     private Organization organization;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "volunteer_to_team",
+            joinColumns = { @JoinColumn(name = "team_id") },
+            inverseJoinColumns = { @JoinColumn(name = "volunteer_id") })
+    @JsonIgnore
+    private List<Volunteer> volunteers;
 
     public Team(Organization org, String name){
         organization = org;
