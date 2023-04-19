@@ -117,8 +117,18 @@ public class PostController {
 
     @PostMapping(path = "/addVolunteer/{postTitle}/{volunteerId}")
     Message addVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
+        Message m = new Message();
         Post p = postRepository.findByTitle(postTitle);
         Volunteer v = volunteerRepository.findById(volunteerId);
+
+        List<Volunteer> volunteers = p.getVolunteers();
+
+        for(Volunteer vol : volunteers){
+            if(vol.getId() == volunteerId){
+                m.message = "You have already signed up for this post";
+                return m;
+            }
+        }
 
         p.addVolunteer(v);
         v.addEvent(p);
@@ -128,7 +138,33 @@ public class PostController {
         postRepository.save(p);
         volunteerRepository.save(v);
 
+
+        m.message = "success";
+        return m;
+    }
+
+
+    @PostMapping(path = "/removeVolunteer/{postTitle}/{volunteerId}")
+    Message removeVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
         Message m = new Message();
+        Post p = postRepository.findByTitle(postTitle);
+        Volunteer v = volunteerRepository.findById(volunteerId);
+
+
+        int found = p.removeVolunteer(v);
+
+        if(found == 0){
+            m.message = "You have not signed up for this post";
+            return m;
+        }
+
+        v.removeEvent(p);
+
+        p.decrementCount();
+
+        postRepository.save(p);
+        volunteerRepository.save(v);
+
         m.message = "success";
         return m;
     }

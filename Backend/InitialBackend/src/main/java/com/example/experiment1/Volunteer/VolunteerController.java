@@ -2,6 +2,7 @@ package com.example.experiment1.Volunteer;
 
 
 import com.example.experiment1.Post.Post;
+import com.example.experiment1.Post.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,9 @@ public class VolunteerController {
 
     @Autowired
     VolunteerRepository volunteerRepository;
+
+    @Autowired
+    PostRepository postRepository;
 
     //Returns List of all Organizations
     @GetMapping(path = "/listVolunteers")
@@ -125,6 +129,27 @@ public class VolunteerController {
         }
         m.message = "failed";
         return m;
+    }
+
+
+    @GetMapping(path = "/listEvents/{volID}")
+    public List<Post> listEvents(@PathVariable int volID){
+
+        /*List<Post> allposts = postRepository.findAll();
+
+        ArrayList<Post> events;
+
+        for (Post p : allposts){
+            List<Volunteer> signedUp
+            p.getVolunteers()
+        }*/
+
+        Volunteer v = volunteerRepository.findById(volID);
+
+        return v.getEvents();
+
+
+
     }
 }
 

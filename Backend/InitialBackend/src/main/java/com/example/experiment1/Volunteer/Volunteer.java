@@ -88,6 +88,26 @@ public class Volunteer{
         return events;
     }
 
+    public int removeEvent(Post p){
+        int found = 0;
+        Post delete = null;
+        for (Post post : events){
+            if(post.getTitle() == p.getTitle()){
+                delete = post;
+                found = 1;
+            }
+        }
+
+        if (found == 1){
+            events.remove(delete);
+        }
+
+        return found;  //returns 1 if you found a post to remove, 0 otherwise
+
+    }
+
+
+
     public boolean getIsBanned(){ return isBanned; }
 
     public void setIsBanned(boolean isBanned) { this.isBanned = isBanned; }
