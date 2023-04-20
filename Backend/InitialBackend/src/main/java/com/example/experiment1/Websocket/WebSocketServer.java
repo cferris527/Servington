@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
-@ServerEndpoint("/websocket/{username}")
+@ServerEndpoint("/websocket/{username}") // change to team name
 @Component
 public class WebSocketServer {
 
@@ -27,6 +27,7 @@ public class WebSocketServer {
     private static Map < String, Session > usernameSessionMap = new Hashtable < > ();
 
     private final Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
+
 
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username)
@@ -39,6 +40,7 @@ public class WebSocketServer {
         String message = "User:" + username + " has Joined the Chat";
         broadcast(message);
     }
+
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {
@@ -57,11 +59,13 @@ public class WebSocketServer {
         }
     }
 
+
     @OnClose
     public void onClose(Session session) throws IOException {
         logger.info("Entered into Close");
 
         String username = sessionUsernameMap.get(session);
+        
         sessionUsernameMap.remove(session);
         usernameSessionMap.remove(username);
 
@@ -69,11 +73,13 @@ public class WebSocketServer {
         broadcast(message);
     }
 
+
     @OnError
     public void onError(Session session, Throwable throwable) {
-        // Do error handling here
+
         logger.info("Entered into Error");
     }
+
 
     private void sendMessageToPArticularUser(String username, String message) {
         try {
@@ -85,6 +91,7 @@ public class WebSocketServer {
     }
 
     private void broadcast(String message) {
+
         sessionUsernameMap.forEach((session, username) -> {
             try {
                 session.getBasicRemote().sendText(message);
