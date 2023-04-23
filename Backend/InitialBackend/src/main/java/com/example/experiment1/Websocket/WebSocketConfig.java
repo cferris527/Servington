@@ -1,4 +1,4 @@
-package com.example.experiment1.Websocket;
+/*package com.example.experiment1.Websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,3 +13,4 @@ public class WebSocketConfig {
     }
 
 }
+*/
