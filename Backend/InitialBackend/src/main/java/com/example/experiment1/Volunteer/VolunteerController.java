@@ -1,8 +1,14 @@
 package com.example.experiment1.Volunteer;
 
 
+import com.example.experiment1.Admin.Admin;
 import com.example.experiment1.Post.Post;
 import com.example.experiment1.Post.PostRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +27,23 @@ public class VolunteerController {
     @Autowired
     PostRepository postRepository;
 
-    //Returns List of all Organizations
+
+    @Operation(summary = "List all Volunteers", description = "Return a JSON array of all of the volunteer accounts in the database")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully returned all volunteers.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Volunteer.class)))
+    })
     @GetMapping(path = "/listVolunteers")
     List<Volunteer> getAllVolunteers(){
         return volunteerRepository.findAll();
     }
 
-    //Creates Organization account
+
+
+    @Operation(summary = "Create a Volunteer", description = "A volunteer is created based on the JSON object of the request body. " +
+            "Example url: /createVolunteer --> A volunteer containing the attributes from the response body is added to the database.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully created a volunteer", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Volunteer.class)))
+    })
     @PostMapping(path = "/createVolunteer")
     Message createVolunteer(@RequestBody Volunteer v) {
         if (v == null) {
@@ -41,7 +57,12 @@ public class VolunteerController {
         return m;
     }
 
-    //THIS METHOD WORKS FOR DELETING USER. Works on frontend.
+
+
+    @Operation(summary = "Delete a Volunteer", description = "The volunteer whose ID matches the ID in the response body is removed from the database")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully deleted a volunteer", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Volunteer.class)))
+    })
     @PostMapping(path = "/deleteVolunteer")
     Message deleteUser(@RequestBody Volunteer v){
         int id = v.getId();
@@ -52,6 +73,12 @@ public class VolunteerController {
         return m;
     }
 
+
+    @Operation(summary = "Volunteer login", description = "A user attempting to login in with their volunteer credentials. If there is a credentials match in the database, the Volunteer object is sent to the frontend and they are logged in." +
+            "If there is not a match, an empty volunteer object is sent to the frontend and the user is denied login.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully logged in as volunteer", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Volunteer.class)))
+    })
     //Used for login return user if username and password is valid. This is working on frontend.
     @GetMapping(path = "/volunteerLogin/{username}/{password}")
     public Volunteer login(@PathVariable String username, @PathVariable String password){
@@ -67,6 +94,11 @@ public class VolunteerController {
         return nullUser;
     }
 
+
+    @Operation(summary = "Volunteer edit fields", description = "A volunteer user can edit their descriptive fields: email, displayName, etc. The fields that are present in the response body JSON object will be written to the fields of the current volunteer in the database,")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully updated the volunteer's fields", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Volunteer.class)))
+    })
     @PostMapping(path = "/volunteerEditFields")
     public Message editFields(@RequestBody Volunteer volunteer){
         Message m = new Message();
@@ -132,6 +164,12 @@ public class VolunteerController {
     }
 
 
+
+    @Operation(summary = "List volunteer's events", description = "All of the events the given volunteer have signed up for are listed. " +
+            "Example url: /listEvents/5  --> All posts volunteer with ID 5 has signed up for will be returned in a JSON array.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully returned all events")
+    })
     @GetMapping(path = "/listEvents/{volID}")
     public List<Post> listEvents(@PathVariable int volID){
 
