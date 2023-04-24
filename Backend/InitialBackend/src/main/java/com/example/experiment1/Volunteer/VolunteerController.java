@@ -2,6 +2,7 @@ package com.example.experiment1.Volunteer;
 
 
 import com.example.experiment1.Admin.Admin;
+import com.example.experiment1.Organization.Organization;
 import com.example.experiment1.Post.Post;
 import com.example.experiment1.Post.PostRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -130,6 +131,11 @@ public class VolunteerController {
         return m;
     }
 
+    @Operation(summary = "Ban Volunteer", description = "An volunteer with the username from the URL path is banned." +
+            "Example url: /banVolunteer/{volUsername} --> An volunteer with username from the path is not allowed to login again.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully banned volunteer", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Volunteer.class)))
+    })
     @PostMapping(path = "/banVolunteer/{volUsername}")
     public Message banVolunteer(@PathVariable String volUsername){
         Message m = new Message();
@@ -147,6 +153,11 @@ public class VolunteerController {
         return m;
     }
 
+    @Operation(summary = "Unban Volunteer", description = "An volunteer with the username from the URL path is unbanned." +
+            "Example url: /unbanVolunteer/{volUsername} --> An volunteer with username from the path is allowed to login again.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully unbanned a volunteer", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Volunteer.class)))
+    })
     @PostMapping(path = "/unbanVolunteer/{volUsername}")
     public Message unbanVolunteer(@PathVariable String volUsername){
         Message m = new Message();
