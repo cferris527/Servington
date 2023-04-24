@@ -15,6 +15,7 @@ public class Singleton {
     private String displayName;
     private String email;
     private String phone;
+    private String profilePicture;
     private boolean isBanned;
 
     private Singleton() {}
@@ -45,6 +46,7 @@ public class Singleton {
         displayName = obj.getString("displayName");
         email = obj.getString("email");
         phone = obj.getString("phone_number");
+        profilePicture = obj.getString("profilePictureUrl");
         isBanned = obj.getBoolean("isBanned");
     }
 
@@ -58,6 +60,7 @@ public class Singleton {
         displayName = null;
         email = null;
         phone = null;
+        profilePicture = null;
         isBanned = false;
     }
 
@@ -68,6 +71,7 @@ public class Singleton {
     public String getDisplayName() {return displayName;}
     public String getEmail() {return email;}
     public String getPhone() {return phone;}
+    public String getProfilePicture() {return profilePicture;}
     public boolean getBanned() {return isBanned;}
 
     // set methods
@@ -77,6 +81,7 @@ public class Singleton {
     public void setDisplayName(String displayName) {this.displayName = displayName;}
     public void setEmail(String email) {this.email = email;}
     public void setPhone(String phone) {this.phone = phone;}
+    public void setProfilePicture(String pfp) {profilePicture = pfp;}
     public void setBanned(boolean b) {isBanned = b;}
 
 }
