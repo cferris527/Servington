@@ -78,4 +78,20 @@ public class TeamController {
         }
         return m;
     }
+
+    @PostMapping(path = "/removeVolunteerTeam/{teamId}/{volunteerId}")
+    Message removeVolunteer(@PathVariable int teamId, @PathVariable int volunteerId){
+        Message m = new Message();
+        if(teamRepository.existsById((long) teamId) && volunteerRepository.existsById((long) volunteerId)) {
+            Volunteer v = volunteerRepository.findById(volunteerId);
+            Team t = teamRepository.findById(teamId);
+            t.removeVolunteerTeam(v);
+            teamRepository.save(t);
+            volunteerRepository.save(v);
+            m.message = "success";
+        } else {
+            m.message = "failed";
+        }
+        return m;
+    }
 }

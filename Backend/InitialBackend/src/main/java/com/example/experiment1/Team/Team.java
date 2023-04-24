@@ -59,7 +59,7 @@ public class Team {
         this.volunteers.add(v);
     }
 
-    public int removeVolunteer(Volunteer v){
+    public int removeVolunteerTeam(Volunteer v){
         int found = 0;
         Volunteer delete = null;
         for (Volunteer vol : volunteers){
