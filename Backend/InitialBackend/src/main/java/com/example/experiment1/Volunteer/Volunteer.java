@@ -2,6 +2,7 @@ package com.example.experiment1.Volunteer;
 
 import com.example.experiment1.Post.Post;
 
+import com.example.experiment1.Team.Team;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -38,6 +39,15 @@ public class Volunteer{
             mappedBy = "volunteer")
     @JsonIgnore
     private List<Post> events;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "volunteers")
+    @JsonIgnore
+    private List<Team> teams;
 
     private boolean isBanned;
 
@@ -148,4 +158,6 @@ public class Volunteer{
     public String getProfilePictureUrl() {
         return profilePictureUrl;
     }
+
+    public void addTeam(Team t){ this.teams.add(t); }
 }

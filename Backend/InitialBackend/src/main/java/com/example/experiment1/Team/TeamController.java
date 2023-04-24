@@ -1,5 +1,7 @@
 package com.example.experiment1.Team;
 
+import com.example.experiment1.Volunteer.VolunteerRepository;
+import com.example.experiment1.Volunteer.Volunteer;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.experiment1.Organization.Organization;
 import com.example.experiment1.Organization.OrganizationRepository;
@@ -23,12 +25,9 @@ public class TeamController {
 
     @Autowired OrganizationRepository organizationRepository;
 
+    @Autowired
+    VolunteerRepository volunteerRepository;
 
-    @Operation(summary = "Create an Team for a Given Organization", description = "An team is created with a name from the URL path for the organization with its ID in the path." +
-            "Example url: /createTeam/{orgID}/{teamName} --> A team with the name in the path is created for the organization ID given in the path.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully created an team", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Team.class)))
-    })
     @PostMapping(path = "/createTeam/{orgID}/{teamName}")
     Message createTeam(@PathVariable int orgID, @PathVariable String teamName){
         Message m = new Message();
@@ -77,6 +76,39 @@ public class TeamController {
             return m;
         }
         m.message = "Deletion failed, Check if teamID exists";
+        return m;
+    }
+
+    @PostMapping(path = "/addVolunteerTeam/{teamId}/{volunteerId}")
+    Message addVolunteer(@PathVariable int teamId, @PathVariable int volunteerId) {
+        Message m = new Message();
+        if(teamRepository.existsById((long) teamId) && volunteerRepository.existsById((long) volunteerId)) {
+            Volunteer v = volunteerRepository.findById(volunteerId);
+            Team t = teamRepository.findById(teamId);
+            t.addVolunteer(v);
+            v.addTeam(t);
+            teamRepository.save(t);
+            volunteerRepository.save(v);
+            m.message = "success";
+        } else {
+            m.message = "failed";
+        }
+        return m;
+    }
+
+    @PostMapping(path = "/removeVolunteerTeam/{teamId}/{volunteerId}")
+    Message removeVolunteer(@PathVariable int teamId, @PathVariable int volunteerId){
+        Message m = new Message();
+        if(teamRepository.existsById((long) teamId) && volunteerRepository.existsById((long) volunteerId)) {
+            Volunteer v = volunteerRepository.findById(volunteerId);
+            Team t = teamRepository.findById(teamId);
+            t.removeVolunteerTeam(v);
+            teamRepository.save(t);
+            volunteerRepository.save(v);
+            m.message = "success";
+        } else {
+            m.message = "failed";
+        }
         return m;
     }
 }
