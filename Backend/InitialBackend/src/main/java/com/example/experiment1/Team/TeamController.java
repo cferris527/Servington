@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import com.example.experiment1.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -110,5 +111,14 @@ public class TeamController {
             m.message = "failed";
         }
         return m;
+    }
+
+    @GetMapping(path= "/getVolunteersFromTeam/{teamID}")
+    List<Volunteer> getVolunteersFromTeam(@PathVariable int teamID){
+        List<Volunteer> volunteers = new ArrayList<>();
+        if(teamRepository.existsById((long) teamID)){
+            volunteers = teamRepository.getById((long) teamID).getVolunteers();
+        }
+        return volunteers;
     }
 }
