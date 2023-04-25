@@ -216,6 +216,18 @@ public class PostController {
 
 
 
+    @GetMapping(path = "/orgViewSignUps/{postTitle}")
+    public List<Volunteer> orgViewSignUps(@PathVariable String postTitle){
+
+        Post p = postRepository.findByTitle(postTitle);
+
+        List<Volunteer> vols = p.getVolunteers();
+
+        return vols;
+    }
+
+
+
 }
 
 
