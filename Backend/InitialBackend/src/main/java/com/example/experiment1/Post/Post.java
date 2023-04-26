@@ -32,7 +32,7 @@ public class Post {
 
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "org_id", referencedColumnName = "id")
     @JsonIgnore
     private Organization org;
@@ -106,6 +106,10 @@ public class Post {
         this.volunteerCount += 1;
     }
 
+    public void decrementCount(){
+        this.volunteerCount -= 1;
+    }
+
 
 
     public void addVolunteer(Volunteer v) {
@@ -114,5 +118,23 @@ public class Post {
 
     public List<Volunteer> getVolunteers() {
         return volunteer;
+    }
+
+    public int removeVolunteer(Volunteer v){
+        int found = 0;
+        Volunteer delete = null;
+        for (Volunteer vol : volunteer){
+            if(vol.getId() == v.getId()){
+                delete = vol;
+                found = 1;
+            }
+        }
+
+        if (found == 1){
+            volunteer.remove(delete);
+        }
+
+        return found; //returns 1 if you found a volunteer to remove, 0 otherwise
+
     }
 }
