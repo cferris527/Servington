@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -125,6 +126,10 @@ public class VolunteerPostsFragment extends Fragment {
                 {
                     VolApply();
                 }
+                if(spinnerText.equals("Apply"))
+                {
+
+                }
             }
         });
 
@@ -134,20 +139,33 @@ public class VolunteerPostsFragment extends Fragment {
 
     private void VolApply() {
 
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         Singleton data = Singleton.getInstance();
-        String url = Const.URL_ADD_VOLUNTEER + "/" + volInput.getText().toString() + "/" + data.getId();
+        String url = Const.URL_ADD_VOLUNTEER + "/" + volInput.getText().toString() + "/" + data.getDisplayName();
         JSONObject body = new JSONObject();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
+        body = null;
 
-            }
-        })
+               JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
 
-
-
-
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        queue.add(request); // send request
     }
+
+
+
+
+
 
     private void getData() {
 
