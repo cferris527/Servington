@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import com.example.experiment1.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -83,13 +84,18 @@ public class TeamController {
     Message addVolunteer(@PathVariable int teamId, @PathVariable int volunteerId) {
         Message m = new Message();
         if(teamRepository.existsById((long) teamId) && volunteerRepository.existsById((long) volunteerId)) {
-            Volunteer v = volunteerRepository.findById(volunteerId);
-            Team t = teamRepository.findById(teamId);
-            t.addVolunteer(v);
-            v.addTeam(t);
-            teamRepository.save(t);
-            volunteerRepository.save(v);
-            m.message = "success";
+            if(!(teamRepository.findById(teamId).getVolunteers().contains(volunteerRepository.findById(volunteerId)))) {
+                Volunteer v = volunteerRepository.findById(volunteerId);
+                Team t = teamRepository.findById(teamId);
+                t.addVolunteer(v);
+                v.addTeam(t);
+                teamRepository.save(t);
+                volunteerRepository.save(v);
+                m.message = "success";
+            }
+            else{
+                m.message = "volunteer already on team";
+            }
         } else {
             m.message = "failed";
         }
@@ -100,15 +106,29 @@ public class TeamController {
     Message removeVolunteer(@PathVariable int teamId, @PathVariable int volunteerId){
         Message m = new Message();
         if(teamRepository.existsById((long) teamId) && volunteerRepository.existsById((long) volunteerId)) {
-            Volunteer v = volunteerRepository.findById(volunteerId);
-            Team t = teamRepository.findById(teamId);
-            t.removeVolunteerTeam(v);
-            teamRepository.save(t);
-            volunteerRepository.save(v);
-            m.message = "success";
+            if((teamRepository.findById(teamId).getVolunteers().contains(volunteerRepository.findById(volunteerId)))) {
+                Volunteer v = volunteerRepository.findById(volunteerId);
+                Team t = teamRepository.findById(teamId);
+                t.removeVolunteerTeam(v);
+                teamRepository.save(t);
+                volunteerRepository.save(v);
+                m.message = "success";
+            }
+            else{
+                m.message = "volunteer not apart of team";
+            }
         } else {
             m.message = "failed";
         }
         return m;
+    }
+
+    @GetMapping(path= "/getVolunteersFromTeam/{teamID}")
+    List<Volunteer> getVolunteersFromTeam(@PathVariable int teamID){
+        List<Volunteer> volunteers = new ArrayList<>();
+        if(teamRepository.existsById((long) teamID)){
+            volunteers = teamRepository.getById((long) teamID).getVolunteers();
+        }
+        return volunteers;
     }
 }
