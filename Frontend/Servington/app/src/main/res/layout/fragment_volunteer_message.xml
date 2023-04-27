@@ -31,12 +31,12 @@
         tools:layout_editor_absoluteX="2dp">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/messageTxt"
             android:layout_width="300dp"
             android:layout_height="83dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Messsage" />
+            android:hint="@string/prompt_message"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/sendBtn"

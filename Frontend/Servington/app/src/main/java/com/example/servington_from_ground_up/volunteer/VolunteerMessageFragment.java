@@ -1,12 +1,15 @@
 package com.example.servington_from_ground_up.volunteer;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,15 +26,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link VolunteerMessageFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Global chat for all users.
+ *
+ * @author Connor Ferris
  */
 public class VolunteerMessageFragment extends Fragment {
 
     View view;
     LinearLayout messageLayout;
     Button sendBtn;
+    EditText messageTxt;
     private WebSocketClient cc;
 
     public VolunteerMessageFragment() {}
@@ -48,10 +52,11 @@ public class VolunteerMessageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_volunteer_dm, container, false);
+        view = inflater.inflate(R.layout.fragment_volunteer_message, container, false);
 
         messageLayout = view.findViewById(R.id.messageLayout);
         sendBtn = view.findViewById(R.id.sendBtn);
+        messageTxt = view.findViewById(R.id.messageTxt);
 
         Draft[] drafts = {
                 new Draft_6455()
@@ -61,6 +66,7 @@ public class VolunteerMessageFragment extends Fragment {
 
         String w = Const.SERVER + "/chat" + "/" + data.getUsername() ;
 
+        //initial connection to websocket
         try {
             Log.d("Socket:", "Trying socket");
 
@@ -75,6 +81,13 @@ public class VolunteerMessageFragment extends Fragment {
                     Log.d("", "run() returned: " + s);
                     //String s = t1.getText().toString();
                     //t1.setText(s + "\nServer:" + message);
+
+                    TextView t = new TextView(getContext());
+                    t.setText(s);
+                    t.setBackgroundColor(Color.parseColor("#fcfcfc"));
+                    messageLayout.addView(t);
+
+
                 }
 
                 @Override
@@ -92,6 +105,19 @@ public class VolunteerMessageFragment extends Fragment {
             e.printStackTrace();
         }
         cc.connect();
+
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    cc.send(messageTxt.getText().toString());
+                    messageTxt.setText("");
+                } catch (Exception e) {
+                    //Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                }
+            }
+        });
+
 
         return view;
     }
