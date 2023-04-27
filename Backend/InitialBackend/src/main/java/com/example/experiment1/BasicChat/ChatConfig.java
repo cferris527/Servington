@@ -10,7 +10,7 @@ public class ChatConfig {
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
-    
+
 
 }
 
