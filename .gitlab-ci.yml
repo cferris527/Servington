@@ -30,6 +30,10 @@ maven-build:
     script:
       - cd ./Backend/InitialBackend
       - mvn package
+    only:
+      changes:
+        - Backend/**/*
+
 
 maven-test:
   stage: maventest
@@ -41,6 +45,9 @@ maven-test:
   artifacts:
     paths:
       - ./Backend/InitialBackend/target/*.jar
+  only:
+    changes:
+      - Backend/**/*
 
 
 
@@ -58,6 +65,10 @@ android-build:
     artifacts:
       paths:
       - Android_test/app/build/outputs/
+    only:
+      changes:
+        - Frontend/**/*
+
 
 
 android-test:
@@ -71,6 +82,9 @@ android-test:
   script:
     - cd ./Frontend/Servington
     - ./gradlew assemble
+  only:
+    changes:
+      - Frontend/**/*
 
 
 autoDeploy:
@@ -86,5 +100,7 @@ autoDeploy:
   only:
     refs:
       - main
+    changes:
+      - Backend/**/*
 
     
