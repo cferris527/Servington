@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="412sp"
+    android:layout_height="600sp"
+    tools:context=".organization.OrganizationPostsFragment">
+
+    <TextView
+        android:id="@+id/ReportTitle"
+        android:layout_width="235dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginBottom="14dp"
+        android:text="Please enter the title of the post"
+        app:layout_constraintBottom_toTopOf="@+id/reportTitleInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/reportTitleInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="35dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Post Title"
+        app:layout_constraintBottom_toTopOf="@+id/ReportDesc"
+        app:layout_constraintStart_toStartOf="@+id/ReportTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ReportTitle" />
+
+    <TextView
+        android:id="@+id/ReportDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="Please enter a description of the report"
+        app:layout_constraintBottom_toTopOf="@+id/reportDescInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reportTitleInput" />
+
+    <EditText
+        android:id="@+id/reportDescInput"
+        android:layout_width="240dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="34dp"
+        android:background="#E1DBDB"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/reportBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ReportDesc" />
+
+    <Button
+        android:id="@+id/reportBtn"
+        android:layout_width="193dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="53dp"
+        android:text="Send Report"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reportDescInput" />
+</androidx.constraintlayout.widget.ConstraintLayout>

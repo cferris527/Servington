@@ -85,4 +85,7 @@ public class Const {
 
     public static final String URL_ADD_VOLUNTEER
             = "http://coms-309-029.class.las.iastate.edu:8080/addVolunteer";
+
+    public static final String URL_CREATE_REPORT
+            = "http://coms-309-029.class.las.iastate.edu:808/createReport/";
 }

@@ -126,9 +126,9 @@ public class VolunteerPostsFragment extends Fragment {
                 {
                     VolApply();
                 }
-                if(spinnerText.equals("Apply"))
+                if(spinnerText.equals("Report"))
                 {
-
+                    VolReport();
                 }
             }
         });
@@ -137,6 +137,16 @@ public class VolunteerPostsFragment extends Fragment {
         return view;
     }
 
+    private void VolReport() {
+
+
+
+
+    }
+
+    /*
+    VolApply() method for sending a volley POST request to have users apply to posts
+     */
     private void VolApply() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -166,7 +176,9 @@ public class VolunteerPostsFragment extends Fragment {
 
 
 
-
+/*
+    getData() is a helper method that will send a volley request for the Array of posts
+ */
     private void getData() {
 
 
