@@ -11,7 +11,7 @@ public class Const {
     /**
      * Initial URL to be used before every "/" and string.
      */
-    public static final String SERVER = "http://10.0.2.2:8080";
+    public static final String SERVER = "http://coms-309-029.class.las.iastate.edu:8080";
 
     /**
      * URL for pushing "Login" button on MainActivity. Sends POST with:

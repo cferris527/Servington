@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.servington_from_ground_up.MainActivity;
 import com.example.servington_from_ground_up.R;
+import com.example.servington_from_ground_up.multi.ChoosePictureFragment;
+import com.example.servington_from_ground_up.utils.ProfilePicture;
 import com.example.servington_from_ground_up.utils.Singleton;
 
 /**
@@ -24,13 +27,16 @@ import com.example.servington_from_ground_up.utils.Singleton;
  */
 public class VolunteerHomeFragment extends Fragment {
     View view;
+    ProfilePicture pfp;
     Singleton data = Singleton.getInstance();
+    ImageView picture;
     TextView welcomeText;
     TextView idText;
     TextView emailText;
     TextView phoneText;
     TextView displayName;
     Button logoutBtn;
+    Button pictureBtn;
     Button settingsBtn;
     public VolunteerHomeFragment() {}
 
@@ -50,6 +56,10 @@ public class VolunteerHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_volunteer_home, container, false);
+        pfp = new ProfilePicture();
+
+        picture = view.findViewById(R.id.profilePictureVol);
+        picture.setImageResource(pfp.determinePicture(data.getProfilePicture()));
 
         //Welcome Text
         welcomeText = (TextView) view.findViewById(R.id.welcomeVolText);
@@ -89,6 +99,20 @@ public class VolunteerHomeFragment extends Fragment {
             //Changes to Settings Fragment
             public void onClick(View view) {
                 Fragment fragment = new VolunteerSettingsFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        //Picture Button
+        pictureBtn = (Button) view.findViewById(R.id.picVolBtn);
+        pictureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ChoosePictureFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
