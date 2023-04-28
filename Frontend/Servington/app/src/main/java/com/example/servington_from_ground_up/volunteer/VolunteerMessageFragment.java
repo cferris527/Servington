@@ -81,13 +81,7 @@ public class VolunteerMessageFragment extends Fragment {
                     Log.d("", "run() returned: " + s);
                     //String s = t1.getText().toString();
                     //t1.setText(s + "\nServer:" + message);
-
-                    TextView t = new TextView(getContext());
-                    t.setText(s);
-                    t.setBackgroundColor(Color.parseColor("#fcfcfc"));
-                    messageLayout.addView(t);
-
-
+                    generateMessage(s);
                 }
 
                 @Override
@@ -111,15 +105,22 @@ public class VolunteerMessageFragment extends Fragment {
             public void onClick(View view) {
                 try {
                     cc.send(messageTxt.getText().toString());
-                    messageTxt.setText("");
+                    //messageTxt.setText("");
                 } catch (Exception e) {
-                    //Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                    Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                    e.printStackTrace();
                 }
             }
         });
-
-
         return view;
+    }
+
+    private void generateMessage(String m) {
+        TextView t = new TextView(getContext());
+        t.setText(m);
+        t.setBackgroundColor(Color.parseColor("#fcfcfc"));
+        t.setTextSize(25);
+        messageLayout.addView(t);
     }
 
 

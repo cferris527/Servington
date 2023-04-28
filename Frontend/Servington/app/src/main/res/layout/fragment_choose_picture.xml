@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="412sp"
+    android:layout_height="600sp"
+    tools:context=".multi.ChoosePictureFragment" >
+
+    <LinearLayout
+        android:layout_width="412sp"
+        android:layout_height="520sp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="412sp"
+            android:layout_height="137sp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/dermPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/derm" />
+
+            <ImageButton
+                android:id="@+id/ferrisPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/ferris" />
+
+            <ImageButton
+                android:id="@+id/mitraPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/mitra_edited" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="412sp"
+            android:layout_height="137sp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/jaguarPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/jaguar" />
+
+            <ImageButton
+                android:id="@+id/rigbyPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/rigby" />
+
+            <ImageButton
+                android:id="@+id/defaultPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/pfp_placeholder" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="412sp"
+            android:layout_height="137sp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/dogPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/dog" />
+
+            <ImageButton
+                android:id="@+id/spongebobPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:src="@drawable/spongebob" />
+
+            <ImageButton
+                android:id="@+id/peterPic"
+                android:layout_width="137sp"
+                android:layout_height="137sp"
+                android:layout_weight="1"
+                android:src="@drawable/peter" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="412dp"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/backPicBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Back" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,36 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412sp"
     android:layout_height="600sp"
-    tools:context=".volunteer.VolunteerMessageFragment" >
+    tools:context=".volunteer.VolunteerMessageFragment">
 
     <LinearLayout
         android:id="@+id/messageLayout"
-        android:layout_width="420dp"
-        android:layout_height="496dp"
+        android:layout_width="412dp"
+        android:layout_height="540dp"
         android:background="#BDC3C3"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="410dp"
-        android:layout_height="68dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageLayout"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="2dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messageLayout">
 
         <EditText
             android:id="@+id/messageTxt"
             android:layout_width="300dp"
-            android:layout_height="83dp"
+            android:layout_height="match_parent"
             android:ems="10"
             android:hint="@string/prompt_message"
             android:inputType="textPersonName" />
@@ -43,7 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Send" />
+            android:text="Send"
+            tools:layout_editor_absoluteX="301dp"
+            tools:layout_editor_absoluteY="386dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
