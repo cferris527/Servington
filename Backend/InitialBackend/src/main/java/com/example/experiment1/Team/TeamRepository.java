@@ -9,6 +9,8 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
 
     Team findById(int id);
 
+    Team findByName(String name);
+
     List<Team> findAll();
 
     @Transactional

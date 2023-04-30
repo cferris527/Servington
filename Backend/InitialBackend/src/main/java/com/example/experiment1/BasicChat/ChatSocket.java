@@ -5,6 +5,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import com.example.experiment1.Team.TeamRepository;
+import com.example.experiment1.Volunteer.Volunteer;
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnError;
 import jakarta.websocket.OnMessage;
@@ -21,7 +23,7 @@ import org.springframework.stereotype.Controller;
 @Controller      // this is needed for this to be an endpoint to springboot
 @ServerEndpoint(value = "/chat/{username}")  // this is Websocket url
 public class ChatSocket {
-
+     private TeamRepository teamRepository;
     // cannot autowire static directly (instead we do it by the below
     // method
     private static ChatMessageRepository msgRepo;
@@ -79,6 +81,13 @@ public class ChatSocket {
             sendMessageToPArticularUser(username, "[DM] " + username + ": " + message);
 
         }
+        else if (message.startsWith("#")){
+            String destTeam = message.split(" ")[0].substring(1);
+
+            sendMessageToParticularTeam(destTeam, "[TEAM] " + username + message);
+            sendMessageToPArticularUser(username, "[TEAM] " + username + message);
+
+        }
         else { // broadcast
             broadcast(username + ": " + message);
         }
@@ -119,6 +128,16 @@ public class ChatSocket {
             logger.info("Exception: " + e.getMessage().toString());
             e.printStackTrace();
         }
+    }
+
+    private void sendMessageToParticularTeam(String teamName, String message){
+
+        List<Volunteer> volunteersInTeam = teamRepository.findByName(teamName).getVolunteers();
+
+        for(int i = 0; i < volunteersInTeam.size(); i++) {
+            sendMessageToPArticularUser(volunteersInTeam.get(i).getUsername(), message);
+        }
+
     }
 
 
