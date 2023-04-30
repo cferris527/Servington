@@ -59,7 +59,7 @@ public class TeamController {
             @ApiResponse(responseCode = "200", description = "Successfully returned team", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Team.class)))
     })
     @GetMapping(path = "/getTeam/{teamID}")
-    Team getTeamByOrg(@PathVariable int teamID){
+    Team getTeamByID(@PathVariable int teamID){
         Team t = teamRepository.findById(teamID);
         return t;
     }
@@ -131,4 +131,5 @@ public class TeamController {
         }
         return volunteers;
     }
+
 }
