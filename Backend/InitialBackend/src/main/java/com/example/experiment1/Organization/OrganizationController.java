@@ -180,7 +180,7 @@ public class OrganizationController {
         return m;
     }
 
-    @GetMapping(path = "/getTeamFromOrgID/{ordID}")
+    @GetMapping(path = "/getTeamFromOrgID/{orgID}")
     public Team getTeamFromOrgID(@PathVariable int orgID){
         Organization o = organizationRepository.findById(orgID);
         Team t = o.getOrgTeam();

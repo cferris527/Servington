@@ -137,7 +137,6 @@ public class ChatSocket {
         for(int i = 0; i < volunteersInTeam.size(); i++) {
             sendMessageToPArticularUser(volunteersInTeam.get(i).getUsername(), message);
         }
-
     }
 
 

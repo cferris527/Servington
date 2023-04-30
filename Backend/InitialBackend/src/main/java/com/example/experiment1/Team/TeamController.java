@@ -40,6 +40,7 @@ public class TeamController {
         Team t = new Team(o, teamName);
         o.setOrgTeam(t);
         t.setOrganization(o);
+        organizationRepository.save(o);
         teamRepository.save(t);
         m.message = "success";
         return m;
