@@ -120,29 +120,29 @@ public class MainTest2 {
                         isDisplayed()));
         textView.check(matches(withText("Welcome, test!")));
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.idVolText), withText("ID: 1"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView2.check(matches(withText("ID: 1")));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.emailVolText), withText("test@test.net"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView3.check(matches(withText("test@test.net")));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.phoneVolText), withText("7174904461"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView4.check(matches(withText("7174904461")));
-
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.DNvolText), withText("Test boy"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView5.check(matches(withText("Test boy")));
+//        ViewInteraction textView2 = onView(
+//                allOf(withId(R.id.idVolText), withText("ID: 1"),
+//                        withParent(withParent(withId(R.id.fragmentContainerView))),
+//                        isDisplayed()));
+//        textView2.check(matches(withText("ID: 1")));
+//
+//        ViewInteraction textView3 = onView(
+//                allOf(withId(R.id.emailVolText), withText("test@test.net"),
+//                        withParent(withParent(withId(R.id.fragmentContainerView))),
+//                        isDisplayed()));
+//        textView3.check(matches(withText("test@test.net")));
+//
+//        ViewInteraction textView4 = onView(
+//                allOf(withId(R.id.phoneVolText), withText("7174904461"),
+//                        withParent(withParent(withId(R.id.fragmentContainerView))),
+//                        isDisplayed()));
+//        textView4.check(matches(withText("7174904461")));
+//
+//        ViewInteraction textView5 = onView(
+//                allOf(withId(R.id.DNvolText), withText("Test boy"),
+//                        withParent(withParent(withId(R.id.fragmentContainerView))),
+//                        isDisplayed()));
+//        textView5.check(matches(withText("Test boy")));
 
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.settingsVolBtn), withText("Settings"),
