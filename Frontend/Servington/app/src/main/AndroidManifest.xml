@@ -27,21 +27,6 @@
             android:name=".volunteer.HomeVolunteerActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminDeletionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ManageAdminsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OrganizationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserActivity"
-            android:exported="false" />
-        <activity
             android:name=".CreateAccountActivity"
             android:exported="false" />
         <activity
