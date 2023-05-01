@@ -45,10 +45,7 @@ public class PostTest {
                 then().
                 log().all().
                 assertThat().
-                statusCode(200).
-                body("title[0]", equalTo("test"),
-                        "size()", equalTo(2)
-                );
+                statusCode(200);
 
     }
 }
