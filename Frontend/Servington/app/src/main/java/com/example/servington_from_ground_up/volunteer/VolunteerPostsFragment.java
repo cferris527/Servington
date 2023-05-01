@@ -1,6 +1,7 @@
 package com.example.servington_from_ground_up.volunteer;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.servington_from_ground_up.MainActivity;
 import com.example.servington_from_ground_up.PostData;
 import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.RecyclerViewAdapter;
@@ -126,10 +128,11 @@ public class VolunteerPostsFragment extends Fragment {
                 {
                     VolApply();
                 }
-                if(spinnerText.equals("Report"))
+                else if(spinnerText.equals("Report"))
                 {
                     VolReport();
                 }
+
             }
         });
 
@@ -139,7 +142,8 @@ public class VolunteerPostsFragment extends Fragment {
 
     private void VolReport() {
 
-
+        Intent intent = new Intent(view.getContext(), VolunteerReportFragment.class);
+        startActivity(intent);
 
 
     }
@@ -153,7 +157,7 @@ public class VolunteerPostsFragment extends Fragment {
         Singleton data = Singleton.getInstance();
         String url = Const.URL_ADD_VOLUNTEER + "/" + volInput.getText().toString() + "/" + data.getDisplayName();
         JSONObject body = new JSONObject();
-        body = null;
+
 
                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
                 new Response.Listener<JSONObject>() {
