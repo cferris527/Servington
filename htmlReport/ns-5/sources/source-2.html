@@ -1,0 +1,337 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PostController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.experiment1.Post</a>
+</div>
+
+<h1>Coverage Summary for Class: PostController (com.example.experiment1.Post)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PostController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    58.6%
+  </span>
+  <span class="absValue">
+    (34/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.experiment1.Post;
+&nbsp;
+&nbsp;import com.example.experiment1.Admin.AdminRepository;
+&nbsp;import com.example.experiment1.Message;
+&nbsp;import com.example.experiment1.Organization.Organization;
+&nbsp;import com.example.experiment1.Volunteer.Volunteer;
+&nbsp;import com.example.experiment1.Volunteer.VolunteerRepository;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.media.Content;
+&nbsp;import io.swagger.v3.oas.annotations.media.Schema;
+&nbsp;import io.swagger.v3.oas.annotations.responses.ApiResponse;
+&nbsp;import io.swagger.v3.oas.annotations.responses.ApiResponses;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import com.example.experiment1.Organization.Organization;
+&nbsp;import com.example.experiment1.Organization.OrganizationRepository;
+&nbsp;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class PostController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    PostRepository postRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    OrganizationRepository organizationRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    VolunteerRepository volunteerRepository;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //This function returns a list of all posts in the database. This works on frontend.
+&nbsp;    @Operation(summary = &quot;List all posts&quot;, description = &quot;Return a JSON array of all of the posts in the database&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully returned all posts.&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @GetMapping(path = &quot;/allPosts&quot;)
+&nbsp;    List&lt;Post&gt; getAllPosts(){
+<b class="fc">&nbsp;        return postRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //Returns the post with the given title. Has not been implemented on frontend.
+&nbsp;    @Operation(summary = &quot;Return post with given title&quot;, description = &quot;Returns a JSON object of the post with the given title.&quot; +
+&nbsp;            &quot;Example url: /getPostByTitle/Title --&gt; The post with title: Title will be returned&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully found the post&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @GetMapping(path = &quot;/getPostByTitle/{title}&quot;)
+&nbsp;    Post getPostByTitle( @PathVariable String title){
+<b class="fc">&nbsp;        return postRepository.findByTitle(title);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    //Returns a list of posts containing the given keyword in the description. Has not been implemented on frontend.
+&nbsp;    @Operation(summary = &quot;Return post with given keyword in Description&quot;, description = &quot;Returns a JSON array of all posts in the database that contain the given keyword in the description.&quot; +
+&nbsp;            &quot;Example url: /postDescriptionKeyword/help --&gt; all posts containing help in the description will be returned.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully returned posts&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @GetMapping(path = &quot;/postDescriptionKeyword/{keyword}&quot;)
+&nbsp;    public List&lt;Post&gt; getPostsByKeywordInDescription(@PathVariable String keyword){
+<b class="fc">&nbsp;        return postRepository.findByDescriptionContaining(keyword);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    //Returns a list of posts containing the given keyword in the Title. Has not been implemented on frontend.
+&nbsp;    @Operation(summary = &quot;Return post with given keyword in Title&quot;, description = &quot;Returns a JSON array of all posts in the database that contain the given keyword in the title.  &quot; +
+&nbsp;            &quot;Example url: /postTitleKeyword/help --&gt; all posts containing help in the title will be returned.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully returned posts&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @GetMapping(path = &quot;/postTitleKeyword/{keyword}&quot;)
+&nbsp;    public List&lt;Post&gt; getPostsByKeywordinTitle(@PathVariable String keyword){
+<b class="nc">&nbsp;        return postRepository.findByTitleContaining(keyword);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //Creates a new post and adds it to the database. Not used on frontend yet.
+&nbsp;    @Operation(summary = &quot;Create a post&quot;, description = &quot;A post is created for the organization whose ID is included in the url and added to the database. A JSON array of the post&#39;s fields is included in the response body. &quot; +
+&nbsp;            &quot;Example url: /createPost/2 --&gt; A post containing the attributes from the response body is added to the database under the organization with id 2&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully created a post&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/createPost/{id}&quot;)
+&nbsp;    Message createPost(@RequestBody Post post, @PathVariable int id){
+<b class="fc">&nbsp;        Message m = new Message();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (post == null) {</b>
+<b class="nc">&nbsp;            m.message = &quot;failure&quot;;</b>
+<b class="nc">&nbsp;            return m;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Organization o = organizationRepository.findById(id);</b>
+<b class="fc">&nbsp;        post.setOrg(o);</b>
+<b class="fc">&nbsp;        postRepository.save(post);</b>
+<b class="fc">&nbsp;        m.message = &quot;success&quot;;</b>
+<b class="fc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    //Given the organization id in the url, this method returns a list of every post that organization has made
+&nbsp;    @Operation(summary = &quot;Return organization&#39;s posts&quot;, description = &quot;Returns all of the posts a given organization has made in a JSON array. They are stored in the database under the org&#39;s ID.  &quot; +
+&nbsp;            &quot;Example url: /getPostsByOrg/4 --&gt; this returns all the posts org with ID 4 has made.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully returned the posts&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @GetMapping(path = &quot;/getPostsByOrg/{id}&quot;)
+&nbsp;    public List&lt;Post&gt; getPostsByOrganization(@PathVariable int id){
+<b class="nc">&nbsp;        List&lt;Post&gt; all = postRepository.findAll();</b>
+<b class="nc">&nbsp;        List&lt;Post&gt; selected = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (Post post:all) {</b>
+<b class="nc">&nbsp;            if (post.getOrg().getId() == id){</b>
+<b class="nc">&nbsp;                selected.add(post);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return selected;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //This function uses the post mapping method to delete a post. Works with front end.
+&nbsp;    @Operation(summary = &quot;Delete&#39;s a post from the database&quot;, description = &quot;A JSON object containing a post ID is sent in the request body. The post with the given ID in the database is deleted.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully deleted a post&quot;, content = @Content(mediaType = &quot;application/json&quot;))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/deletePost&quot;)
+&nbsp;    Message deletePost(@RequestBody Post post){
+<b class="nc">&nbsp;        String title = post.getTitle();</b>
+<b class="nc">&nbsp;        postRepository.deleteByTitle(title);</b>
+&nbsp;
+<b class="nc">&nbsp;        Message m = new Message();</b>
+<b class="nc">&nbsp;        m.message = &quot;success&quot;;</b>
+<b class="nc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Volunteer signs up for a post&quot;, description = &quot;A volunteer can register for a given post. The volunteer ID and post title are included in the url. The relation is added to the database and the post&#39;s volunteer_count field is incremented. &quot; +
+&nbsp;            &quot;Example url: addVolunteer/Opportunity/2 --&gt;  volunteer with ID 2 signs up for post with title Opportunity&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully registered for a post&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/addVolunteer/{postTitle}/{volunteerId}&quot;)
+&nbsp;    Message addVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
+<b class="fc">&nbsp;        Message m = new Message();</b>
+<b class="fc">&nbsp;        Post p = postRepository.findByTitle(postTitle);</b>
+<b class="fc">&nbsp;        Volunteer v = volunteerRepository.findById(volunteerId);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Volunteer&gt; volunteers = p.getVolunteers();</b>
+&nbsp;
+<b class="fc">&nbsp;        for(Volunteer vol : volunteers){</b>
+<b class="nc">&nbsp;            if(vol.getId() == volunteerId){</b>
+<b class="nc">&nbsp;                m.message = &quot;You have already signed up for this post&quot;;</b>
+<b class="nc">&nbsp;                return m;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        p.addVolunteer(v);</b>
+<b class="fc">&nbsp;        v.addEvent(p);</b>
+&nbsp;
+<b class="fc">&nbsp;        p.incrementCount();</b>
+&nbsp;
+<b class="fc">&nbsp;        postRepository.save(p);</b>
+<b class="fc">&nbsp;        volunteerRepository.save(v);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        m.message = &quot;success&quot;;</b>
+<b class="fc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Volunteer unregisters for a post&quot;, description = &quot;A volunteer can unregister for a given post. The volunteer ID and post title are included in the url. The relation is removed from the database and the post&#39;s volunteer_count field is decremented. &quot; +
+&nbsp;            &quot;Example url: addVolunteer/Opportunity/2 --&gt;  volunteer with ID 2 unregisters for post with title Opportunity&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully unregistered for a post&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Post.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/removeVolunteer/{postTitle}/{volunteerId}&quot;)
+&nbsp;    Message removeVolunteer(@PathVariable String postTitle, @PathVariable int volunteerId){
+<b class="fc">&nbsp;        Message m = new Message();</b>
+<b class="fc">&nbsp;        Post p = postRepository.findByTitle(postTitle);</b>
+<b class="fc">&nbsp;        Volunteer v = volunteerRepository.findById(volunteerId);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        int found = p.removeVolunteer(v);</b>
+&nbsp;
+<b class="fc">&nbsp;        if(found == 0){</b>
+<b class="nc">&nbsp;            m.message = &quot;You have not signed up for this post&quot;;</b>
+<b class="nc">&nbsp;            return m;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        v.removeEvent(p);</b>
+&nbsp;
+<b class="fc">&nbsp;        p.decrementCount();</b>
+&nbsp;
+<b class="fc">&nbsp;        postRepository.save(p);</b>
+<b class="fc">&nbsp;        volunteerRepository.save(v);</b>
+&nbsp;
+<b class="fc">&nbsp;        m.message = &quot;success&quot;;</b>
+<b class="fc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @GetMapping(path = &quot;/orgViewSignUps/{postTitle}&quot;)
+&nbsp;    public List&lt;Volunteer&gt; orgViewSignUps(@PathVariable String postTitle){
+&nbsp;
+<b class="nc">&nbsp;        Post p = postRepository.findByTitle(postTitle);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Volunteer&gt; vols = p.getVolunteers();</b>
+&nbsp;
+<b class="nc">&nbsp;        return vols;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-30 23:47</div>
+</div>
+</body>
+</html>

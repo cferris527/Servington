@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Organization</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.experiment1.Organization</a>
+</div>
+
+<h1>Coverage Summary for Class: Organization (com.example.experiment1.Organization)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Organization</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (18/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    59.4%
+  </span>
+  <span class="absValue">
+    (19/32)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Organization$HibernateProxy$B5FhSX8u</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (18/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    59.4%
+  </span>
+  <span class="absValue">
+    (19/32)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.experiment1.Organization;
+&nbsp;
+&nbsp;import com.example.experiment1.Post.Post;
+&nbsp;
+&nbsp;import com.example.experiment1.Team.Team;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+&nbsp;import jakarta.persistence.*;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Entity
+&nbsp;public class Organization {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    private int id;
+&nbsp;
+&nbsp;    private String username;
+&nbsp;
+&nbsp;    private String password;
+&nbsp;
+&nbsp;    private String email;
+&nbsp;
+&nbsp;    private String phone_number;
+&nbsp;
+&nbsp;    private String displayName;
+&nbsp;
+&nbsp;    private String profilePictureUrl;
+&nbsp;
+&nbsp;    private boolean isBanned;
+&nbsp;
+&nbsp;    @OneToOne(cascade = CascadeType.ALL)
+&nbsp;    @JoinColumn(name = &quot;team_id&quot;)
+&nbsp;    @JsonIgnore
+&nbsp;    private Team orgTeam;
+&nbsp;
+&nbsp;    @OneToMany(mappedBy = &quot;title&quot;)
+&nbsp;    @JsonIgnore
+&nbsp;    private List&lt;Post&gt; posts;
+&nbsp;
+<b class="fc">&nbsp;    public Organization(){</b>
+<b class="fc">&nbsp;        posts = new ArrayList&lt;&gt;();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Organization(String username, String password, String displayName, String email, String phone_number, String profilePictureURL){</b>
+<b class="nc">&nbsp;        this.username = username;</b>
+<b class="nc">&nbsp;        this.password = password;</b>
+<b class="nc">&nbsp;        this.displayName = displayName;</b>
+<b class="nc">&nbsp;        this.email = email;</b>
+<b class="nc">&nbsp;        this.phone_number = phone_number;</b>
+<b class="nc">&nbsp;        this.profilePictureUrl = profilePictureURL;</b>
+<b class="nc">&nbsp;        posts = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        orgTeam = new Team();</b>
+<b class="nc">&nbsp;        isBanned = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public int getId() {
+<b class="fc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(int id) {
+<b class="fc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public String getPassword() {
+<b class="fc">&nbsp;        return password;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPassword(String password) {
+<b class="fc">&nbsp;        this.password = password;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public String getUsername(){
+<b class="fc">&nbsp;        return username;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void setUsername(String name) {
+<b class="fc">&nbsp;        this.username = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public List&lt;Post&gt; getPost() {
+<b class="fc">&nbsp;        return posts;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPost(Post post){
+<b class="nc">&nbsp;        posts.add(post);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public void setOrgTeam(Team t) {
+<b class="fc">&nbsp;        orgTeam = t;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Team getOrgTeam(){ return orgTeam; }</b>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //editing other fields
+&nbsp;
+&nbsp;
+&nbsp;    public void setDisplayName(String displayName) {
+<b class="fc">&nbsp;        this.displayName = displayName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDisplayName() {
+<b class="fc">&nbsp;        return displayName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void setEmail(String email) {
+<b class="fc">&nbsp;        this.email = email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getEmail() {
+<b class="fc">&nbsp;        return email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void setPhone_number(String phone_number) {
+<b class="fc">&nbsp;        this.phone_number = phone_number;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getPhone_number() {
+<b class="fc">&nbsp;        return phone_number;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public boolean getIsBanned(){ return isBanned; }</b>
+&nbsp;
+<b class="fc">&nbsp;    public void setIsBanned(boolean isBanned) { this.isBanned = isBanned; }</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;    public void setProfilePictureUrl(String profilePictureUrl) {this.profilePictureUrl = profilePictureUrl; }</b>
+&nbsp;
+&nbsp;    public String getProfilePictureUrl() {
+<b class="fc">&nbsp;        return profilePictureUrl;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-30 23:47</div>
+</div>
+</body>
+</html>

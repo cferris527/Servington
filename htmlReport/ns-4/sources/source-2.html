@@ -1,0 +1,294 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > OrganizationController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.experiment1.Organization</a>
+</div>
+
+<h1>Coverage Summary for Class: OrganizationController (com.example.experiment1.Organization)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OrganizationController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (7/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.2%
+  </span>
+  <span class="absValue">
+    (43/64)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.experiment1.Organization;
+&nbsp;
+&nbsp;import com.example.experiment1.Admin.Admin;
+&nbsp;import com.example.experiment1.Team.Team;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.media.Content;
+&nbsp;import io.swagger.v3.oas.annotations.media.Schema;
+&nbsp;import io.swagger.v3.oas.annotations.responses.ApiResponse;
+&nbsp;import io.swagger.v3.oas.annotations.responses.ApiResponses;
+&nbsp;import com.example.experiment1.Post.Post;
+&nbsp;import com.example.experiment1.Volunteer.Volunteer;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import com.example.experiment1.Message;
+&nbsp;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class OrganizationController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    OrganizationRepository organizationRepository;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //Returns List of all Organizations
+&nbsp;    @Operation(summary = &quot;Lists all Organizations&quot;, description = &quot;Return a JSON array of all of the organizations in the database&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully returned all organizatoins.&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Organization.class)))
+&nbsp;    })
+&nbsp;    @GetMapping(path = &quot;/listOrganizations&quot;)
+&nbsp;    List&lt;Organization&gt; getAllOrgs(){
+<b class="fc">&nbsp;        return organizationRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //Creates Organization account
+&nbsp;    @Operation(summary = &quot;Create an Organization&quot;, description = &quot;An organization is created based on the JSON object of the request body.&quot; +
+&nbsp;            &quot;Example url: /createOrg --&gt; An organization containing the attributes from the response body is added to the database.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully created an organization&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Organization.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/createOrg&quot;)
+&nbsp;    Message createOrg(@RequestBody Organization org) {
+<b class="fc">&nbsp;        if (org == null) {</b>
+<b class="nc">&nbsp;            Message m = new Message();</b>
+<b class="nc">&nbsp;            m.message = &quot;failed&quot;;</b>
+<b class="nc">&nbsp;            return m;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        organizationRepository.save(org);</b>
+<b class="fc">&nbsp;        Message m = new Message();</b>
+<b class="fc">&nbsp;        m.message = &quot;success&quot;;</b>
+<b class="fc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //THIS METHOD WORKS FOR DELETING USER. Works on frontend.
+&nbsp;    @Operation(summary = &quot;Delete an Organization&quot;, description = &quot;The organization whose ID matches the ID in the response body is removed from the database&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully deleted an organization&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Organization.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/deleteOrg&quot;)
+&nbsp;    Message deleteUser(@RequestBody Organization org){
+<b class="nc">&nbsp;        int id = org.getId();</b>
+<b class="nc">&nbsp;        organizationRepository.deleteById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        Message m = new Message();</b>
+<b class="nc">&nbsp;        m.message = &quot;success&quot;;</b>
+<b class="nc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //Used for login return user if username and password is valid. This is working on frontend.
+&nbsp;    @Operation(summary = &quot;Organization login&quot;, description = &quot;A organization attempting to login in with their credentials. If there is a credentials match in the database, the Admin object is sent to the frontend and they are logged in.&quot; +
+&nbsp;            &quot;If there is not a match, an empty organization object is sent to the frontend and the user is denied login.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully logged in as organization&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Organization.class)))
+&nbsp;    })
+&nbsp;    @GetMapping(path = &quot;/orgLogin/{username}/{password}&quot;)
+&nbsp;    public Organization login(@PathVariable String username, @PathVariable String password){
+<b class="fc">&nbsp;        List&lt;Organization&gt; listByUsername = organizationRepository.findByUsernameContaining(username);</b>
+<b class="fc">&nbsp;        for(Organization org: listByUsername){</b>
+<b class="fc">&nbsp;            if(org.getPassword().equals(password)){</b>
+<b class="fc">&nbsp;                if(org.getUsername().equals(username)){</b>
+<b class="fc">&nbsp;                    return org;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        Organization nullUser = new Organization(null,null,null,null,null,null);</b>
+<b class="nc">&nbsp;        return nullUser;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Edit Fields of an Organization&quot;, description = &quot;An organization is edited to match the JSON object of the request body.&quot; +
+&nbsp;            &quot;Example url: /orgEditFields --&gt; An organization with an ID that matches the ID from the response body is edited to match the JSON response body&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully created an organization&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Organization.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/orgEditFields&quot;)
+&nbsp;    public Message editFields(@RequestBody Organization organization){
+<b class="fc">&nbsp;        Message m = new Message();</b>
+<b class="fc">&nbsp;        if(organization == null){</b>
+<b class="nc">&nbsp;            m.message = &quot;failed&quot;;</b>
+<b class="nc">&nbsp;            return m;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Organization o = organizationRepository.findById(organization.getId());</b>
+&nbsp;
+<b class="fc">&nbsp;        if(organization.getPassword() != null){</b>
+<b class="fc">&nbsp;            o.setPassword(organization.getPassword());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(organization.getDisplayName() != null){</b>
+<b class="fc">&nbsp;            o.setDisplayName(organization.getDisplayName());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(organization.getPhone_number() != null){</b>
+<b class="fc">&nbsp;            o.setPhone_number(organization.getPhone_number());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(organization.getEmail() != null){</b>
+<b class="fc">&nbsp;            o.setEmail(organization.getEmail());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(organization.getProfilePictureUrl() != null){</b>
+<b class="nc">&nbsp;            o.setProfilePictureUrl(organization.getProfilePictureUrl());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        organizationRepository.save(o);</b>
+&nbsp;
+<b class="fc">&nbsp;        m.message = &quot;success&quot;;</b>
+<b class="fc">&nbsp;        return m;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Ban Organization&quot;, description = &quot;An organization with the username from the URL path is banned.&quot; +
+&nbsp;            &quot;Example url: /banOrganization/{orgUsername} --&gt; An organization with username from the path is not allowed to login again.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully created an organization&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Organization.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/banOrganization/{orgUsername}&quot;)
+&nbsp;    public Message banOrganization(@PathVariable String orgUsername){
+<b class="fc">&nbsp;        Message m = new Message();</b>
+<b class="fc">&nbsp;        List&lt;Organization&gt; o = organizationRepository.findAll();</b>
+<b class="fc">&nbsp;        for(int i = 0; i &lt; o.toArray().length; i++){</b>
+<b class="fc">&nbsp;            if(o.get(i).getUsername().equals(orgUsername)){</b>
+<b class="fc">&nbsp;                o.get(i).setIsBanned(true);</b>
+<b class="fc">&nbsp;                organizationRepository.save(o.get(i));</b>
+<b class="fc">&nbsp;                m.message = &quot;success&quot;;</b>
+<b class="fc">&nbsp;                return m;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        m.message = &quot;failed&quot;;</b>
+<b class="nc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Unban Organization&quot;, description = &quot;An organization with the username from the URL path is unbanned.&quot; +
+&nbsp;            &quot;Example url: /unbanOrganization/{orgUsername} --&gt; An organization with username from the path is allowed to login again.&quot;)
+&nbsp;    @ApiResponses(value = {
+&nbsp;            @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Successfully created an organization&quot;, content = @Content(mediaType = &quot;application/json&quot;, schema = @Schema(implementation = Organization.class)))
+&nbsp;    })
+&nbsp;    @PostMapping(path = &quot;/unbanOrganization/{orgUsername}&quot;)
+&nbsp;    public Message unbanOrganization(@PathVariable String orgUsername){
+<b class="fc">&nbsp;        Message m = new Message();</b>
+<b class="fc">&nbsp;        List&lt;Organization&gt; o = organizationRepository.findAll();</b>
+<b class="fc">&nbsp;        for(int i = 0; i &lt; o.toArray().length; i++){</b>
+<b class="fc">&nbsp;            if(o.get(i).getUsername().equals(orgUsername)){</b>
+<b class="fc">&nbsp;                o.get(i).setIsBanned(false);</b>
+<b class="fc">&nbsp;                organizationRepository.save(o.get(i));</b>
+<b class="fc">&nbsp;                m.message = &quot;success&quot;;</b>
+<b class="fc">&nbsp;                return m;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        m.message = &quot;failed&quot;;</b>
+<b class="nc">&nbsp;        return m;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(path = &quot;/getTeamFromOrgID/{orgID}&quot;)
+&nbsp;    public Team getTeamFromOrgID(@PathVariable int orgID){
+<b class="nc">&nbsp;        Organization o = organizationRepository.findById(orgID);</b>
+<b class="nc">&nbsp;        Team t = o.getOrgTeam();</b>
+<b class="nc">&nbsp;        return t;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-30 23:47</div>
+</div>
+</body>
+</html>
