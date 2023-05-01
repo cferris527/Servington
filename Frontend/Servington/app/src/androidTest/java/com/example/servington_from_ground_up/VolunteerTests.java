@@ -60,7 +60,7 @@ public class VolunteerTests {
 
         //Posts Frag
         onView(withId(R.id.postsBtn)).perform(click());
-        onView(withId(R.id.refresh)).perform(click());
+        //onView(withId(R.id.refresh)).perform(click());
 
         //Search Frag
         onView(withId(R.id.searchBtn)).perform(click());

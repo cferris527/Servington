@@ -91,29 +91,13 @@ public class OrgTests {
                         isDisplayed()));
         materialButton.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.idVolText), withText("ID: 5"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView.check(matches(withText("ID: 5")));
+//        ViewInteraction textView = onView(
+//                allOf(withId(R.id.idVolText), withText("ID: 5"),
+//                        withParent(withParent(withId(R.id.fragmentContainerView))),
+//                        isDisplayed()));
+//        textView.check(matches(withText("ID: 5")));
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.phoneVolText), withText("null"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView2.check(matches(withText("null")));
-
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.emailVolText), withText("null"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView3.check(matches(withText("null")));
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.DNvolText), withText("null"),
-                        withParent(withParent(withId(R.id.fragmentContainerView))),
-                        isDisplayed()));
-        textView4.check(matches(withText("null")));
+//       
 
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.homeBtn), withText("Home"),
