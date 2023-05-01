@@ -1,6 +1,5 @@
 package com.example.servington_from_ground_up.organization;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,19 +11,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.servington_from_ground_up.PostData;
 import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.RecyclerViewAdapter;
 import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
-import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +29,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Fragment the allows an organization to view posts they have created
+ *
+ * @author Mike
+ */
 
 public class OrganizationPostsViewFragment extends Fragment {
     View view;

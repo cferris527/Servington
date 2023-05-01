@@ -1,6 +1,5 @@
 package com.example.servington_from_ground_up.volunteer;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +31,6 @@ import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.RecyclerViewAdapter;
 import com.example.servington_from_ground_up.utils.Const;
 import com.example.servington_from_ground_up.utils.Singleton;
-import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,12 +38,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link VolunteerPostsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment to allow volunteers to see a list of posts using a recycler view
+ *
+ * @author Mike
  */
 public class VolunteerPostsFragment extends Fragment {
     View view;
@@ -102,6 +101,9 @@ public class VolunteerPostsFragment extends Fragment {
 
         getData();
 
+        Singleton data = Singleton.getInstance();
+        System.out.println(data.getId());
+
         Spinner spMethod = view.findViewById(R.id.postselect);
         String[] postOptions = new String[]{"Apply", "Report"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, postOptions);
@@ -126,10 +128,11 @@ public class VolunteerPostsFragment extends Fragment {
                 {
                     VolApply();
                 }
-                if(spinnerText.equals("Report"))
+                else if(spinnerText.equals("Report"))
                 {
                     VolReport();
                 }
+
             }
         });
 
@@ -139,7 +142,12 @@ public class VolunteerPostsFragment extends Fragment {
 
     private void VolReport() {
 
-
+        Fragment fragment = new VolunteerReportFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
 
     }
@@ -151,9 +159,10 @@ public class VolunteerPostsFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         Singleton data = Singleton.getInstance();
-        String url = Const.URL_ADD_VOLUNTEER + "/" + volInput.getText().toString() + "/" + data.getDisplayName();
+
+        String url = Const.URL_ADD_VOLUNTEER + "/" + volInput.getText().toString() + "/" + data.getId();
         JSONObject body = new JSONObject();
-        body = null;
+
 
                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
                 new Response.Listener<JSONObject>() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private String accountType;
     Button loginButton;
     Button createButton;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

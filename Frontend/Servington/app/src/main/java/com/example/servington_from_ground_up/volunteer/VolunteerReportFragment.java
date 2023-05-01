@@ -23,6 +23,11 @@ import com.example.servington_from_ground_up.utils.Singleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Fragment to allow volunteers to create reports on posts
+ *
+ * @author Mike
+ */
 public class VolunteerReportFragment extends Fragment {
 
     View view;
@@ -33,15 +38,14 @@ public class VolunteerReportFragment extends Fragment {
     Button sendReport;
 
     public VolunteerReportFragment() {
-
+        // Required empty public constructor
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-
-    public static VolunteerReportFragment newInstance() {
+    public static VolunteerReportFragment newInstance(String param1, String param2) {
         VolunteerReportFragment fragment = new VolunteerReportFragment();
         return fragment;
     }
@@ -51,8 +55,10 @@ public class VolunteerReportFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_volunteer_report, container, false);
 
         postTitle = view.findViewById(R.id.reportTitleInput);
@@ -72,36 +78,39 @@ public class VolunteerReportFragment extends Fragment {
 
     private void PostRequest() {
 
+        System.out.println("report sent");
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         // create the new JSON object
         JSONObject report = new JSONObject();
         //grab string from title and description fields
-        String PostTitle = postTitle.getText().toString();
+        String title = postTitle.getText().toString();
         String PostDesc = reportDesc.getText().toString();
 
         Singleton data = Singleton.getInstance();
 
         //add fields to the JSON object
         try {
-            report.put("title",PostTitle);
+            report.put("title",title);
             report.put("username", data.getUsername());
-            report.put("description", PostDesc);
+            report.put("reportDescription", PostDesc);
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
 
-        String url = Const.URL_CREATE_REPORT + postTitle.getText().toString();
+        String url = Const.URL_CREATE_REPORT + title;
 
 
-
+        System.out.println(title);
+        System.out.println(PostDesc);
+        System.out.println(report);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, report,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
+                    System.out.println("responce");
                     }
                 },
                 new Response.ErrorListener() {

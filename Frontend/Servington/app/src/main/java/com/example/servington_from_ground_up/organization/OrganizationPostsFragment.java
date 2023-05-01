@@ -13,9 +13,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.servington_from_ground_up.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrganizationPostsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment for allowing organizations to travel to different post related functions
+ *
+ * @author Mike
  */
 public class OrganizationPostsFragment extends Fragment {
     View view;
