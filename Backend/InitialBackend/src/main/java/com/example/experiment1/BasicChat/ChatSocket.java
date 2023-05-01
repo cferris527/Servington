@@ -23,24 +23,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
-@Controller// this is needed for this to be an endpoint to springboot
-@ServerEndpoint(value = "/chat/{username}")  // this is Websocket url
+@Controller
+@ServerEndpoint(value = "/chat/{username}")
 public class ChatSocket {
 
 
 
     private static TeamRepository teamRepository;
-    // cannot autowire static directly (instead we do it by the below
-    // method
+
     private static ChatMessageRepository msgRepo;
 
-    /*
-     * Grabs the MessageRepository singleton from the Spring Application
-     * Context.  This works because of the @Controller annotation on this
-     * class and because the variable is declared as static.
-     * There are other ways to set this. However, this approach is
-     * easiest.
-     */
+
     @Autowired
     public void setMessageRepository(ChatMessageRepository repo) {
         msgRepo = repo;  // we are setting the static variable
@@ -53,7 +46,7 @@ public class ChatSocket {
 
 
 
-    // Store all socket session and their corresponding username.
+   
     private static Map<Session, String> sessionUsernameMap = new Hashtable<>();
     private static Map<String, Session> usernameSessionMap = new Hashtable<>();
 
