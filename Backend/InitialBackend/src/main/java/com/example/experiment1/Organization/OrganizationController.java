@@ -1,6 +1,7 @@
 package com.example.experiment1.Organization;
 
 import com.example.experiment1.Admin.Admin;
+import com.example.experiment1.Team.Team;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -177,6 +178,13 @@ public class OrganizationController {
         }
         m.message = "failed";
         return m;
+    }
+
+    @GetMapping(path = "/getTeamFromOrgID/{orgID}")
+    public Team getTeamFromOrgID(@PathVariable int orgID){
+        Organization o = organizationRepository.findById(orgID);
+        Team t = o.getOrgTeam();
+        return t;
     }
 }
 
