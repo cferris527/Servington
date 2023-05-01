@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
+import com.example.experiment1.Admin.Admin;
+import com.example.experiment1.Organization.Organization;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -22,6 +24,7 @@ import org.json.JSONObject;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -113,6 +116,15 @@ public class AdminTesting {
                 .assertThat().statusCode(200)
                 .log().all();
 
+    }
+
+
+    @Test
+    public void test_Admin() throws Throwable {
+        Admin a = new Admin("please", "please");
+
+        Assertions.assertEquals(a.getPassword(), "please");
+        Assertions.assertEquals(a.getUsername(), "please");
     }
 
 

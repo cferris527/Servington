@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412sp"
     android:layout_height="600sp"
-    tools:context=".VolunteerCreatePostsFragment">
+    tools:context="organization.OrganizationPostsCreateFragment">
 
     <TextView
         android:id="@+id/create_posts_servington"
