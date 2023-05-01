@@ -6,6 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -23,6 +29,7 @@ import com.example.servington_from_ground_up.PostData;
 import com.example.servington_from_ground_up.R;
 import com.example.servington_from_ground_up.RecyclerViewAdapter;
 import com.example.servington_from_ground_up.utils.Const;
+import com.example.servington_from_ground_up.utils.Singleton;
 import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONArray;
@@ -31,6 +38,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +55,9 @@ public class VolunteerPostsFragment extends Fragment {
     private DividerItemDecoration dividerItemDecoration;
     private List<PostData> PostList;
     private RecyclerView.Adapter adapter;
+    private String spinnerText;
+    private EditText volInput;
+    Button postBtn;
 
     public VolunteerPostsFragment() {
         // Required empty public constructor
@@ -77,6 +88,9 @@ public class VolunteerPostsFragment extends Fragment {
         PostList = new ArrayList<>();
         adapter = new RecyclerViewAdapter(getActivity().getApplicationContext(), PostList);
 
+        postBtn = view.findViewById(R.id.VolSelect);
+        volInput = view.findViewById(R.id.postinput);
+
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         dividerItemDecoration = new DividerItemDecoration(pList.getContext(), linearLayoutManager.getOrientation());
@@ -87,9 +101,84 @@ public class VolunteerPostsFragment extends Fragment {
         pList.setAdapter(adapter);
 
         getData();
+
+        Spinner spMethod = view.findViewById(R.id.postselect);
+        String[] postOptions = new String[]{"Apply", "Report"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, postOptions);
+        spMethod.setAdapter(adapter);
+
+        spMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int selection, long l) {
+                spinnerText = (String) parent.getItemAtPosition(selection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        postBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(spinnerText.equals("Apply"))
+                {
+                    VolApply();
+                }
+                if(spinnerText.equals("Report"))
+                {
+                    VolReport();
+                }
+            }
+        });
+
+
         return view;
     }
 
+    private void VolReport() {
+
+
+
+
+    }
+
+    /*
+    VolApply() method for sending a volley POST request to have users apply to posts
+     */
+    private void VolApply() {
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        Singleton data = Singleton.getInstance();
+        String url = Const.URL_ADD_VOLUNTEER + "/" + volInput.getText().toString() + "/" + data.getDisplayName();
+        JSONObject body = new JSONObject();
+        body = null;
+
+               JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        queue.add(request); // send request
+    }
+
+
+
+
+
+/*
+    getData() is a helper method that will send a volley request for the Array of posts
+ */
     private void getData() {
 
 
