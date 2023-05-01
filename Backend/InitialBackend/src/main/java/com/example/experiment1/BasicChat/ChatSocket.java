@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.example.experiment1.Team.TeamRepository;
 import com.example.experiment1.Volunteer.Volunteer;
+import jakarta.transaction.Transactional;
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnError;
 import jakarta.websocket.OnMessage;
@@ -18,12 +19,17 @@ import jakarta.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller      // this is needed for this to be an endpoint to springboot
+@Controller// this is needed for this to be an endpoint to springboot
 @ServerEndpoint(value = "/chat/{username}")  // this is Websocket url
 public class ChatSocket {
-     private TeamRepository teamRepository;
+
+
+
+    private static TeamRepository teamRepository;
     // cannot autowire static directly (instead we do it by the below
     // method
     private static ChatMessageRepository msgRepo;
@@ -39,6 +45,13 @@ public class ChatSocket {
     public void setMessageRepository(ChatMessageRepository repo) {
         msgRepo = repo;  // we are setting the static variable
     }
+
+    @Autowired
+    public void setMessageRepository(TeamRepository repo) {
+        teamRepository = repo;  // we are setting the static variable
+    }
+
+
 
     // Store all socket session and their corresponding username.
     private static Map<Session, String> sessionUsernameMap = new Hashtable<>();
@@ -84,8 +97,8 @@ public class ChatSocket {
         else if (message.startsWith("#")){
             String destTeam = message.split(" ")[0].substring(1);
 
-            sendMessageToParticularTeam(destTeam, "[TEAM] " + username + message);
-            sendMessageToPArticularUser(username, "[TEAM] " + username + message);
+            sendMessageToParticularTeam(destTeam, "[TEAM] " + username + ": " + message);
+            sendMessageToPArticularUser(username, "[TEAM] " + username + ": " + message);
 
         }
         else { // broadcast
@@ -130,9 +143,11 @@ public class ChatSocket {
         }
     }
 
+    //@Transactional
     private void sendMessageToParticularTeam(String teamName, String message){
-
+        System.out.print(teamName);
         List<Volunteer> volunteersInTeam = teamRepository.findByName(teamName).getVolunteers();
+
 
         for(int i = 0; i < volunteersInTeam.size(); i++) {
             sendMessageToPArticularUser(volunteersInTeam.get(i).getUsername(), message);
@@ -169,5 +184,5 @@ public class ChatSocket {
         return sb.toString();
     }
 
-} // end of Class
+}
 

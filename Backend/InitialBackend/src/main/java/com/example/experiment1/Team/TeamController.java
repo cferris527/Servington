@@ -133,4 +133,10 @@ public class TeamController {
         return volunteers;
     }
 
+    @GetMapping(path ="/findTeamByName/{teamName}")
+    Team getTeamFromName(@PathVariable String teamName){
+        Team t = teamRepository.findByName(teamName);
+        return t;
+    }
+
 }
