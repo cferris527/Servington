@@ -4,31 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412sp"
     android:layout_height="600sp"
-    tools:context=".VolunteerPostsFragment">
+    tools:context="volunteer.VolunteerPostsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/refresh" />
+        app:layout_constraintTop_toBottomOf="@+id/postselect" />
 
-    <Button
-        android:id="@+id/refresh"
-        android:layout_width="212dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="138dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="157dp"
-        android:layout_marginBottom="3dp"
-        android:text="refresh"
+    <EditText
+        android:id="@+id/postinput"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Enter Title"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/postselect"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/postselect"
+        android:layout_width="128dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/VolSelect"
+        app:layout_constraintStart_toEndOf="@+id/postinput"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/VolSelect"
+        android:layout_width="0dp"
+        android:layout_height="51dp"
+        android:layout_marginEnd="7dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/postselect"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
