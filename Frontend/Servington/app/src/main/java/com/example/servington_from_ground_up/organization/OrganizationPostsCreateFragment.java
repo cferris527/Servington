@@ -24,9 +24,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrganizationPostsCreateFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * fragment that allows organizations to create a post
+ *
+ * @author Mike
  */
 public class OrganizationPostsCreateFragment extends Fragment {
     View view;
