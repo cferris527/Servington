@@ -1,5 +1,6 @@
 package Testing;
 
+import com.example.experiment1.Report.Report;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -92,17 +93,6 @@ public class ReportTest {
         Assertions.assertEquals(jsonPathObj.getString("title"), "test");
     }
 
-    /*@Test
-    public void testDeleteReport() throws Throwable{
-        given().
-                when().
-                pathParam("reportID", 1).
-                post("/deleteReport/{reportID}").
-                then().
-                log().all().
-                assertThat().
-                statusCode(200);
-    }*/
 
     @Test
     public void testCreateReport() throws Throwable{
@@ -122,7 +112,25 @@ public class ReportTest {
                 .assertThat().statusCode(200);
     }
 
+    @Test
+    public void testDeleteReport() throws Throwable{
+        given().
+                when().
+                pathParam("reportID", 1).
+                post("/deleteReport/{reportID}").
+                then().
+                log().all().
+                assertThat().
+                statusCode(200);
+    }
 
+    @Test
+    public void test_report() throws Throwable{
+        Report r = new Report("testUsername", "testTitle", "testDescription");
+        Assertions.assertEquals(r.getUsername(), "testUsername");
+        Assertions.assertEquals(r.getTitle(), "testTitle");
+        Assertions.assertEquals(r.getReportDescription(), "testDescription");
+    }
 
 
 

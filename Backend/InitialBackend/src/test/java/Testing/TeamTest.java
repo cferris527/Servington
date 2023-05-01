@@ -1,4 +1,6 @@
 package Testing;
+import com.example.experiment1.Organization.Organization;
+import com.example.experiment1.Team.Team;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -51,6 +53,16 @@ public class TeamTest {
                 .assertThat().statusCode(200);
     }
 
+    @Test
+    public void testDeleteTeamID() throws Throwable{
+        given()
+                .when()
+                .pathParam("teamID", 10)
+                .post("http://localhost:8080/deleteTeam/{teamID}")
+                .then()
+                .assertThat().statusCode(200);
+    }
+
     @Test public void testListTeams() throws Throwable{
 
         given().
@@ -72,6 +84,16 @@ public class TeamTest {
                 .assertThat().statusCode(200);
     }
 
+    @Test public void testRemoveVolunteerTeam() throws Throwable{
+        given()
+                .when()
+                .pathParam("teamID", 1)
+                .pathParam("volunteerID", 1)
+                .post("http://localhost:8080/removeVolunteerTeam/{teamID}/{volunteerID}")
+                .then()
+                .assertThat().statusCode(200);
+    }
+
     @Test public void testGetVolunteerListTeam() throws Throwable{
 
         given().
@@ -82,6 +104,13 @@ public class TeamTest {
                 log().all().
                 assertThat().
                 statusCode(200);
+    }
+
+    @Test public void test_team() throws Throwable{
+        Organization o = new Organization();
+        Team t = new Team(o,"testTeamName");
+        Assertions.assertEquals(t.getOrganization(), o);
+        Assertions.assertEquals(t.getName(), "testTeamName");
     }
 
 
