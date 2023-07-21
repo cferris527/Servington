@@ -28,6 +28,7 @@ public class AdminTests {
     @Before
     public void initialize() throws InterruptedException {
         onView(withId(R.id.username)).perform(typeText("Admin1"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.password)).perform(typeText("password"));
         Espresso.closeSoftKeyboard();
 
@@ -46,6 +47,7 @@ public class AdminTests {
 
         //Admin page
         onView(withId(R.id.username3)).perform(typeText("Demo"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.password3)).perform(typeText("Demo"));
         Espresso.closeSoftKeyboard();
         TimeUnit.SECONDS.sleep(1);

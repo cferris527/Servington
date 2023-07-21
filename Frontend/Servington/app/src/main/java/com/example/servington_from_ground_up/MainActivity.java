@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -175,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                             intent = new Intent(MainActivity.this, HomeAdminActivity.class);
                         }
                         else {
-                            status.setText("Account has no type?");
+                            status.setText("Account `has no type?");
                             return;
                         }
 

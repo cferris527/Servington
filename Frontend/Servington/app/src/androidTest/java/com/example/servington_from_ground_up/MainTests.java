@@ -46,6 +46,7 @@ public class MainTests {
     @Test
     public void testMainFields() {
         onView(withId(R.id.username)).perform(typeText("Bob"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.password)).perform(typeText("password"));
 
         onView(withText("password")).check(matches(isDisplayed()));
@@ -80,6 +81,7 @@ public class MainTests {
     @Test
     public void testLogin() throws InterruptedException {
         onView(withId(R.id.username)).perform(typeText("test"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.password)).perform(typeText("test"));
         Espresso.closeSoftKeyboard();
         TimeUnit.SECONDS.sleep(1);
